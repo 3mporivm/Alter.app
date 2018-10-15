@@ -1,0 +1,1 @@
+const btc_like = require('bitcore-lib');
