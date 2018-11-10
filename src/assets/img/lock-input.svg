@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="9px" height="10px" viewBox="0 0 9 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>lock</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Pack_2.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.6">
+        <g id="-g-AlterApp_SignIn01" transform="translate(-45.000000, -208.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Balance" transform="translate(25.000000, 77.000000)">
+                <g id="Password" transform="translate(20.000000, 112.000000)">
+                    <g id="lock" transform="translate(0.000000, 19.000000)">
+                        <path d="M8,4.08535285 C8.58259619,4.29127106 9,4.84689059 9,5.5 L9,8.5 C9,9.32842712 8.32842712,10 7.5,10 L1.5,10 C0.671572875,10 1.01453063e-16,9.32842712 0,8.5 L4.4408921e-16,5.5 C3.64106375e-16,4.84689059 0.417403814,4.29127106 1,4.08535285 L1,3.5 C1,1.56700338 2.56700338,3.55085719e-16 4.5,0 C6.43299662,-3.55085719e-16 8,1.56700338 8,3.5 L8,4.08535285 Z M6,4 L6,3.5 C6,2.67157288 5.32842712,2 4.5,2 C3.67157288,2 3,2.67157288 3,3.5 L3,4 L6,4 Z" id="Combined-Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

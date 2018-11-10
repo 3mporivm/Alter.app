@@ -1,13 +1,17 @@
-// @import './fonts.scss';
+@import './fonts.scss';
 
 body {
-  // font-family: 'CirceRounded Regular';
   margin: 0;
-  padding: 0 25px;
-  width: 375px;
-  //height: 667px;
+  padding: 0;
+  overflow-x:hidden;
   background: rgba(13,24,57,1);
   background: linear-gradient(to bottom, rgba(13,24,57,1) 100%, rgba(8,16,36,1) 100%);
+}
+
+#root {
+  width: 375px;
+  padding: 0 25px;
+  box-sizing: border-box;
 }
 
 button {

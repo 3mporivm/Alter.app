@@ -1,0 +1,44 @@
+.info-block {
+  font-size: 10px;
+  font-family: 'ProximaNova-Regular';
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  // 99
+  margin-bottom: 50px;
+
+  &__lastupdate {
+    margin-top: 20px;
+    margin-bottom: 24px;
+  }
+
+  &__checkupdates {
+    color: #63CEFF;
+  }
+
+  &__description {
+    line-height: 20px;
+    color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.share-buttons {
+  margin-top: 13px;
+  align-items: center;
+
+  &__telegram {
+    width: 14px;
+    height: 12px;
+    margin-right: 15px;
+  }
+
+  &__twitter {
+    width: 15px;
+    height: 12px;
+    margin-right: 15px;
+  }
+
+  &__github {
+    width: 12px;
+    height: 12px;
+  }
+}

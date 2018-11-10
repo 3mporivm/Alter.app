@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="8px" viewBox="0 0 10 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Pack_2.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-g-AlterApp_SignIn00" transform="translate(-236.000000, -288.000000)" fill-rule="nonzero">
+            <g id="Button" transform="translate(25.000000, 269.000000)">
+                <g id="Icon" transform="translate(211.000000, 20.000000)">
+                    <g id="Group-2" transform="translate(4.500000, 3.500000) scale(1, -1) rotate(-90.000000) translate(-4.500000, -3.500000) translate(1.000000, -1.000000)">
+                        <rect id="Rectangle" fill="#B076FF" x="2.33333333" y="0" width="1.55555556" height="8.18181818" rx="0.777777778"></rect>
+                        <polyline id="Path-2" stroke="#B076FF" stroke-width="2" points="0 4.90909091 3.14453125 8.21697443 6.2890625 4.90909091"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

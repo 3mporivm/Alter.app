@@ -1,5 +1,7 @@
-import HomeScreen from './HomeScreen';
+import GetStartedScreen from './GetStartedScreen';
+import ProtectAccountScreen from './ProtectAccountScreen';
 
 export {
-  HomeScreen,
+  GetStartedScreen,
+  ProtectAccountScreen,
 };
