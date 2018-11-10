@@ -2,8 +2,8 @@ const btc_like = require('bitcore-lib'); // library for btc-like chains (btc, bc
 const bchaddrs = require('bchaddrjs'); // address format bch
 const bip39 = require('bip39'); // для seed-phrase
 
-const net = require('./networks');
-const constants = require('./constants');
+const net = require('../constants/networks');
+const constants = require('../constants/constants');
 const BTC_LIKE = constants.BTC_LIKE;
 const NETWORK = constants.NETWORK;
 
