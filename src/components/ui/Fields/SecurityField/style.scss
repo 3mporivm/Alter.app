@@ -1,0 +1,26 @@
+.security-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+  &__icon {
+    width: 9px;
+    height: 10px;
+    opacity: 0.6;
+  }
+
+  &__input {
+    background: transparent;
+    font-family: 'ProximaNova-Regular';
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    box-sizing: border-box;
+    padding-left: 10px;
+    height: 48px;
+
+    &::placeholder {
+      color: #b2bdca;
+    }
+  }
+}

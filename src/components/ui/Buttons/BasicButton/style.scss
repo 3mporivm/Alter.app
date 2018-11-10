@@ -1,0 +1,28 @@
+.basic-button {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  border: solid 1px #355cf7;
+  border-radius: 20px;
+  padding: 8px 12px 8px 12px;
+  font-size: 17px;
+  font-family: 'Circe-Regular';
+  background-color: #355cf7;
+  color: #ffffff;
+  height: 39px;
+
+  &__img {
+    position: relative;
+    top: 3px;
+    right: 5px;
+    width: 15px;
+    height: 12px;
+  }
+
+  &__disabled {
+    background-color: #b2bdca;
+    border: 0;
+    cursor: not-allowed;
+    color: rgba(255, 255, 255, 0.5)
+  }
+}
