@@ -1,7 +1,7 @@
-//import BasicButton from './BasicButton';
+import BasicButton from './BasicButton';
 import NextButton from './NextButton';
 
 export default {
-  //BasicButton,
+  BasicButton,
   NextButton,
 };

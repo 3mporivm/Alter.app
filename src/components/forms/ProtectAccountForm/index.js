@@ -25,7 +25,7 @@ const ProtectAccountForm = ({
         </div>
         <Field
           validate={required}
-          component={ui.Fields.SecurityField}
+          component={ui.Fields.BasicField}
           name="password"
           placeholder="Create a password"
           props={{
@@ -33,16 +33,18 @@ const ProtectAccountForm = ({
             styleWrapper: {
               marginBottom: 20,
               marginTop: 30,
-            }
+            },
+            isSecurity: true,
           }}
         />
         <Field
           validate={required}
-          component={ui.Fields.SecurityField}
+          component={ui.Fields.BasicField}
           name="confirm_password"
           placeholder="Confirm password"
           props={{
             inputId: 'confirmPassword',
+            isSecurity: true,
           }}
         />
       </div>

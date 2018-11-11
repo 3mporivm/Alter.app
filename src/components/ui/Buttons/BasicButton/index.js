@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import LoadingSpinner from '../../LoadingSpinner';
 import './style.scss';
 
-const iconPath = 'assets/img/';
-
 const BasicButton = ({
  onPress,
  title,
@@ -25,7 +23,11 @@ const BasicButton = ({
       isLoading
         ? <LoadingSpinner small />
         : [
-          icon && <img key="imgButton" className="basic-button__img" src={iconPath + icon} alt="" />,
+          icon && (
+            <div className="basic-button__img-wrapper">
+              <img key="imgButton" className="basic-button__img" src={icon} alt="" />
+            </div>
+          ),
           title,
         ]
     }
@@ -36,13 +38,14 @@ BasicButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   style: PropTypes.any,
-  icon: PropTypes.string,
+  icon: PropTypes.any,
   isDisabled: PropTypes.bool,
   isLoading: PropTypes.bool,
 };
 
 BasicButton.defaultProps = {
   style: {},
+  icon: false,
   isDisabled: false,
   isLoading: false,
 };

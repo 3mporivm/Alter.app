@@ -5,7 +5,7 @@ import * as screens from 'screens';
 const App = () => (
 	<div>
     <Switch>
-      <Route path="/" component={screens.AccountScreen} />
+      <Route path="/" component={screens.WelcomeBackScreen} />
     </Switch>
 	</div>
 );

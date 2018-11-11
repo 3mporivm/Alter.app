@@ -1,5 +1,5 @@
-import SecurityField from './SecurityField';
+import BasicField from './BasicField';
 
 export default {
-  SecurityField,
+  BasicField,
 };

@@ -5,7 +5,7 @@ import LockIcon from 'assets/img/lock-input.svg';
 
 import './style.scss';
 
-const SecurityField = ({
+const BasicField = ({
   input: {
    value,
   },
@@ -14,28 +14,32 @@ const SecurityField = ({
   pattern,
   styleWrapper,
   inputId,
+  isSecurity,
 }) => (
   <div
     style={styleWrapper}
-    className="security-field"
+    className="basic-field"
   >
-    <img
-      class="security-field__icon"
-      src={LockIcon}
-      alt=""
-    />
+    {
+      isSecurity &&
+      <img
+        class="basic-field__icon"
+        src={LockIcon}
+        alt=""
+      />
+    }
     <input
       id={inputId}
       value={value}
       onChange={handleChange}
       placeholder={placeholder}
-      type="password"
-      className="security-field__input"
+      type={isSecurity ? "password" : "text"}
+      className="basic-field__input"
     />
   </div>
 );
 
-SecurityField.propTypes = {
+BasicField.propTypes = {
   placeholder: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
   styleWrapper: PropTypes.any,
@@ -43,12 +47,14 @@ SecurityField.propTypes = {
     value: PropTypes.any.isRequired,
   }).isRequired,
   inputId: PropTypes.string,
+  isSecurity: PropTypes.bool,
 };
 
-SecurityField.defaultProps = {
+BasicField.defaultProps = {
   placeholder: '',
   styleWrapper: {},
   inputId: '',
+  isSecurity: false,
 };
 
 export default compose(
@@ -57,4 +63,4 @@ export default compose(
       onChange(evt.target.validity.valid ? evt.target.value : value);
     },
   }),
-)(SecurityField);
+)(BasicField);

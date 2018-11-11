@@ -1,4 +1,4 @@
-.security-field {
+.basic-field {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -8,15 +8,16 @@
     width: 9px;
     height: 10px;
     opacity: 0.6;
+    padding-right: 10px;
   }
 
   &__input {
     background: transparent;
+    flex: 1;
     font-family: 'ProximaNova-Regular';
     font-size: 16px;
     color: rgba(255, 255, 255, 0.6);
     box-sizing: border-box;
-    padding-left: 10px;
     height: 48px;
 
     &::placeholder {
