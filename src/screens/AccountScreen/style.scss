@@ -1,0 +1,41 @@
+@import '../../assets/screens.scss';
+
+.account-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__create, &__import {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 135px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 30px;
+    cursor: pointer;
+  }
+
+  &__create {
+    margin-top: 35px;
+    background-color: rgba(176, 118, 255, 0.2);
+    margin-bottom: 20px;
+  }
+
+  &__import {
+    background-color: rgba(99, 206, 255, 0.2);
+    margin-bottom: 50px;
+  }
+
+  &__title {
+    font-family: 'ProximaNova-Bold';
+    font-size: 18px;
+    color: #FFFFFF;
+  }
+
+  &__image {
+    height: 49px;
+    width: 49px;
+    margin-bottom: 15px;
+  }
+}
