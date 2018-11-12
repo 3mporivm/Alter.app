@@ -3,7 +3,7 @@ import { compose } from 'recompose';
 import { ui } from 'components';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form/immutable';
-import LockIcon from 'assets/img/lock.svg';
+import iconLock from 'assets/img/lock.svg';
 import { required } from 'validators';
 
 import './style.scss';
@@ -18,7 +18,9 @@ const ProtectAccountForm = ({
 }) => (
   <form onSubmit={handleSubmit} className="protect-account-form-layout">
     <div className="protect-account-form">
-      <img className="protect-account-form__lock" src={LockIcon} alt=""/>
+      <ui.Badge
+        icon={iconLock}
+      />
       <div className="protect-account-form__background">
         <div style={styleTitle} className="protect-account-form__title">
           Protect Your Account

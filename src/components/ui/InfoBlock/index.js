@@ -35,13 +35,13 @@ const InfoBlock = ({}) => (
 );
 
 InfoBlock.propTypes = {
-  onPressNewPoll: PropTypes.func,
-  name: PropTypes.string,
-  picture: PropTypes.string,
-  pollsCount: PropTypes.number.isRequired,
-  isAuthorized: PropTypes.bool,
-  isJoined: PropTypes.bool,
-  onButtonPress: PropTypes.func.isRequired,
+  // onPressNewPoll: PropTypes.func,
+  // name: PropTypes.string,
+  // picture: PropTypes.string,
+  // pollsCount: PropTypes.number.isRequired,
+  // isAuthorized: PropTypes.bool,
+  // isJoined: PropTypes.bool,
+  // onButtonPress: PropTypes.func.isRequired,
 };
 
 export default InfoBlock;

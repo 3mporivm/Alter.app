@@ -30,7 +30,7 @@ const NextButton = ({
 
 NextButton.propTypes = {
   onPress: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   style: PropTypes.any,
   isLoading: PropTypes.bool,
 };
@@ -38,6 +38,7 @@ NextButton.propTypes = {
 NextButton.defaultProps = {
   style: {},
   isLoading: false,
+  title: "Continue"
 };
 
 export default NextButton;

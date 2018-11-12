@@ -21,7 +21,10 @@ const EnterWalletForm = ({
 }) => (
   <form onSubmit={handleSubmit} className="enter-wallet-form-layout">
     <div className="enter-wallet-form">
-      <img className="enter-wallet-form__lock" src={iconEnter} alt=""/>
+      <ui.Badge
+        icon={iconEnter}
+        backgroundColor="#63CEFF"
+      />
       <div style={styleTitle} className="enter-wallet-form__title">
         Welcome back
       </div>
