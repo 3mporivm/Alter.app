@@ -5,6 +5,7 @@ import WelcomeBackScreen from './WelcomeBackScreen';
 import CreateAccountScreen from './CreateAccountScreen';
 import AccountNameScreen from './AccountNameScreen';
 import SaveBackupPhraseScreen from './SaveBackupPhraseScreen';
+import ConfirmBackupScreen from './ConfirmBackupScreen';
 
 export {
   GetStartedScreen,
@@ -14,4 +15,5 @@ export {
   CreateAccountScreen,
   AccountNameScreen,
   SaveBackupPhraseScreen,
+  ConfirmBackupScreen,
 };

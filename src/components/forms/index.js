@@ -3,6 +3,7 @@ import EnterWalletForm from './EnterWalletForm';
 import CreateAccountForm from './CreateAccountForm';
 import AccountNameForm from './AccountNameForm';
 import SaveBackupPhraseForm from './SaveBackupPhraseForm';
+import ConfirmBackupForm from './ConfirmBackupForm';
 
 export default {
   ProtectAccountForm,
@@ -10,4 +11,5 @@ export default {
   CreateAccountForm,
   AccountNameForm,
   SaveBackupPhraseForm,
+  ConfirmBackupForm,
 };

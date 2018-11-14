@@ -19,10 +19,7 @@ const MultilineField = ({
   readOnly,
   label,
 }) => (
-  <div
-    style={styleWrapper}
-    className="multiline-field-wrapper"
-  >
+  <div style={styleWrapper}>
     <label className="multiline-field__label">{label}</label>
     <div className="multiline-field">
       <textarea
