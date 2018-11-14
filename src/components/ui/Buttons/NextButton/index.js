@@ -10,10 +10,12 @@ const NextButton = ({
   title,
   isLoading,
   style,
+  isDisabled,
 }) => (
   <button
     className="next-button"
     onClick={onPress}
+    disabled={isDisabled ? 'disabled' : ''}
     type="button"
     style={style}
   >
@@ -33,11 +35,13 @@ NextButton.propTypes = {
   title: PropTypes.string,
   style: PropTypes.any,
   isLoading: PropTypes.bool,
+  isDisabled: PropTypes.bool,
 };
 
 NextButton.defaultProps = {
   style: {},
   isLoading: false,
+  isDisabled: false,
   title: "Continue"
 };
 

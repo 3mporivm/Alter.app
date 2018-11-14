@@ -12,7 +12,7 @@ const ConfirmBackupScreen = ({ }) => (
       onSubmit={() => {}}
       isFetching={false}
       initialValues={Immutable.Map({
-        words: Immutable.List()
+        words: []
       })}
     />
     <ui.InfoBlock/>

@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers, withState } from 'recompose';
 
-let refInput = React.createRef();
 import './style.scss';
 
 const PuzzlesField = ({
   input: {
-   value = [],
+   value,
   },
   handleChange,
   placeholder,
@@ -29,6 +28,7 @@ const PuzzlesField = ({
           <span
             onClick={() => unselected(item)}
             className="puzzles-field__words__word"
+            key={`selected${item}`}
           >
             {item}
           </span>
@@ -40,6 +40,7 @@ const PuzzlesField = ({
       {
         words.map(item => (
           <span
+            key={item.word}
             onClick={() => handleChange(item)}
             className={`puzzles-field__words__word ${item.isSelected ? 'puzzles-field__words__word-selected' : ''}`}
           >
@@ -89,11 +90,11 @@ export default compose(
     { word: "Milk" },
   ]),
   withHandlers({
-    handleChange: ({ words, updateWords, input: { onChange, value = [] } }) => ({ word, isSelected }) => {
+    handleChange: ({ words, updateWords, input: { onChange, value } }) => ({ word, isSelected }) => {
       updateWords(words.map(item => item.word !== word ? item : { ...item, isSelected: true }));
-      !isSelected && onChange(value.push(word));
+      !isSelected && onChange(value.concat(word));
     },
-    unselected: ({ words, updateWords, input: { onChange, value = [] } }) => (word) => {
+    unselected: ({ words, updateWords, input: { onChange, value } }) => (word) => {
       updateWords(words.map(item => item.word !== word ? item : { ...item, isSelected: false }));
       onChange(value.filter((item) => item !== word));
     },

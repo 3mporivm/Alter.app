@@ -13,7 +13,7 @@ const BasicButton = ({
  isLoading,
 }) => (
   <button
-    className={`basic-button ${isDisabled ? 'basic-button__disabled' : ''}`}
+    className="basic-button"
     disabled={isDisabled ? 'disabled' : ''}
     onClick={onPress}
     type="button"

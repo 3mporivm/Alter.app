@@ -27,7 +27,7 @@
     height: 17px;
   }
 
-  &__disabled {
+  &:disabled {
     div {
       background-color: rgba(99, 206, 255, 0.1);
     }

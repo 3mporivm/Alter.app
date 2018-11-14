@@ -37,10 +37,10 @@ const ConfirmBackupForm = ({
       <div className="confirm-backup-form__background"/>
     </div>
     <ui.Buttons.NextButton
-      style={{ marginBottom: 20 }}
+      style={{ marginBottom: 50 }}
       onPress={handleSubmit}
       isLoading={isFetching}
-      isDisabled={invalid || isFetching}
+      isDisabled={true}
     />
   </form>
 );
