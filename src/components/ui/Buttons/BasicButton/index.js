@@ -11,9 +11,10 @@ const BasicButton = ({
  isDisabled,
  icon,
  isLoading,
+ color,
 }) => (
   <button
-    className="basic-button"
+    className={`basic-button ${color}`}
     disabled={isDisabled ? 'disabled' : ''}
     onClick={onPress}
     type="button"
@@ -41,6 +42,7 @@ BasicButton.propTypes = {
   icon: PropTypes.any,
   isDisabled: PropTypes.bool,
   isLoading: PropTypes.bool,
+  color: PropTypes.string,
 };
 
 BasicButton.defaultProps = {
@@ -48,6 +50,7 @@ BasicButton.defaultProps = {
   icon: false,
   isDisabled: false,
   isLoading: false,
+  color: 'blue',
 };
 
 export default BasicButton;

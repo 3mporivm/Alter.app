@@ -1,0 +1,34 @@
+.change-password-form-layout {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-top: 35px;
+}
+
+.change-password-form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background: rgba(62,25,87,1);
+  background: linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
+  margin-bottom: 20px;
+  border-radius: 20px;
+  height: 316px;
+  position: relative;
+  box-sizing: content-box;
+
+  &__background {
+    flex: 1;
+    border-radius: 20px;
+    padding: 20px;
+    background: url("../../../assets/img/background-form.png") no-repeat 0 100%;
+  }
+
+  &__title {
+    margin-top: 20px;
+    font-family: 'ProximaNova-Bold';
+    font-size: 18px;
+    color: #FFFFFF;
+    text-align: center;
+  }
+}

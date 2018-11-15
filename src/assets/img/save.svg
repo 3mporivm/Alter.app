@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Pack_2.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-g-AlterApp_Menu03" transform="translate(-149.000000, -449.000000)" fill="#A56FF0" fill-rule="nonzero">
+            <g id="Save" transform="translate(25.000000, 433.000000)">
+                <g id="icon" transform="translate(118.000000, 10.000000)">
+                    <g id="Group" transform="translate(6.000000, 6.000000)">
+                        <path d="M16,5.82842712 L12.1715729,2 L4,2 C2.8954305,2 2,2.8954305 2,4 L2,14 C2,15.1045695 2.8954305,16 4,16 L14,16 C15.1045695,16 16,15.1045695 16,14 L16,5.82842712 Z M4,0 L13,0 L18,5 L18,14 C18,16.209139 16.209139,18 14,18 L4,18 C1.790861,18 0,16.209139 0,14 L0,4 C0,1.790861 1.790861,0 4,0 Z" id="Rectangle"></path>
+                        <path d="M7,2 L7,4.5 C7,4.77614237 7.22385763,5 7.5,5 L10.5,5 C10.7761424,5 11,4.77614237 11,4.5 L11,2 L7,2 Z M5,0 L13,0 L13,4.5 C13,5.88071187 11.8807119,7 10.5,7 L7.5,7 C6.11928813,7 5,5.88071187 5,4.5 L5,0 Z" id="Rectangle"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

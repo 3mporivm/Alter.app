@@ -1,3 +1,17 @@
+.purple {
+  background-color: rgba(176, 118, 255, 0.2);
+  &:disabled div {
+    background-color: rgba(176, 118, 255, 0.2);
+  }
+}
+
+.blue {
+  background-color: rgba(99, 206, 255, 0.2);
+  &:disabled div {
+    background-color: rgba(99, 206, 255, 0.2);
+  }
+}
+
 .basic-button {
   display: flex;
   flex: 1;
@@ -6,7 +20,6 @@
   border-radius: 15px;
   font-size: 18px;
   font-family: 'ProximaNova-Bold';
-  background-color: rgba(99, 206, 255, 0.2);
   color: #ffffff;
   height: 50px;
   align-items: center;
@@ -15,8 +28,8 @@
     width: 30px;
     height: 30px;
     border-radius: 10px;
-    background-color: rgba(99, 206, 255, 0.2);
     margin-right: 12px;
+    margin-left: -12px;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -28,12 +41,7 @@
   }
 
   &:disabled {
-    div {
-      background-color: rgba(99, 206, 255, 0.1);
-    }
-
     color: rgba(255, 255, 255, 0.3);
-    background-color: rgba(99, 206, 255, 0.2);
     cursor: not-allowed;
   }
 }

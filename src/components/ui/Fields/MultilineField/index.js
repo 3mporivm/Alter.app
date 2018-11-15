@@ -3,45 +3,41 @@ import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import iconCopy from 'assets/img/copy.svg';
 
-let refInput = React.createRef();
 import './style.scss';
 
-const MultilineField = ({
-  input: {
-   value,
-  },
-  handleChange,
-  placeholder,
-  pattern,
-  styleWrapper,
-  inputId,
-  onCopy,
-  readOnly,
-  label,
-}) => (
-  <div style={styleWrapper}>
-    <label className="multiline-field__label">{label}</label>
-    <div className="multiline-field">
-      <textarea
-        rows={3}
-        id={inputId}
-        value={value}
-        onChange={handleChange}
-        placeholder={placeholder}
-        className="multiline-field__input"
-        onFocus={() => refInput.select()}
-        ref={ref => refInput = ref}
-        readOnly={readOnly}
-      />
-      <img
-        class="multiline-field__icon"
-        src={iconCopy}
-        alt=""
-        onClick={onCopy}
-      />
-    </div>
-  </div>
-);
+class MultilineField extends React.Component {
+  render() {
+    this.refInput = null;
+    return (
+      <div style={this.props.styleWrapper}>
+        <label className="multiline-field__label">{this.props.label}</label>
+        <div className="multiline-field">
+          <textarea
+            rows={3}
+            id={this.props.inputId}
+            value={this.props.input.value}
+            onChange={this.props.handleChange}
+            placeholder={this.props.placeholder}
+            className="multiline-field__input"
+            onFocus={() => this.refInput.select()}
+            ref={ref => this.refInput = ref}
+            readOnly={this.props.readOnly}
+          />
+          <img
+            class="multiline-field__icon"
+            src={iconCopy}
+            alt=""
+            onClick={() => {
+              this.refInput.select();
+              this.props.onCopy();
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
+}
+
 
 MultilineField.propTypes = {
   placeholder: PropTypes.string,
@@ -69,9 +65,6 @@ export default compose(
     handleChange: ({ input: { onChange, value } }) => (evt) => {
       onChange(evt.target.validity.valid ? evt.target.value : value);
     },
-    onCopy: () => () => {
-      refInput.select();
-      document.execCommand("Copy");
-    },
+    onCopy: () => () => document.execCommand("Copy"),
   }),
 )(MultilineField);
