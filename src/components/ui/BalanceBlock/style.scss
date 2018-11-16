@@ -1,0 +1,46 @@
+.balance-block-wrapper {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.balance-block {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 2px;
+  border-radius: 20px;
+  position: relative;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 20px;
+  z-index: 1;
+  background: rgba(62,25,87,1);
+  background: url("../../../assets/img/background-form.png") bottom no-repeat, linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
+
+  &__title {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.15);
+    margin-top: 30px;
+    font-family: 'ProximaNova-Bold';
+    font-size: 10px;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 6px 10px;
+  }
+
+  &__total {
+    font-family: 'ProximaNova-Extrabold';
+    font-size: 34px;
+    margin-top: 26px;
+    color: #FFFFFF;
+  }
+
+  &__course {
+    font-family: 'ProximaNova-Regular';
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import LockIcon from 'assets/img/lock-input.svg';
+import iconSearch from 'assets/img/search.svg';
 
 import './style.scss';
 
@@ -15,6 +16,7 @@ const BasicField = ({
   styleWrapper,
   inputId,
   isSecurity,
+  isSearch,
 }) => (
   <div
     style={styleWrapper}
@@ -36,6 +38,15 @@ const BasicField = ({
       type={isSecurity ? "password" : "text"}
       className="basic-field__input"
     />
+    {
+      isSearch &&
+      <img
+        style={value ? { opacity: 1 } : {}}
+        className="basic-field__icon-search"
+        src={iconSearch}
+        alt=""
+      />
+    }
   </div>
 );
 
@@ -48,6 +59,7 @@ BasicField.propTypes = {
   }).isRequired,
   inputId: PropTypes.string,
   isSecurity: PropTypes.bool,
+  isSearch: PropTypes.bool,
 };
 
 BasicField.defaultProps = {
@@ -55,6 +67,7 @@ BasicField.defaultProps = {
   styleWrapper: {},
   inputId: '',
   isSecurity: false,
+  isSearch: false,
 };
 
 export default compose(

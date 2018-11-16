@@ -3,6 +3,8 @@ import InfoBlock from './InfoBlock';
 import Header from './Header';
 import Fields from './Fields';
 import Badge from './Badge';
+import BalanceBlock from './BalanceBlock';
+import SearchInput from './Fields/SearchInput';
 
 
 export default {
@@ -11,4 +13,6 @@ export default {
   Header,
   Fields,
   Badge,
+  BalanceBlock,
+  SearchInput,
 };
