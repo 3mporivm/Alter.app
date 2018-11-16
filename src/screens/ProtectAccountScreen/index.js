@@ -5,7 +5,7 @@ import 'assets/screens.scss';
 import './style.scss';
 
 const ProtectAccountScreen = ({ }) => (
-  <div class="protect-account-layout">
+  <div className="protect-account-layout">
     <ui.Header/>
     <forms.ProtectAccountForm
       onSubmit={() => {}}

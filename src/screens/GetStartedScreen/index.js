@@ -8,8 +8,8 @@ import 'assets/screens.scss';
 import './style.scss';
 
 const GetStartedScreen = ({ redditPosts }) => (
-  <div class="get-started-layout">
-    <div class="get-started-layout__title">alter.app</div>
+  <div className="get-started-layout">
+    <div className="get-started-layout__title">alter.app</div>
     <ui.Buttons.NextButton
       title="Get Started"
       onPress={() => {}}

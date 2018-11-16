@@ -24,7 +24,7 @@ class MultilineField extends React.Component {
             readOnly={this.props.readOnly}
           />
           <img
-            class="multiline-field__icon"
+            className="multiline-field__icon"
             src={iconCopy}
             alt=""
             onClick={() => {

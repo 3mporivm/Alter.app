@@ -6,7 +6,7 @@ import './style.scss';
 import Immutable from "immutable";
 
 const SaveBackupPhraseScreen = ({ }) => (
-  <div class="save-backup-phrase-layout">
+  <div className="save-backup-phrase-layout">
     <ui.Header/>
     <forms.SaveBackupPhraseForm
       onSubmit={() => {}}

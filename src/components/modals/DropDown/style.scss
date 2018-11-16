@@ -1,0 +1,61 @@
+.dropdown {
+  padding: 25px 30px 30px 30px;
+  width: 325px;
+  z-index: 5;
+  top: 80px;
+  position: absolute;
+  left: 25px;
+  justify-content: center;
+  display: flex;
+  border-radius: 20px;
+  background-color: #fff;
+  box-sizing: border-box;
+  flex-direction: column;
+
+  &::before {
+    content: ' ';
+    top: -10px;
+    position: absolute;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 10px solid #FFFFFF;
+    left: 50%;
+    transform: translate(-50%, 0px);
+  }
+
+  &__wallet {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'ProximaNova-Bold';
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    padding: 19px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    &:hover {
+      color: black;
+    }
+
+    &__icon {
+
+    }
+  }
+
+  &__button-wrapper {
+    margin-top: 10px;
+    display: flex;
+    flex: 1;
+    button {
+      color: #B076FF;
+    }
+    img {
+      width: 12px;
+      height: 12px;
+    }
+  }
+}

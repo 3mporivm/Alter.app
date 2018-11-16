@@ -8,17 +8,17 @@ import iconGithub from 'assets/img/github.svg';
 import './style.scss';
 
 const InfoBlock = ({}) => (
-  <div class="info-block">
+  <div className="info-block">
     <div>
       [alpha version /patch_0.1]
     </div>
-    <div class="info-block__lastupdate">
+    <div className="info-block__lastupdate">
       {'lastupdate 12/05/2018, '}
-      <span class="info-block__checkupdates">
+      <span className="info-block__checkupdates">
         checkupdates
       </span>
     </div>
-    <div class="info-block__description">
+    <div className="info-block__description">
       Alter.app - мультивалютный крипто-кошелек, дающий возможность
       взаимодействовать со сторонними сервисами, работающими
       с приемом и отдачей крипто-валют. Alter.app это совершенно
@@ -26,10 +26,10 @@ const InfoBlock = ({}) => (
       каждый новый день. Дальше будет интересней, следите за нами
       в социальных сетях:
     </div>
-    <div class="share-buttons">
-      <img class="share-buttons__telegram" src={iconTelegram} alt=""/>
-      <img class="share-buttons__twitter" src={iconTwitter} alt=""/>
-      <img class="share-buttons__github" src={iconGithub} alt=""/>
+    <div className="share-buttons">
+      <img className="share-buttons__telegram" src={iconTelegram} alt=""/>
+      <img className="share-buttons__twitter" src={iconTwitter} alt=""/>
+      <img className="share-buttons__github" src={iconGithub} alt=""/>
     </div>
   </div>
 );

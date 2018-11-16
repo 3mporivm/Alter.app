@@ -7,7 +7,7 @@ import 'assets/screens.scss';
 import './style.scss';
 
 const WelcomeBackScreen = ({ }) => (
-  <div class="welcome-back-layout">
+  <div className="welcome-back-layout">
     <ui.Header/>
     <forms.EnterWalletForm
       onSubmit={() => {}}

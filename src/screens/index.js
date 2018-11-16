@@ -7,6 +7,7 @@ import AccountNameScreen from './AccountNameScreen';
 import SaveBackupPhraseScreen from './SaveBackupPhraseScreen';
 import ConfirmBackupScreen from './ConfirmBackupScreen';
 import ChangePasswordScreen from './ChangePasswordScreen';
+import OverviewScreen from './OverviewScreen';
 
 export {
   GetStartedScreen,
@@ -18,4 +19,5 @@ export {
   SaveBackupPhraseScreen,
   ConfirmBackupScreen,
   ChangePasswordScreen,
+  OverviewScreen,
 };

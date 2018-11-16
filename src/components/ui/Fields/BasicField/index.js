@@ -23,7 +23,7 @@ const BasicField = ({
     {
       isSecurity &&
       <img
-        class="basic-field__icon"
+        className="basic-field__icon"
         src={LockIcon}
         alt=""
       />

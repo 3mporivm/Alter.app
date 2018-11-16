@@ -72,6 +72,7 @@ const ChangePasswordForm = ({
       style={{ marginBottom: 50 }}
       onPress={handleSubmit}
       isLoading={isFetching}
+      isDisabled={true}
       color="purple"
       icon={iconSave}
     />

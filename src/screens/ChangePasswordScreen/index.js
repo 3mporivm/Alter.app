@@ -5,7 +5,7 @@ import 'assets/screens.scss';
 import './style.scss';
 
 const ChangePasswordScreen = ({ }) => (
-  <div class="change-password-layout">
+  <div className="change-password-layout">
     <ui.Header/>
     <forms.ChangePasswordForm
       onSubmit={() => {}}

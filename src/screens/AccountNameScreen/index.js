@@ -5,7 +5,7 @@ import 'assets/screens.scss';
 import './style.scss';
 
 const AccountNameScreen = ({ }) => (
-  <div class="account-name-layout">
+  <div className="account-name-layout">
     <ui.Header/>
     <forms.AccountNameForm
       onSubmit={() => {}}

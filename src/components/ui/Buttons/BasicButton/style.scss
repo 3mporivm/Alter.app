@@ -1,14 +1,20 @@
 .purple {
   background-color: rgba(176, 118, 255, 0.2);
-  &:disabled div {
+  div {
     background-color: rgba(176, 118, 255, 0.2);
+  }
+  &:disabled div {
+    background-color: rgba(176, 118, 255, 0.3);
   }
 }
 
 .blue {
   background-color: rgba(99, 206, 255, 0.2);
-  &:disabled div {
+  div {
     background-color: rgba(99, 206, 255, 0.2);
+  }
+  &:disabled div {
+    background-color: rgba(99, 206, 255, 0.3);
   }
 }
 
@@ -41,6 +47,9 @@
   }
 
   &:disabled {
+    img {
+      opacity: 0.3;
+    }
     color: rgba(255, 255, 255, 0.3);
     cursor: not-allowed;
   }

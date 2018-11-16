@@ -7,15 +7,15 @@ import 'assets/screens.scss';
 import './style.scss';
 
 const AccountScreen = ({ }) => (
-  <div class="account-layout">
+  <div className="account-layout">
     <ui.Header/>
-    <div class="account-layout__create">
-      <img class="account-layout__image" src={CreateAccountIcon} alt=""/>
-      <span class="account-layout__title">Create a New Account</span>
+    <div className="account-layout__create">
+      <img className="account-layout__image" src={CreateAccountIcon} alt=""/>
+      <span className="account-layout__title">Create a New Account</span>
     </div>
-    <div class="account-layout__import">
-      <img class="account-layout__image" src={ImportAccountIcon} alt=""/>
-      <span class="account-layout__title">Import Account Via Seed</span>
+    <div className="account-layout__import">
+      <img className="account-layout__image" src={ImportAccountIcon} alt=""/>
+      <span className="account-layout__title">Import Account Via Seed</span>
     </div>
     <ui.InfoBlock/>
   </div>
