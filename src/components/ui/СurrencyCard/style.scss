@@ -1,0 +1,78 @@
+.currency_card {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 20px;
+  color: #FFFFFF;
+  width: 152px;
+  height: 180px;
+  box-sizing: border-box;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+
+    &__badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      padding: 5.12px;
+      box-sizing: border-box;
+      border-radius: 10px;
+    }
+
+    &__badge-image {
+      max-width:100%;
+      max-height:100%;
+    }
+
+
+    &__right {
+      margin-left: 10px;
+      font-size: 14px;
+    }
+
+    &__right-name {
+      font-family: 'ProximaNova-Bold';
+    }
+
+    &__right-full-name {
+      font-family: 'ProximaNova-Regular';
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  &__course {
+    font-size: 18px;
+    font-family: 'ProximaNova-Extrabold';
+    margin-top: 20px;
+  }
+
+  &__course-usd {
+    font-size: 12px;
+    font-family: 'ProximaNova-Regular';
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.4)
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    font-size: 14px;
+    color: #FFFFFF;
+    font-family: 'ProximaNova-Bold';
+    cursor: pointer;
+    height: 30px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+}

@@ -3,6 +3,13 @@
 .wallet-screen-layout {
   display: flex;
   flex-direction: column;
-  //align-items: center;
   justify-content: center;
+
+  &__currencies {
+    margin-top: 10px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }

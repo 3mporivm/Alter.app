@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="12px" viewBox="0 0 20 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Pack_2.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-g-AlterApp_Overview01" transform="translate(-223.000000, -601.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="04" transform="translate(198.000000, 572.000000)">
+                <g id="Crypto" transform="translate(20.000000, 20.000000)">
+                    <g id="dash">
+                        <g id="Group" transform="translate(5.175000, 9.210000)">
+                            <path d="M19.614,1.842 C19.593863,1.50586468 19.4952253,1.17912753 19.326,0.888 C19.176,0.588 18.909,0.354 18.597,0.234 C18.2788253,0.0754314206 17.9263322,-0.00186971495 17.571,0.009 L4.257,0.009 L3.303,2.868 L15.366,2.868 L13.461,8.712 L1.401,8.712 L0.447,11.571 L13.824,11.571 C14.2225926,11.5594627 14.6166895,11.4834801 14.991,11.346 C15.366,11.133 15.795,10.917 16.158,10.617 C16.5123943,10.3376054 16.8326054,10.0173943 17.112,9.663 C17.3429554,9.31576614 17.5398678,8.94705772 17.7,8.562 L19.467,3.006 C19.6277507,2.64043986 19.6788209,2.23604728 19.614,1.842 Z" id="Shape"></path>
+                            <polygon id="Shape" points="8.058 4.464 0.96 4.464 0.006 7.107 7.176 7.107"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,5 +1,8 @@
 .purple {
   background-color: rgba(176, 118, 255, 0.2);
+  &:hover, &:hover div {
+    background-color: rgba(176, 118, 255, 0.3);
+  }
   div {
     background-color: rgba(176, 118, 255, 0.2);
   }
@@ -10,6 +13,9 @@
 
 .blue {
   background-color: rgba(99, 206, 255, 0.2);
+  &:hover, &:hover div {
+    background-color: rgba(99, 206, 255, 0.3);
+  }
   div {
     background-color: rgba(99, 206, 255, 0.2);
   }

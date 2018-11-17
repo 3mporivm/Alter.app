@@ -4,7 +4,7 @@ import Header from './Header';
 import Fields from './Fields';
 import Badge from './Badge';
 import BalanceBlock from './BalanceBlock';
-import SearchInput from './Fields/SearchInput';
+import CurrencyCard from './СurrencyCard';
 
 
 export default {
@@ -14,5 +14,5 @@ export default {
   Fields,
   Badge,
   BalanceBlock,
-  SearchInput,
+  CurrencyCard,
 };
