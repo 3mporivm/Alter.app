@@ -6,10 +6,11 @@ import './style.scss';
 const Badge = ({
   icon,
   backgroundColor,
+  style,
   styleImg,
 }) => (
   <div
-    style={{ backgroundColor }}
+    style={{ ...style, backgroundColor }}
     className="badge"
   >
     <img
@@ -21,12 +22,14 @@ const Badge = ({
 );
 
 Badge.propTypes = {
+  style: PropTypes.any,
   icon: PropTypes.any,
   backgroundColor: PropTypes.string,
   styleImg: PropTypes.any,
 };
 
 Badge.defaultProps = {
+  style: null,
   icon: "",
   backgroundColor: "#B076FF",
   styleImg: {},

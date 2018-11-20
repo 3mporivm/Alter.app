@@ -11,6 +11,7 @@ const CurrencyCard = ({
   wallets,
   course,
   courseUSD,
+  onPress,
 }) => (
   <div className="currency_card">
     <div className="currency_card__header">
@@ -31,7 +32,7 @@ const CurrencyCard = ({
     </div>
     <div className="currency_card__course">{course}</div>
     <div className="currency_card__course-usd">{`$${courseUSD}`}</div>
-    <button className="currency_card__button">
+    <button onClick={onPress} className="currency_card__button">
       {`${wallets} wallets`}
     </button>
   </div>
@@ -44,6 +45,7 @@ CurrencyCard.propTypes = {
   wallets: PropTypes.number.isRequired,
   course: PropTypes.number.isRequired,
   courseUSD: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 CurrencyCard.defaultProps = {

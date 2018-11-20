@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import iconSettings from 'assets/img/settings.svg';
 import iconDropdown from 'assets/img/dropdown.svg';
+import iconBack from 'assets/img/back.svg';
 import { compose, withState, lifecycle, withHandlers, withStateHandlers } from "recompose";
 
 import './style.scss';
@@ -10,6 +11,7 @@ const Header = ({
   isExtended,
   isDropDown,
   title,
+  onBackPress,
   onCenterPress,
   onRightPress,
   isDropdownOpen,
@@ -18,7 +20,17 @@ const Header = ({
   modal,
 }) => (
   <div className="header">
-    <div className="header__left"/>
+    <div className="header__left">
+      {
+        onBackPress &&
+        <img
+          onClick={onBackPress}
+          className="header__left__icon-back"
+          src={iconBack}
+          alt=""
+        />
+      }
+    </div>
     <div
       ref={ref => setDropdownRef(ref)}
       id="header__center"
@@ -72,6 +84,10 @@ Header.propTypes = {
   isExtended: PropTypes.bool,
   isDropDown: PropTypes.bool,
   title: PropTypes.string,
+  onBackPress: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.bool,
+  ]),
   onRightPress: PropTypes.func,
   modal: PropTypes.element,
   isDropdownOpen: PropTypes.bool.isRequired,
@@ -81,6 +97,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   title: "",
+  onBackPress: false,
   isExtended: false,
   isDropDown: false,
   onRightPress: () => {},

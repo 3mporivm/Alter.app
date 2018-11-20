@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import { compose, getContext, withHandlers } from "recompose";
 import { ui, forms, modals } from 'components';
 import iconBitcoin from 'assets/img/bitcoin.svg';
 import iconEthereum from 'assets/img/ethereum.svg';
@@ -10,6 +11,7 @@ import './style.scss';
 
 const OverviewScreen = ({
   currencies,
+  onCoin,
 }) => (
   <div className="wallet-screen-layout">
     <ui.Header
@@ -38,6 +40,7 @@ const OverviewScreen = ({
       {
         currencies.map((currency) => (
           <ui.CurrencyCard
+            onPress={onCoin}
             name={currency.name}
             fullName={currency.fullName}
             icon={currency.icon}
@@ -55,6 +58,7 @@ const OverviewScreen = ({
 
 OverviewScreen.propTypes = {
   currencies: PropTypes.array,
+  onCoin: PropTypes.func.isRequired,
 };
 
 OverviewScreen.defaultProps = {
@@ -89,5 +93,19 @@ OverviewScreen.defaultProps = {
   ],
 };
 
-
-export default OverviewScreen;
+export default compose(
+  getContext({
+    router: PropTypes.shape({
+      history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }),
+  withHandlers({
+    onCoin: ({ router }) => () => {
+      router.history.push({
+        pathname: '/coin',
+      });
+    },
+  })
+)(OverviewScreen);

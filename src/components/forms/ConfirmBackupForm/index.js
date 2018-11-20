@@ -40,7 +40,7 @@ const ConfirmBackupForm = ({
       style={{ marginBottom: 50 }}
       onPress={handleSubmit}
       isLoading={isFetching}
-      isDisabled={true}
+      //isDisabled={true}
     />
   </form>
 );
@@ -52,6 +52,9 @@ ConfirmBackupForm.propTypes = {
 
 export default compose(
   reduxForm({
-    form: 'saveBackupPhraseForm',
+    form: 'confirmBackupPhraseForm',
+    initialValues: {
+      words: [],
+    },
   }),
 )(ConfirmBackupForm);

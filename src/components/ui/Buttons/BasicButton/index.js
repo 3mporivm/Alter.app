@@ -8,6 +8,7 @@ const BasicButton = ({
  onPress,
  title,
  style,
+ styleIcon,
  isDisabled,
  icon,
  isLoading,
@@ -25,7 +26,10 @@ const BasicButton = ({
         ? <LoadingSpinner small />
         : [
           icon && (
-            <div className="basic-button__img-wrapper">
+            <div
+              className="basic-button__img-wrapper"
+              style={styleIcon}
+            >
               <img key="imgButton" className="basic-button__img" src={icon} alt="" />
             </div>
           ),
@@ -39,6 +43,7 @@ BasicButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   style: PropTypes.any,
+  styleIcon: PropTypes.any,
   icon: PropTypes.any,
   isDisabled: PropTypes.bool,
   isLoading: PropTypes.bool,
@@ -47,6 +52,7 @@ BasicButton.propTypes = {
 
 BasicButton.defaultProps = {
   style: {},
+  styleIcon: {},
   icon: false,
   isDisabled: false,
   isLoading: false,

@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, lifecycle } from 'recompose';
-import { ui } from 'components';
-import apiHOCs from 'components/apiHOCs';
+import { compose, lifecycle, withHandlers, getContext } from 'recompose';
+import { ui, apiHOCs } from 'components';
 
 import 'assets/screens.scss';
 import './style.scss';
 
-const GetStartedScreen = ({ redditPosts }) => (
+const GetStartedScreen = ({
+  onGetStarted
+}) => (
   <div className="get-started-layout">
     <div className="get-started-layout__title">alter.app</div>
     <ui.Buttons.NextButton
       title="Get Started"
-      onPress={() => {}}
+      onPress={onGetStarted}
       style={{ marginBottom: 50 }}
     />
     <ui.InfoBlock/>
@@ -28,11 +29,25 @@ const GetStartedScreen = ({ redditPosts }) => (
 
 GetStartedScreen.propTypes = {
   redditPosts: PropTypes.any,
+  onGetStarted: PropTypes.func.isRequired,
 };
 
 export default compose(
   apiHOCs.RedditApiHOC(),
-
+  getContext({
+    router: PropTypes.shape({
+      history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }),
+  withHandlers({
+    onGetStarted: ({ router }) => () => {
+      router.history.push({
+        pathname: '/auth/protect-account',
+      });
+    },
+  }),
   lifecycle({
     componentDidMount() {
       this.props.getReddit({ redditName: 'reactjs' });

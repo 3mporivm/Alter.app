@@ -1,10 +1,10 @@
 import React from 'react';
 import { ui, forms } from 'components';
-import CreateAccountIcon from 'assets/img/create-account.svg';
-import ImportAccountIcon from 'assets/img/import-account.svg';
 
 import 'assets/screens.scss';
 import './style.scss';
+import { compose, getContext, withHandlers } from "recompose";
+import PropTypes from "prop-types";
 
 const WelcomeBackScreen = ({ }) => (
   <div className="welcome-back-layout">
@@ -17,4 +17,19 @@ const WelcomeBackScreen = ({ }) => (
   </div>
 );
 
-export default WelcomeBackScreen;
+export default compose(
+  getContext({
+    router: PropTypes.shape({
+      history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }),
+  withHandlers({
+    onSubmit: ({ router }) => () => {
+      router.history.push({
+        pathname: '/auth/account',
+      });
+    },
+  })
+)(WelcomeBackScreen);

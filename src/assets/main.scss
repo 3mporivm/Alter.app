@@ -8,6 +8,10 @@ body {
   background: linear-gradient(to bottom, rgba(13,24,57,1) 100%, rgba(8,16,36,1) 100%);
 }
 
+button {
+  padding: 0;
+}
+
 #root {
   width: 375px;
   padding: 0 25px;

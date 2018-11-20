@@ -6,6 +6,7 @@ import SaveBackupPhraseForm from './SaveBackupPhraseForm';
 import ConfirmBackupForm from './ConfirmBackupForm';
 import ChangePasswordForm from './ChangePasswordForm';
 import SearchForm from './SearchForm';
+import NewWalletForm from './NewWalletForm';
 
 export default {
   ProtectAccountForm,
@@ -16,4 +17,5 @@ export default {
   ConfirmBackupForm,
   ChangePasswordForm,
   SearchForm,
+  NewWalletForm,
 };

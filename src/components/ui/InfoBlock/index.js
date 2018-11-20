@@ -7,8 +7,11 @@ import iconGithub from 'assets/img/github.svg';
 
 import './style.scss';
 
-const InfoBlock = ({}) => (
-  <div className="info-block">
+const InfoBlock = ({ style }) => (
+  <div
+    className="info-block"
+    style={style}
+  >
     <div>
       [alpha version /patch_0.1]
     </div>
@@ -36,12 +39,16 @@ const InfoBlock = ({}) => (
 
 InfoBlock.propTypes = {
   // onPressNewPoll: PropTypes.func,
-  // name: PropTypes.string,
+  style: PropTypes.any,
   // picture: PropTypes.string,
   // pollsCount: PropTypes.number.isRequired,
   // isAuthorized: PropTypes.bool,
   // isJoined: PropTypes.bool,
   // onButtonPress: PropTypes.func.isRequired,
+};
+
+InfoBlock.defaultProps = {
+  style: null,
 };
 
 export default InfoBlock;

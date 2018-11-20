@@ -1,0 +1,61 @@
+.info-layout {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  margin: 0 auto;
+
+  &__header {
+    margin: 50px 0 0 30px;
+    display: flex;
+    flex-direction: row;
+    font-family: 'Circe-Regular';
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    text-align: left;
+    color: #141f4d;
+
+
+    &__title {
+      font-size: 14px;
+      letter-spacing: 3px;
+    }
+
+    &__subtitle {
+      font-size: 10px;
+      letter-spacing: 2.2px;
+    }
+
+    &__button-wrapper {
+      position: absolute;
+      right: 30px;
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      margin: 140px auto 0 auto;
+      font-family: 'Circe-Regular';
+      font-size: 30px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: 4.6px;
+      color: #141f4d;
+    }
+
+    &__second-paragraph {
+      color: #355cf7;
+    }
+
+    &__button-wrapper {
+      margin-top: 36px;
+    }
+  }
+}

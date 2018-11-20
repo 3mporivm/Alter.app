@@ -6,7 +6,7 @@ import './style.scss';
 
 const PuzzlesField = ({
   input: {
-   value,
+   value = [],
   },
   handleChange,
   placeholder,
@@ -24,7 +24,7 @@ const PuzzlesField = ({
     <label className="puzzles-field__label">Confirmation</label>
     <div className="puzzles-field__selected-words">
       {
-        value.map(item => (
+        value && value.toJS().map(item => (
           <span
             onClick={() => unselected(item)}
             className="puzzles-field__words__word"
@@ -91,8 +91,8 @@ export default compose(
   ]),
   withHandlers({
     handleChange: ({ words, updateWords, input: { onChange, value } }) => ({ word, isSelected }) => {
-      updateWords(words.map(item => item.word !== word ? item : { ...item, isSelected: true }));
       !isSelected && onChange(value.concat(word));
+      updateWords(words.map(item => item.word !== word ? item : { ...item, isSelected: true }));
     },
     unselected: ({ words, updateWords, input: { onChange, value } }) => (word) => {
       updateWords(words.map(item => item.word !== word ? item : { ...item, isSelected: false }));

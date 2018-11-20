@@ -10,6 +10,22 @@
   &__left {
     width: 20px;
     height: 20px;
+
+    &__icon-back {
+      width: 7px;
+      height: 14px;
+      cursor: pointer;
+      opacity: 0.3;
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+      padding: 0.5em;
+      margin: -0.5em;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 
   &__center {
