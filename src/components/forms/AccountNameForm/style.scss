@@ -1,15 +1,15 @@
-.create-account-form-layout {
+.account-name-form-wrapper {
   margin-top: 40px;
   display: flex;
   flex-direction: column;
 }
 
-.create-account-form {
+.account-name-form {
   background: rgba(62,25,87,1);
   background: linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
   margin-bottom: 20px;
   border-radius: 20px;
-  height: 209px;
+  height: 230px;
   position: relative;
   box-sizing: border-box;
   padding: 20px;

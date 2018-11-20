@@ -16,10 +16,10 @@ const AccountNameForm = ({
   styleForm,
   styleTitle,
 }) => (
-  <form onSubmit={handleSubmit} className="create-account-form-layout">
-    <div className="create-account-form">
+  <form onSubmit={handleSubmit} className="account-name-form-wrapper">
+    <div className="account-name-form">
       <ui.Badge icon={iconPencil} />
-      <div style={styleTitle} className="enter-wallet-form__title">
+      <div style={styleTitle} className="account-name-form__title">
         Account Name
       </div>
       <Field
@@ -34,8 +34,8 @@ const AccountNameForm = ({
           }
         }}
       />
-      <div className="create-account-form__label">The account name will be known only to you</div>
-      <div className="create-account-form__background"/>
+      <div className="account-name-form__label">The account name will be known only to you</div>
+      <div className="account-name-form__background"/>
     </div>
     <ui.Buttons.NextButton
       style={{ marginBottom: 50 }}

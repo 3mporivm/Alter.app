@@ -19,17 +19,10 @@ const SaveBackupPhraseScreen = ({
         phrase: "ketchup viable sport car man jungle coin green coat shoes web dog table jeans milk"
       })}
     />
-    <ui.Buttons.BasicButton
+    <ui.Buttons.TransparentButton
       title="Cancel Creation"
       onPress={() => {}}
-      style={{
-        backgroundColor: 'transparent',
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: 'rgba(255, 255, 255, 0.15)',
-        flex: 1,
-        marginBottom: 50,
-      }}
+      style={{ marginBottom: 50 }}
     />
     <ui.InfoBlock/>
   </div>

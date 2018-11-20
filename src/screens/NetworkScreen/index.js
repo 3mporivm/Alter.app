@@ -1,24 +1,27 @@
 import React from 'react';
+import PropTypes from "prop-types";
+import { compose, getContext, withHandlers } from "recompose";
 import { ui, forms } from 'components';
 
 import 'assets/screens.scss';
 import './style.scss';
-import PropTypes from "prop-types";
-import {compose, getContext, withHandlers} from "recompose";
 
-const ChangePasswordScreen = ({ onBack }) => (
-  <div className="change-password-layout">
-    <ui.Header onBackPress={onBack}/>
-    <forms.ChangePasswordForm
+const NetworkScreen = ({ onBack }) => (
+  <div className="network-layout">
+    <ui.Header
+      onBackPress={onBack}
+    />
+    <forms.NetworkForm
       onSubmit={() => {}}
       isFetching={false}
-      submitAction={() => {}}
-      onSuccess={() => alert('onSuccess')}
+      initialValues={{
+        node_address: "https://nodes.wavesplatform.com/",
+      }}
     />
   </div>
 );
 
-ChangePasswordScreen.propTypes = {
+NetworkScreen.propTypes = {
   onBack: PropTypes.func.isRequired,
 };
 
@@ -37,4 +40,4 @@ export default compose(
       });
     },
   })
-)(ChangePasswordScreen);
+)(NetworkScreen);

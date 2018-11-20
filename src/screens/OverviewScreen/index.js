@@ -41,6 +41,7 @@ const OverviewScreen = ({
       {
         currencies.map((currency) => (
           <ui.CurrencyCard
+            key={currency.name}
             onPress={onCoin}
             name={currency.name}
             fullName={currency.fullName}

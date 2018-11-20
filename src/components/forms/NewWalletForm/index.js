@@ -39,15 +39,12 @@ const NewWalletForm = ({
       }}
     />
     <div className="new-wallet-form__buttons">
-      <ui.Buttons.BasicButton
+      <ui.Buttons.TransparentButton
         title="Cancel"
         onPress={onCancel}
         style={{
           color: 'black',
-          background: 'transparent',
-          borderWidth: 1,
           borderColor: 'rgba(26, 39, 78, 0.15)',
-          borderStyle: 'solid',
           marginRight: 21,
         }}
       />

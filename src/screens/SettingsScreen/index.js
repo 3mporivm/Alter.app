@@ -10,24 +10,38 @@ import './style.scss';
 
 const SettingsScreen = ({
   onClose,
+  onNetwork,
+  onChangePassword,
 }) => (
   <div className="setting-layout">
     <ui.Header
       onRightPress={onClose}
       rightIcon={iconClose}
     />
-    <ui.AddressCard
-      onSubmit={() => {}}
-      isFetching={false}
-    />
+    <div className="setting-layout__address-card">
+      <ui.Badge
+        //icon={}
+        backgroundColor="#B076FF"
+      />
+      <div className="setting-layout__address-card__title">Wallet one</div>
+      <ui.Fields.CopyField
+        input={{
+          value: "3LVGbddKk3uKhqfGKz7X7n6d5asdasdasdasdg",
+        }}
+        inputId="address_account"
+        styleWrapper={{ marginTop: 20 }}
+        label="Account address"
+        readOnly
+      />
+    </div>
     <div className="setting-layout__buttons">
       <ui.Buttons.ListButton
         title="Network"
-        onPress={() => {}}
+        onPress={onNetwork}
       />
       <ui.Buttons.ListButton
         title="Password"
-        onPress={() => {}}
+        onPress={onChangePassword}
       />
     </div>
     <ui.Buttons.BasicButton
@@ -39,15 +53,9 @@ const SettingsScreen = ({
         marginTop: 30,
       }}
     />
-    <ui.Buttons.BasicButton
+    <ui.Buttons.TransparentButton
       title="Delete Account"
-      style={{
-        background: 'transparent',
-        borderWidth: 1,
-        borderColor: 'rgba(255, 255, 255, 0.15)',
-        borderStyle: 'solid',
-        marginTop: 99,
-      }}
+      style={{ marginTop: 99 }}
       onPress={() => {}}
     />
   </div>
@@ -55,6 +63,8 @@ const SettingsScreen = ({
 
 SettingsScreen.propTypes = {
   onClose: PropTypes.func.isRequired,
+  onNetwork: PropTypes.func.isRequired,
+  onChangePassword: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -67,9 +77,13 @@ export default compose(
   }),
   withHandlers({
     onClose: ({ router }) => () => {
-      router.history.push({
-        pathname: '/',
-      });
+      router.history.push({ pathname: '/' });
+    },
+    onNetwork: ({ router }) => () => {
+      router.history.push({ pathname: '/network' });
+    },
+    onChangePassword: ({ router }) => () => {
+      router.history.push({ pathname: '/change-password' });
     },
   })
 )(SettingsScreen);

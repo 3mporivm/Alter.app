@@ -13,6 +13,8 @@ const HomeScreen = () => (
   <Switch>
     <Route path="/coin" component={screens.CoinScreen} />
     <Route path="/settings" component={screens.SettingsScreen} />
+    <Route path="/network" component={screens.NetworkScreen} />
+    <Route path="/change-password" component={screens.ChangePasswordScreen} />
     <Route path="/" component={screens.OverviewScreen} />
   </Switch>
 );

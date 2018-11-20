@@ -7,8 +7,7 @@ import { required } from 'validators';
 
 import './style.scss';
 
-const SearchForm = ({
-}) => (
+const SearchForm = () => (
   <form className="search-form">
     <Field
       validate={required}
@@ -25,7 +24,6 @@ const SearchForm = ({
 
 SearchForm.propTypes = {
   onChanges: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
 };
 
 export default compose(

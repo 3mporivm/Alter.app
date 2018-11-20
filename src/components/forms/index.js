@@ -7,6 +7,7 @@ import ConfirmBackupForm from './ConfirmBackupForm';
 import ChangePasswordForm from './ChangePasswordForm';
 import SearchForm from './SearchForm';
 import NewWalletForm from './NewWalletForm';
+import NetworkForm from './NetworkForm';
 
 export default {
   ProtectAccountForm,
@@ -18,4 +19,5 @@ export default {
   ChangePasswordForm,
   SearchForm,
   NewWalletForm,
+  NetworkForm,
 };
