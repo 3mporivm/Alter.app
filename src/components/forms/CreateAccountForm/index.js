@@ -27,7 +27,7 @@ const CreateAccountForm = ({
       </div>
       <div className="create-account-form__label">Choose your avatar:</div>
       <Field
-        validate={minLength6}
+        validate={[required, minLength6]}
         component={ui.Fields.CircleField}
         name="your_avatar"
         props={{

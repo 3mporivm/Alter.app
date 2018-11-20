@@ -8,6 +8,7 @@ import { compose, withState, lifecycle, withHandlers, withStateHandlers } from "
 import './style.scss';
 
 const Header = ({
+  styleContent,
   isExtended,
   isDropDown,
   title,
@@ -33,6 +34,7 @@ const Header = ({
       }
     </div>
     <div
+      style={styleContent}
       ref={ref => setDropdownRef(ref)}
       id="header__center"
       className="header__center"
@@ -64,7 +66,7 @@ const Header = ({
         modal
       }
     </div>
-    <div className="header__right">
+    <div style={styleContent} className="header__right">
       {
         onRightPress &&
         <img
@@ -98,6 +100,7 @@ Header.propTypes = {
   isDropdownOpen: PropTypes.bool.isRequired,
   setDropdownOpen: PropTypes.func.isRequired,
   setDropdownRef: PropTypes.func.isRequired,
+  styleContent: PropTypes.any,
 };
 
 Header.defaultProps = {
@@ -108,6 +111,7 @@ Header.defaultProps = {
   rightIcon: iconSettings,
   onRightPress: false,
   modal: null,
+  styleContent: null,
 };
 
 

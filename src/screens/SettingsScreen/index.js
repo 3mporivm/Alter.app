@@ -19,10 +19,7 @@ const SettingsScreen = ({
       rightIcon={iconClose}
     />
     <div className="setting-layout__address-card">
-      <ui.Badge
-        //icon={}
-        backgroundColor="#B076FF"
-      />
+      <ui.Badge/>
       <div className="setting-layout__address-card__title">Wallet one</div>
       <ui.Fields.CopyField
         input={{

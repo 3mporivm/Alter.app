@@ -16,6 +16,7 @@ const OverviewScreen = ({
 }) => (
   <div className="wallet-screen-layout">
     <ui.Header
+      styleContent={{ zIndex: 1 }}
       isDropDown
       isExtended
       onCenterPress={() => alert('onCenterPress')}

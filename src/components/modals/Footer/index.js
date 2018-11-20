@@ -22,7 +22,6 @@ const Footer = ({
         top: -50,
       }}
       icon={icon}
-      backgroundColor="#B076FF"
     />
     {children}
   </div>

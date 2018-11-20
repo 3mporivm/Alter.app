@@ -17,6 +17,12 @@ const CircleField = ({
     style={styleWrapper}
     className="circle-field"
   >
+    {
+      console.log('value', value)
+    }
+    {
+      console.log('value', value.length)
+    }
     <ReactCodeInput
       fields={6}
       value={value}

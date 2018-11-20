@@ -18,9 +18,7 @@ const ProtectAccountForm = ({
 }) => (
   <form onSubmit={handleSubmit} className="protect-account-form-layout">
     <div className="protect-account-form">
-      <ui.Badge
-        icon={iconLock}
-      />
+      <ui.Badge icon={iconLock} />
       <div className="protect-account-form__background">
         <div style={styleTitle} className="protect-account-form__title">
           Protect Your Account
@@ -56,6 +54,7 @@ const ProtectAccountForm = ({
       style={{ marginBottom: 50 }}
       onPress={handleSubmit}
       isLoading={isFetching}
+      isDisabled={invalid || isFetching}
     />
   </form>
 );

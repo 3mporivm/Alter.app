@@ -69,6 +69,9 @@ const CoinScreen = ({
     }
     <ui.InfoBlock style={{ marginTop: 50 }}/>
     {
+      isFooterModalOpen && <div className="header__hide-background"/>
+    }
+    {
       <modals.Footer
         icon={iconPlusWhite}
         style={{ bottom: isFooterModalOpen ? 0 : -500 }}

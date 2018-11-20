@@ -19,10 +19,7 @@ const NetworkForm = ({
 }) => (
   <form onSubmit={handleSubmit} className="network-form-wrapper">
     <div className="network-form">
-      <ui.Badge
-        icon={iconNetwork}
-        backgroundColor="#B076FF"
-      />
+      <ui.Badge icon={iconNetwork}/>
       <div className="network-form__title">
         Network
       </div>
