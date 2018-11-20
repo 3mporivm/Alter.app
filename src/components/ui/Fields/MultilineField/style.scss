@@ -14,6 +14,10 @@
     opacity: 0.3;
     padding-left: 10px;
     cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &__input {

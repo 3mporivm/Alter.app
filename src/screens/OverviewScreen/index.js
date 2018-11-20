@@ -12,13 +12,14 @@ import './style.scss';
 const OverviewScreen = ({
   currencies,
   onCoin,
+  onSettings,
 }) => (
   <div className="wallet-screen-layout">
     <ui.Header
       isDropDown
       isExtended
       onCenterPress={() => alert('onCenterPress')}
-      onRightPress={() => alert('setting')}
+      onRightPress={onSettings}
       modal={
           <modals.DropDown
             onPress={() => {}}
@@ -59,6 +60,7 @@ const OverviewScreen = ({
 OverviewScreen.propTypes = {
   currencies: PropTypes.array,
   onCoin: PropTypes.func.isRequired,
+  onSettings: PropTypes.func.isRequired,
 };
 
 OverviewScreen.defaultProps = {
@@ -105,6 +107,11 @@ export default compose(
     onCoin: ({ router }) => () => {
       router.history.push({
         pathname: '/coin',
+      });
+    },
+    onSettings: ({ router }) => () => {
+      router.history.push({
+        pathname: '/settings',
       });
     },
   })

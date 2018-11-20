@@ -12,6 +12,7 @@ import * as screens from 'screens';
 const HomeScreen = () => (
   <Switch>
     <Route path="/coin" component={screens.CoinScreen} />
+    <Route path="/settings" component={screens.SettingsScreen} />
     <Route path="/" component={screens.OverviewScreen} />
   </Switch>
 );

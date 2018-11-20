@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { ui, forms, modals } from 'components';
-import {withState, compose, withStateHandlers, getContext, withHandlers} from "recompose";
+import { withState, compose, getContext, withHandlers } from "recompose";
 import iconBitcoin from 'assets/img/bitcoin.svg';
 import iconPlusPurple from 'assets/img/plus_purple.svg';
 import iconImport from 'assets/img/import.svg';
@@ -15,13 +15,14 @@ const CoinScreen = ({
   setFooterModalOpen,
   isFooterModalOpen,
   onBack,
+  onSettings,
 }) => (
   <div className="coin-screen-layout">
     <ui.Header
       onBackPress={onBack}
       isExtended
       onCenterPress={() => alert('onCenterPress')}
-      onRightPress={() => alert('setting')}
+      onRightPress={onSettings}
       title="BTC"
     />
     <ui.BalanceBlock
@@ -85,6 +86,7 @@ CoinScreen.propTypes = {
   setFooterModalOpen: PropTypes.func.isRequired,
   isFooterModalOpen: PropTypes.bool.isRequired,
   onBack: PropTypes.func.isRequired,
+  onSettings: PropTypes.func.isRequired,
 };
 
 CoinScreen.defaultProps = {
@@ -123,6 +125,11 @@ export default compose(
   withHandlers({
     onBack: ({ router }) => () => {
       router.history.push('/overview');
+    },
+    onSettings: ({ router }) => () => {
+      router.history.push({
+        pathname: '/settings',
+      });
     },
   })
 )(CoinScreen);

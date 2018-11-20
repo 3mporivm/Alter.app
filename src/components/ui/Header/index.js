@@ -13,6 +13,7 @@ const Header = ({
   title,
   onBackPress,
   onCenterPress,
+  rightIcon,
   onRightPress,
   isDropdownOpen,
   setDropdownOpen,
@@ -65,11 +66,11 @@ const Header = ({
     </div>
     <div className="header__right">
       {
-        isExtended &&
+        onRightPress &&
         <img
           onClick={onRightPress}
           className="header__right__icon-settings"
-          src={iconSettings}
+          src={rightIcon}
           alt=""
         />
       }
@@ -88,7 +89,11 @@ Header.propTypes = {
     PropTypes.func,
     PropTypes.bool,
   ]),
-  onRightPress: PropTypes.func,
+  rightIcon: PropTypes.any,
+  onRightPress: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.bool,
+  ]),
   modal: PropTypes.element,
   isDropdownOpen: PropTypes.bool.isRequired,
   setDropdownOpen: PropTypes.func.isRequired,
@@ -97,10 +102,11 @@ Header.propTypes = {
 
 Header.defaultProps = {
   title: "",
-  onBackPress: false,
   isExtended: false,
   isDropDown: false,
-  onRightPress: () => {},
+  onBackPress: false,
+  rightIcon: iconSettings,
+  onRightPress: false,
   modal: null,
 };
 

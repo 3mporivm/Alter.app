@@ -6,7 +6,7 @@ const App = () => (
 	<div>
     <Switch>
       <Route path="/auth" component={screens.AuthorizationScreen} />
-      <Route path="/" component={screens.HomeScreen} />
+      <Route path="/" component={screens.SettingsScreen} />
     </Switch>
 	</div>
 );

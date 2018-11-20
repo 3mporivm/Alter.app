@@ -11,6 +11,7 @@ import HomeScreen from './HomeScreen';
 import ChangePasswordScreen from './ChangePasswordScreen';
 import OverviewScreen from './OverviewScreen';
 import CoinScreen from './CoinScreen';
+import SettingsScreen from './SettingsScreen';
 
 export {
   AuthorizationScreen,
@@ -26,4 +27,5 @@ export {
   ChangePasswordScreen,
   OverviewScreen,
   CoinScreen,
+  SettingsScreen,
 };
