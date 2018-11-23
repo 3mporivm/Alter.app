@@ -13,6 +13,7 @@ import OverviewScreen from './OverviewScreen';
 import CoinScreen from './CoinScreen';
 import SettingsScreen from './SettingsScreen';
 import NetworkScreen from './NetworkScreen';
+import SendScreen from './SendScreen';
 
 export {
   AuthorizationScreen,
@@ -30,4 +31,5 @@ export {
   CoinScreen,
   SettingsScreen,
   NetworkScreen,
+  SendScreen,
 };

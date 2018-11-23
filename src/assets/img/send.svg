@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="17px" viewBox="0 0 14 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Pack_2.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-g-AlterApp_Send01" transform="translate(-152.000000, -492.000000)" fill-rule="nonzero">
+            <g id="Button" transform="translate(25.000000, 476.000000)">
+                <g id="Group" transform="translate(119.000000, 10.000000)">
+                    <g id="Sent">
+                        <g id="Group-2" transform="translate(15.000000, 15.000000) scale(1, -1) translate(-15.000000, -15.000000) translate(8.000000, 7.000000)">
+                            <rect id="Rectangle" fill="#B076FF" x="0" y="0" width="14" height="2" rx="1"></rect>
+                            <rect id="Rectangle" fill="#B076FF" x="6" y="5" width="2" height="10" rx="1"></rect>
+                            <polyline id="Path-2" stroke="#B076FF" stroke-width="2" points="3 11 7.04296875 15.0429688 11.0859375 11"></polyline>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

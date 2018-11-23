@@ -1,0 +1,15 @@
+@import '../../assets/screens.scss';
+
+.wallet-screen-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__currencies {
+    margin-top: 10px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
