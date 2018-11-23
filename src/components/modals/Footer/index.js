@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ui } from 'components';
-//import iconBackgroundModal from 'assets/img/background-modal.svg';
 
 import './style.scss';
 
@@ -9,8 +8,6 @@ const Footer = ({
   children,
   icon,
   style,
-  isLoading,
-  wallets,
 }) => (
   <div
     style={style}

@@ -7,6 +7,7 @@
     font-family: 'ProximaNova-Regular';
     font-size: 12px;
     color: rgba(255, 255, 255, 0.4);
+    line-height: 8px;
   }
 
   &__input-wrapper {
@@ -25,6 +26,7 @@
       font-family: 'ProximaNova-Extrabold';
       color: rgb(255, 255, 255);
       font-size: 34px;
+      line-height: 22px;
     }
 
     &__dropdown {
@@ -49,26 +51,6 @@
 
     &:hover {
       opacity: 1;
-    }
-  }
-
-  &__footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    font-family: 'ProximaNova-Regular';
-    font-size: 14px;
-
-    &__left {
-      color: rgba(255, 255, 255, 0.4);
-    }
-
-    &__left-fee {
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    &__right {
-      color: #FFFFFF;
     }
   }
 }

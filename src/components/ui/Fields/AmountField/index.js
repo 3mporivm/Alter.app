@@ -50,14 +50,6 @@ const AmountField = ({
         />
       </div>
     </div>
-    <div className="amount-field__footer">
-      <span className="amount-field__footer__left">
-        Estimated fee: <span className="amount-field__footer__left-fee">0.0000001</span>
-      </span>
-      <span className="amount-field__footer__right">
-        Edit
-      </span>
-    </div>
   </div>
 );
 

@@ -35,6 +35,14 @@ const SendForm = ({
           label: 'Amount',
         }}
       />
+      <div className="send-form__fee">
+        <span className="send-form__fee__left">
+          Estimated fee: <span className="send-form__fee__left-fee">0.0000001</span>
+        </span>
+          <span className="send-form__fee__right">
+          Edit
+        </span>
+      </div>
       <Field
         validate={required}
         component={ui.Fields.BasicField}

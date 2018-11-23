@@ -8,60 +8,41 @@ import Immutable from 'immutable';
 import 'assets/screens.scss';
 import './style.scss';
 
-const SendScreen = ({
+const ReceiveScreen = ({
   currencies,
   onCoin,
   onSettings,
   onBack,
-  setFooterModalOpen,
-  confirmationSending,
 }) => (
-  <div className="send-screen-layout">
+  <div className="receive-screen-layout">
     <ui.Header
       onBackPress={onBack}
       isExtended
       onCenterPress={() => alert('onCenterPress')}
       onRightPress={onSettings}
-      title="Send BTC"
+      title="Receive BTC"
     />
-    <forms.SendForm
-      onSubmit={(value) => setFooterModalOpen(value)}
+    <forms.ReceiveForm
+      onSubmit={() => {}}
       initialValues={{
         amount: "0.17846838",
+        code: "3LVGbddKk3uKhqfGKz7X7n6dz7X7n6d78",
       }}
     />
-    {
-      confirmationSending.get('amount') && <div className="header__hide-background"/>
-    }
-    {
-      <modals.Footer
-        icon={iconSendWhite}
-        style={{ bottom: confirmationSending.get('amount') ? 0 : -500 }}
-      >
-        <ui.ConfirmationSending
-          onCancel={() => setFooterModalOpen(Immutable.Map())}
-          onSend={() => {}}
-          values={confirmationSending}
-        />
-      </modals.Footer>
-    }
     <ui.InfoBlock/>
   </div>
 );
 
-SendScreen.propTypes = {
+ReceiveScreen.propTypes = {
   onCoin: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
-  setFooterModalOpen: PropTypes.func.isRequired,
-  isFooterModalOpen: PropTypes.bool.isRequired,
 };
 
-SendScreen.defaultProps = {
+ReceiveScreen.defaultProps = {
 };
 
 export default compose(
-  withState('confirmationSending', 'setFooterModalOpen', Immutable.Map()),
   getContext({
     router: PropTypes.shape({
       history: PropTypes.shape({
@@ -84,4 +65,4 @@ export default compose(
       });
     },
   })
-)(SendScreen);
+)(ReceiveScreen);

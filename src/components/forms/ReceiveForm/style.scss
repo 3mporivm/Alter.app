@@ -1,0 +1,32 @@
+.receive-form-wrapper {
+  margin-top: 40px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.receive-form {
+  background: rgba(62,25,87,1);
+  background: url("../../../assets/img/background-form.png") bottom no-repeat, linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
+  border-radius: 20px;
+  height: 393px;
+  position: relative;
+  box-sizing: border-box;
+  padding: 20px;
+
+  &__qr-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__qr {
+    width: 112.5px;
+    height: 112.5px;
+    margin: 38.75px 0;
+  }
+
+  input::placeholder {
+    font-family: 'ProximaNova-Regular';
+    color: rgba(255, 255, 255, 0.6)
+  }
+}
