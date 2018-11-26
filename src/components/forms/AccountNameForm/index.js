@@ -35,7 +35,6 @@ const AccountNameForm = ({
         }}
       />
       <div className="account-name-form__label">The account name will be known only to you</div>
-      <div className="account-name-form__background"/>
     </div>
     <ui.Buttons.NextButton
       style={{ marginBottom: 50 }}

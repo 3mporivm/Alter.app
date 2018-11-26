@@ -28,10 +28,11 @@
     flex: 1;
     font-family: 'ProximaNova-Regular';
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.8);
     box-sizing: border-box;
     border: none;
     resize: none;
+    line-height: 22px;
 
     &::placeholder {
       color: #b2bdca;

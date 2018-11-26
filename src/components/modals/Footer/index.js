@@ -8,6 +8,7 @@ const Footer = ({
   children,
   icon,
   style,
+  backgroundColor,
 }) => (
   <div
     style={style}
@@ -19,6 +20,7 @@ const Footer = ({
         top: -50,
       }}
       icon={icon}
+      backgroundColor={backgroundColor}
     />
     {children}
   </div>
@@ -29,6 +31,7 @@ Footer.propTypes = {
   icon: PropTypes.any.isRequired,
   isLoading: PropTypes.bool,
   wallets: PropTypes.array,
+  backgroundColor: PropTypes.string.isRequired,
 };
 
 Footer.defaultProps = {

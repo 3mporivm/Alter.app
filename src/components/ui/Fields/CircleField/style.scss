@@ -4,13 +4,6 @@
   align-items: center;
   margin-top: 5px;
 
-  &__icon {
-    width: 9px;
-    height: 10px;
-    opacity: 0.6;
-    padding-right: 10px;
-  }
-
   input {
     text-align: center;
     font-family: 'ProximaNova-Regular';
@@ -25,6 +18,11 @@
 
     &::placeholder {
       color: #b2bdca;
+    }
+
+    &:focus {
+      background-color: rgb(255, 255, 255);
+      color: black;
     }
   }
 }

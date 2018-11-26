@@ -6,7 +6,7 @@
 
 .account-name-form {
   background: rgba(62,25,87,1);
-  background: linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
+  background: url("../../../assets/img/background-form.png") bottom no-repeat, linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
   margin-bottom: 20px;
   border-radius: 20px;
   height: 230px;
@@ -30,15 +30,7 @@
     font-size: 14px;
   }
 
-  &__background {
-    flex: 1;
-    position: absolute;
-    border-radius: 20px;
-    background: url("../../../assets/img/background-form.png") no-repeat 0 77%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.6)
   }
 }

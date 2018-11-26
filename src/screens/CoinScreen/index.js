@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { ui, forms, modals } from 'components';
-import { withState, compose, getContext, withHandlers } from "recompose";
+import { compose, getContext, withHandlers, withStateHandlers } from "recompose";
 import iconBitcoin from 'assets/img/bitcoin.svg';
 import iconPlusPurple from 'assets/img/plus_purple.svg';
 import iconImport from 'assets/img/import.svg';
 import iconPlusWhite from 'assets/img/plus_white.svg';
+import iconEnter from 'assets/img/enter.svg';
 
 import 'assets/screens.scss';
 import './style.scss';
@@ -36,7 +37,7 @@ const CoinScreen = ({
     <div className="coin-screen-layout__buttons">
       <ui.Buttons.BasicButton
         title="Generate"
-        onPress={() => setFooterModalOpen(!isFooterModalOpen)}
+        onPress={() => setFooterModalOpen("generate")}
         icon={iconPlusPurple}
         color="purple"
         style={{
@@ -50,7 +51,7 @@ const CoinScreen = ({
       <ui.Buttons.BasicButton
         title="Import"
         icon={iconImport}
-        onPress={() => {}}
+        onPress={() => setFooterModalOpen("import")}
       />
     </div>
     <div className="coin-screen-layout__wallets-title">
@@ -73,23 +74,32 @@ const CoinScreen = ({
     {
       isFooterModalOpen && <div className="header__hide-background"/>
     }
-    {
-      <modals.Footer
-        icon={iconPlusWhite}
-        style={{ bottom: isFooterModalOpen ? 0 : -500 }}
-      >
-        <forms.NewWalletForm
-          onCancel={() => setFooterModalOpen(false)}
-        />
-      </modals.Footer>
-    }
+    <modals.Footer
+      icon={iconPlusWhite }
+      style={{ bottom: isFooterModalOpen === "generate" ? 0 : -500 }}
+    >
+      <forms.NewWalletForm
+        onCancel={() => setFooterModalOpen(false)}
+        isFetching={false}
+      />
+    </modals.Footer>
+    <modals.Footer
+      icon={iconEnter}
+      style={{ bottom: isFooterModalOpen === "import" ? 0 : -500 }}
+      backgroundColor="#63CEFF"
+    >
+      <forms.ImportWalletForm
+        onCancel={() => setFooterModalOpen(false)}
+        isFetching={false}
+      />
+    </modals.Footer>
   </div>
 );
 
 CoinScreen.propTypes = {
   wallets: PropTypes.array,
   setFooterModalOpen: PropTypes.func.isRequired,
-  isFooterModalOpen: PropTypes.bool.isRequired,
+  isFooterModalOpen: PropTypes.string.isRequired,
   onBack: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
   onWallet: PropTypes.func.isRequired,
@@ -120,7 +130,12 @@ CoinScreen.defaultProps = {
 
 
 export default compose(
-  withState('isFooterModalOpen', 'setFooterModalOpen', false),
+  withStateHandlers(
+    { isFooterModalOpen: false },
+    {
+      setFooterModalOpen: () => value => ({ isFooterModalOpen: value })
+    }
+  ),
   getContext({
     router: PropTypes.shape({
       history: PropTypes.shape({
