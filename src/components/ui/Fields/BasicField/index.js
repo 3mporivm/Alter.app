@@ -14,46 +14,62 @@ const BasicField = ({
   placeholder,
   pattern,
   styleWrapper,
+  styleInput,
   inputId,
   isSecurity,
   isSearch,
+  label,
 }) => (
   <div
     style={styleWrapper}
     className="basic-field"
   >
     {
-      isSecurity &&
-      <img
-        className="basic-field__icon"
-        src={LockIcon}
-        alt=""
-      />
+      label &&
+      <label
+        className="basic-field__label"
+        htmlFor={inputId}
+      >
+        {label}
+      </label>
     }
-    <input
-      id={inputId}
-      value={value}
-      onChange={handleChange}
-      placeholder={placeholder}
-      type={isSecurity ? "password" : "text"}
-      className="basic-field__input"
-    />
-    {
-      isSearch &&
-      <img
-        style={value ? { opacity: 1 } : {}}
-        className="basic-field__icon-search"
-        src={iconSearch}
-        alt=""
+    <div className="basic-field__input-wrapper">
+      {
+        isSecurity &&
+        <img
+          className="basic-field__input-wrapper__icon"
+          src={LockIcon}
+          alt=""
+        />
+      }
+      <input
+        style={styleInput}
+        id={inputId}
+        value={value}
+        onChange={handleChange}
+        placeholder={placeholder}
+        type={isSecurity ? "password" : "text"}
+        className="basic-field__input-wrapper__input"
       />
-    }
+      {
+        isSearch &&
+        <img
+          style={value ? { opacity: 1 } : {}}
+          className="basic-field__input-wrapper__icon-search"
+          src={iconSearch}
+          alt=""
+        />
+      }
+    </div>
   </div>
 );
 
 BasicField.propTypes = {
   placeholder: PropTypes.string,
+  label: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
   styleWrapper: PropTypes.any,
+  styleInput: PropTypes.any,
   input: PropTypes.shape({
     value: PropTypes.any.isRequired,
   }).isRequired,
@@ -64,7 +80,9 @@ BasicField.propTypes = {
 
 BasicField.defaultProps = {
   placeholder: '',
-  styleWrapper: {},
+  label: '',
+  styleWrapper: null,
+  styleInput: null,
   inputId: '',
   isSecurity: false,
   isSearch: false,

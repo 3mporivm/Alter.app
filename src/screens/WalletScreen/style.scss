@@ -1,0 +1,35 @@
+@import '../../assets/screens.scss';
+
+.wallet-screen-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__buttons {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  &__transactions-title {
+    font-family: 'ProximaNova-Bold';
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+  }
+
+  &__transactions {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    margin-top: 20px;
+    padding: 0 20px;
+  }
+
+  &__wallets {
+    display: flex;
+    margin-bottom: 50px;
+  }
+}

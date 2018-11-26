@@ -1,14 +1,7 @@
-.balance-block-wrapper {
+.balance-block {
   margin-top: 40px;
   display: flex;
   flex-direction: column;
-}
-
-.balance-block {
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  letter-spacing: 2px;
   border-radius: 20px;
   position: relative;
   box-sizing: border-box;
@@ -16,16 +9,35 @@
   padding: 20px;
   background: rgba(62,25,87,1);
   background: url("../../../assets/img/background-form.png") bottom no-repeat, linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
+  position: relative;
+
+  &__icon-trash {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 18px;
+    height: 18px;
+    opacity: 0.3;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 
   &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 20px;
+    width: 108px;
+    letter-spacing: 2px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.15);
     margin-top: 30px;
     font-family: 'ProximaNova-Bold';
     font-size: 10px;
     color: #FFFFFF;
-    text-align: center;
-    padding: 6px 10px;
   }
 
   &__total {
@@ -33,6 +45,7 @@
     font-size: 34px;
     margin-top: 26px;
     color: #FFFFFF;
+    line-height: 15px;
   }
 
   &__course {
@@ -41,5 +54,43 @@
     margin-top: 20px;
     margin-bottom: 20px;
     color: rgba(255, 255, 255, 0.7);
+    line-height: 9px;
+  }
+}
+
+.extended {
+  transition-property: all;
+  transition-duration: 500ms;
+
+  &__children-wrapper {
+    transition: inherit;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  &__icon-arrow {
+    transition: inherit;
+    position: absolute;
+    bottom: 7px;
+    width: 14px;
+    height: 19px;
+    opacity: 0.8;
+    cursor: pointer;
+    z-index: 1;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &:after {
+    position: absolute;
+    content: ' ';
+    width: 325px;
+    height: 38px;
+    bottom: 0;
+    background: url("../../../assets/img/block-bottom.svg")
   }
 }

@@ -1,33 +1,46 @@
 .basic-field {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  height: 48px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
 
-  &__icon {
-    width: 9px;
-    height: 10px;
-    opacity: 0.6;
-    padding-right: 10px;
-  }
-
-  &__input {
-    background: transparent;
-    flex: 1;
+  &__label {
+    font-size: 12px;
     font-family: 'ProximaNova-Regular';
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.6);
-    box-sizing: border-box;
-    height: 48px;
-
-    &::placeholder {
-      color: #b2bdca;
-    }
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 3px;
   }
 
-  &__icon-search {
-    width: 15px;
-    height: 15px;
-    opacity: 0.3;
+  &__input-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__icon {
+      width: 9px;
+      height: 10px;
+      opacity: 0.6;
+      padding-right: 10px;
+    }
+
+    &__input {
+      background: transparent;
+      flex: 1;
+      font-family: 'ProximaNova-Regular';
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.6);
+      box-sizing: border-box;
+
+      &::placeholder {
+        color: #b2bdca;
+      }
+    }
+
+    &__icon-search {
+      width: 15px;
+      height: 15px;
+      opacity: 0.3;
+    }
   }
 }

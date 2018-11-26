@@ -12,8 +12,9 @@ const WalletButton = ({
   wallets,
   balance,
   balanceUSD,
+  onPress,
 }) => (
-  <button className="wallet-button">
+  <button onClick={onPress} className="wallet-button">
     <div className="wallet-button__left-border"/>
     <div
       className="wallet-button__icon-wrapper"
@@ -58,6 +59,7 @@ WalletButton.propTypes = {
   wallets: PropTypes.number.isRequired,
   balance: PropTypes.number.isRequired,
   balanceUSD: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 WalletButton.defaultProps = {

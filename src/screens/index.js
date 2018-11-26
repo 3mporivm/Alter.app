@@ -15,6 +15,7 @@ import SettingsScreen from './SettingsScreen';
 import NetworkScreen from './NetworkScreen';
 import SendScreen from './SendScreen';
 import ReceiveScreen from './ReceiveScreen';
+import WalletScreen from './WalletScreen';
 
 export {
   AuthorizationScreen,
@@ -34,4 +35,5 @@ export {
   NetworkScreen,
   SendScreen,
   ReceiveScreen,
+  WalletScreen,
 };

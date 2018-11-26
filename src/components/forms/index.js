@@ -10,6 +10,7 @@ import NewWalletForm from './NewWalletForm';
 import NetworkForm from './NetworkForm';
 import SendForm from './SendForm';
 import ReceiveForm from './ReceiveForm';
+import EditWalletForm from './EditWalletForm';
 
 export default {
   ProtectAccountForm,
@@ -24,4 +25,5 @@ export default {
   NetworkForm,
   SendForm,
   ReceiveForm,
+  EditWalletForm,
 };

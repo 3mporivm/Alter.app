@@ -1,0 +1,68 @@
+.transaction {
+  display: flex;
+  flex: 1;
+  margin-top: 20px;
+  padding-bottom: 20px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  &__icon-wrapper {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__icon {
+    width: 14px;
+    height: 16px;
+  }
+  &__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    font-size: 14px;
+    line-height: 9px;
+    margin-left: 10px;
+    // фикс, что бы содержимое не вылезало за родительский див
+    min-width: 20px;
+
+    &__header {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      justify-content: space-between;
+
+      &__type {
+        font-family: 'ProximaNova-Bold';
+        color: #FFFFFF;
+      }
+      &__sum {
+        font-family: 'ProximaNova-Extrabold';
+      }
+    }
+    &__footer {
+      color: rgba(255, 255, 255, 0.4);
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-family: 'ProximaNova-Regular';
+      line-height: 0.8;
+
+      &__address {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &__date {
+        margin-left: 30px;
+      }
+    }
+  }
+}

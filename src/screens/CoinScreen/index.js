@@ -16,6 +16,7 @@ const CoinScreen = ({
   isFooterModalOpen,
   onBack,
   onSettings,
+  onWallet,
 }) => (
   <div className="coin-screen-layout">
     <ui.Header
@@ -58,6 +59,7 @@ const CoinScreen = ({
     {
       wallets.map(wallet => (
         <ui.Buttons.WalletButton
+          onPress={onWallet}
           name={wallet.name}
           icon={iconBitcoin}
           backgroundColor="#F7931A"
@@ -90,6 +92,7 @@ CoinScreen.propTypes = {
   isFooterModalOpen: PropTypes.bool.isRequired,
   onBack: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
+  onWallet: PropTypes.func.isRequired,
 };
 
 CoinScreen.defaultProps = {
@@ -132,6 +135,11 @@ export default compose(
     onSettings: ({ router }) => () => {
       router.history.push({
         pathname: '/settings',
+      });
+    },
+    onWallet: ({ router }) => () => {
+      router.history.push({
+        pathname: '/wallet',
       });
     },
   })
