@@ -32,7 +32,8 @@ export default compose(
     }).isRequired,
   }),
   withHandlers({
-    onSubmit: ({ router }) => () => {
+    onSubmit: ({ router }) => (values) => {
+      //console.log("finish", values.toJS())
       router.history.push({
         pathname: '/auth/account',
       });
