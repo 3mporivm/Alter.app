@@ -8,7 +8,8 @@ import 'assets/screens.scss';
 import './style.scss';
 
 const SaveBackupPhraseScreen = ({
-  onSubmit
+  onSubmit,
+  onCancel,
 }) => (
   <div className="save-backup-phrase-layout">
     <ui.Header/>
@@ -21,7 +22,7 @@ const SaveBackupPhraseScreen = ({
     />
     <ui.Buttons.TransparentButton
       title="Cancel Creation"
-      onPress={() => {}}
+      onPress={onCancel}
       style={{ marginBottom: 50 }}
     />
     <ui.InfoBlock/>
@@ -42,9 +43,10 @@ export default compose(
   }),
   withHandlers({
     onSubmit: ({ router }) => () => {
-      router.history.push({
-        pathname: '/auth/confirm-backup',
-      });
+      router.history.push({ pathname: '/auth/confirm-backup' });
+    },
+    onCancel: ({ router }) => () => {
+      router.history.push({ pathname: '/auth/account' });
     },
   })
 )(SaveBackupPhraseScreen);
