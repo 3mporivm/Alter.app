@@ -19,8 +19,8 @@ const BalanceBlock = ({
   setRefChildren,
 }) => (
   <div
-    className={`balance-block ${children ? "extended" : ""}`}
-    style={children ? { height: isHideExtended ? 197 : 479 } : {}}
+    className={`balance-block ${children && children.$$typeof ? "extended" : ""}`}
+    style={children && children.$$typeof ? { height: isHideExtended ? 197 : 479 } : {}}
   >
     <Badge
       icon={icon}
@@ -39,7 +39,7 @@ const BalanceBlock = ({
       {course}
     </div>
     {
-      children &&
+      children && children.$$typeof &&
       <div
         ref={setRefChildren}
         className="extended__children-wrapper"
@@ -49,7 +49,7 @@ const BalanceBlock = ({
       </div>
     }
     {
-      children &&
+      children && children.$$typeof &&
       <img
         onClick={setHideExtended}
         style={{ transform: `rotate(${!isHideExtended ? 180 : 0}deg)`}}

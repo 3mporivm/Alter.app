@@ -25,12 +25,19 @@ const SendForm = ({
       </div>
       <Field
         validate={required}
-        component={ui.Fields.AmountField}
+        component={ui.Fields.BasicField}
         name="amount"
         props={{
           inputId: 'amount',
           styleWrapper: {
+            height: 65,
             marginTop: 20,
+          },
+          styleInput: {
+            fontSize: 34,
+            lineHeight: 22,
+            color: '#ffffff',
+            fontFamily: 'ProximaNova-Bold'
           },
           label: 'Amount',
         }}
@@ -50,18 +57,6 @@ const SendForm = ({
         placeholder="BTC address"
         props={{
           inputId: 'BTC_address',
-          styleWrapper: {
-            marginTop: 20,
-          },
-        }}
-      />
-      <Field
-        validate={required}
-        component={ui.Fields.BasicField}
-        name="payment_id"
-        placeholder="Payment ID"
-        props={{
-          inputId: 'payment_id',
           styleWrapper: {
             marginTop: 20,
           },

@@ -12,7 +12,6 @@ import ChangePasswordScreen from './ChangePasswordScreen';
 import OverviewScreen from './OverviewScreen';
 import CoinScreen from './CoinScreen';
 import SettingsScreen from './SettingsScreen';
-import NetworkScreen from './NetworkScreen';
 import SendScreen from './SendScreen';
 import ReceiveScreen from './ReceiveScreen';
 import WalletScreen from './WalletScreen';
@@ -32,7 +31,6 @@ export {
   OverviewScreen,
   CoinScreen,
   SettingsScreen,
-  NetworkScreen,
   SendScreen,
   ReceiveScreen,
   WalletScreen,

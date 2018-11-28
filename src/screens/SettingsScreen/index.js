@@ -18,41 +18,25 @@ const SettingsScreen = ({
       onRightPress={onClose}
       rightIcon={iconClose}
     />
-    <div className="setting-layout__address-card">
-      <ui.Badge/>
-      <div className="setting-layout__address-card__title">Wallet one</div>
-      <ui.Fields.CopyField
-        input={{
-          value: "3LVGbddKk3uKhqfGKz7X7n6d5asdasdasdasdg",
-        }}
-        inputId="address_account"
-        styleWrapper={{ marginTop: 20 }}
-        label="Account address"
-        readOnly
-      />
-    </div>
-    <div className="setting-layout__buttons">
-      <ui.Buttons.ListButton
-        title="Network"
-        onPress={onNetwork}
-      />
-      <ui.Buttons.ListButton
-        title="Password"
-        onPress={onChangePassword}
-      />
-    </div>
+    <ui.Buttons.ListButton
+      title="Password"
+      onPress={onChangePassword}
+      style={{
+        marginTop: 30,
+      }}
+    />
     <ui.Buttons.BasicButton
       title="Log Out"
       color="purple"
       icon={iconLogOut}
       onPress={() => {}}
       style={{
-        marginTop: 30,
+        marginTop: 90,
       }}
     />
     <ui.Buttons.TransparentButton
       title="Delete Account"
-      style={{ marginTop: 99 }}
+      style={{ marginTop: 30, marginBottom: 30 }}
       onPress={() => {}}
     />
   </div>
@@ -75,9 +59,6 @@ export default compose(
   withHandlers({
     onClose: ({ router }) => () => {
       router.history.push({ pathname: '/' });
-    },
-    onNetwork: ({ router }) => () => {
-      router.history.push({ pathname: '/network' });
     },
     onChangePassword: ({ router }) => () => {
       router.history.push({ pathname: '/change-password' });

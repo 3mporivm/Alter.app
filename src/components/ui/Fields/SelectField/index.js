@@ -11,6 +11,7 @@ const SelectField = ({
   handleChange,
   styleWrapper,
   inputId,
+  placeholder,
 }) => (
   <div
     style={styleWrapper}
@@ -21,6 +22,7 @@ const SelectField = ({
       value={value}
       onChange={handleChange}
     >
+      <option value="" disabled selected hidden>{placeholder}</option>
       <option value="1">Wallet</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -35,11 +37,13 @@ SelectField.propTypes = {
     value: PropTypes.any.isRequired,
   }).isRequired,
   inputId: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 SelectField.defaultProps = {
   styleWrapper: null,
   inputId: '',
+  placeholder: '',
 };
 
 export default compose(

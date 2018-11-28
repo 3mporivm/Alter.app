@@ -3,35 +3,4 @@
 .setting-layout {
   display: flex;
   flex-direction: column;
-
-  &__address-card {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    height: 180px;
-    margin-top: 15px;
-    background: rgba(62,25,87,1);
-    background: url("../../assets/img/background-form.png") bottom no-repeat, linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
-    border-radius: 20px;
-    position: relative;
-    color: #FFFFFF;
-    padding: 50px 20px 30px 20px;
-    box-sizing: border-box;
-
-    &__title {
-      font-family: 'ProximaNova-Bold';
-      font-size: 18px;
-      text-align: center;
-    }
-  }
-
-  &__buttons {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__buttons button:not(:last-child) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
 }

@@ -16,14 +16,7 @@ const GetStartedScreen = ({
       onPress={onGetStarted}
       style={{ marginBottom: 50 }}
     />
-    <ui.InfoBlock/>
-    {
-      // redditPosts.map(post =>
-      //   <div key={post.get('id')} style={{ marginTop: 50 }}>
-      //     {post.get('title')}
-      //   </div>
-      // ).toArray()
-    }
+    <ui.InfoBlock />
   </div>
 );
 

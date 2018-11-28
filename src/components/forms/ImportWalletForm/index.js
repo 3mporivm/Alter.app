@@ -24,13 +24,25 @@ const ImportWalletForm = ({
       Import wallet
     </div>
     <Field
-      validate={required}
       component={ui.Fields.SelectField}
       name="type"
+      placeholder="Select type"
       props={{
         inputId: 'type',
         styleWrapper: {
           marginTop: 30,
+        }
+      }}
+    />
+    <Field
+      component={ui.Fields.FileField}
+      name="file"
+      props={{
+        inputId: 'file',
+        label: 'JSON file:',
+        result: 'File not found',
+        styleWrapper: {
+          marginTop: 20,
         }
       }}
     />

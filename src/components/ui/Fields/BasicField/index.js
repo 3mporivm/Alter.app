@@ -28,7 +28,7 @@ const BasicField = ({
       label &&
       <label
         className="basic-field__label"
-        htmlFor={inputId}
+        for={inputId}
       >
         {label}
       </label>

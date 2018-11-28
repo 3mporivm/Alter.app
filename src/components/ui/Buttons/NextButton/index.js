@@ -24,7 +24,7 @@ const NextButton = ({
         ? <LoadingSpinner small/>
         : [
           title,
-          <img className="next-button__img" src={iconArrow} alt=""/>,
+          <img key="img" className="next-button__img" src={iconArrow} alt=""/>,
         ]
     }
   </button>
