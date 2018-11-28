@@ -14,7 +14,6 @@ const HomeScreen = () => (
     <Route path="/coin" component={screens.CoinScreen} />
     <Route path="/wallet" component={screens.WalletScreen} />
     <Route path="/settings" component={screens.SettingsScreen} />
-    <Route path="/network" component={screens.NetworkScreen} />
     <Route path="/change-password" component={screens.ChangePasswordScreen} />
     <Route path="/send" component={screens.SendScreen} />
     <Route path="/receive" component={screens.ReceiveScreen} />

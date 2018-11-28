@@ -19,7 +19,7 @@ const FileField = ({
   <label
     style={styleWrapper}
     className="file-field"
-    for={inputId}
+    htmlFor={inputId}
   >
     {
       label &&

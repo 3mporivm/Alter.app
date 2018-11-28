@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { ui, forms, modals } from 'components';
-import { compose, getContext, withHandlers, withStateHandlers } from "recompose";
+import { compose, getContext, lifecycle, withHandlers, withStateHandlers } from "recompose";
 import iconBitcoin from 'assets/img/bitcoin.svg';
 import iconPlusPurple from 'assets/img/plus_purple.svg';
 import iconImport from 'assets/img/import.svg';
@@ -18,6 +18,7 @@ const CoinScreen = ({
   onBack,
   onSettings,
   onWallet,
+  setDropdownRef,
 }) => (
   <div className="coin-screen-layout">
     <ui.Header
@@ -74,6 +75,7 @@ const CoinScreen = ({
     {
       isFooterModalOpen && <div className="header__hide-background"/>
     }
+    <div ref={ref => setDropdownRef(ref)}>
     <modals.Footer
       icon={iconPlusWhite }
       style={{ bottom: isFooterModalOpen === "generate" ? 0 : -500 }}
@@ -93,6 +95,7 @@ const CoinScreen = ({
         isFetching={false}
       />
     </modals.Footer>
+    </div>
   </div>
 );
 
@@ -103,6 +106,7 @@ CoinScreen.propTypes = {
   onBack: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
   onWallet: PropTypes.func.isRequired,
+  setDropdownRef: PropTypes.func.isRequired,
 };
 
 CoinScreen.defaultProps = {
@@ -136,6 +140,16 @@ export default compose(
       setFooterModalOpen: () => value => ({ isFooterModalOpen: value })
     }
   ),
+  withStateHandlers(
+    { dropdownRef: null },
+    {
+      setDropdownRef: ({ dropdownRef }) => ref => {
+        if (dropdownRef === null) {
+          return ({ dropdownRef: ref })
+        }
+      }
+    }
+  ),
   getContext({
     router: PropTypes.shape({
       history: PropTypes.shape({
@@ -148,14 +162,26 @@ export default compose(
       router.history.push('/overview');
     },
     onSettings: ({ router }) => () => {
-      router.history.push({
-        pathname: '/settings',
-      });
+      router.history.push({ pathname: '/settings' });
     },
     onWallet: ({ router }) => () => {
-      router.history.push({
-        pathname: '/wallet',
-      });
+      router.history.push({ pathname: '/wallet' });
     },
-  })
+    handleOuterDropdownClick: ({ setFooterModalOpen, dropdownRef }) => (e) => {
+      if (dropdownRef.contains(e.target)) {
+        return;
+      }
+      setFooterModalOpen(false);
+    },
+  }),
+  lifecycle({
+    componentDidMount() {
+      const { handleOuterDropdownClick } = this.props;
+      document.addEventListener('mousedown', handleOuterDropdownClick, false);
+    },
+    componentWillUnmount() {
+      const { handleOuterDropdownClick } = this.props;
+      document.addEventListener('mousedown', handleOuterDropdownClick, false);
+    },
+  }),
 )(CoinScreen);
