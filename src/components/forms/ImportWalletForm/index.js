@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { ui } from 'components';
-import { Field, reduxForm } from 'redux-form/immutable';
+import { Field, reduxForm, formValueSelector } from 'redux-form/immutable';
+import { connect } from "react-redux";
+
 
 import iconEnterBlue from 'assets/img/enter-blue.svg';
 
@@ -18,6 +20,7 @@ const ImportWalletForm = ({
   styleForm,
   styleTitle,
   onCancel,
+  type,
 }) => (
   <form onSubmit={handleSubmit} className="import-wallet-form">
     <div style={styleTitle} className="import-wallet-form__title">
@@ -31,27 +34,34 @@ const ImportWalletForm = ({
         inputId: 'type',
         styleWrapper: {
           marginTop: 30,
-        }
+        },
+        options: [
+          "Private key",
+          "JSON file",
+        ]
       }}
     />
-    <Field
-      component={ui.Fields.FileField}
-      name="file"
-      props={{
-        inputId: 'file',
-        label: 'JSON file:',
-        result: 'File not found',
-        styleWrapper: {
-          marginTop: 20,
-        }
-      }}
-    />
+    {
+      type === "JSON file" &&
+      <Field
+        component={ui.Fields.FileField}
+        name="file"
+        props={{
+          inputId: 'file',
+          label: 'JSON file:',
+          result: 'File not found',
+          styleWrapper: {
+            marginTop: 20,
+          }
+        }}
+      />
+    }
     <div className="import-wallet-form__field-wrapper">
       <Field
         validate={required}
         component={ui.Fields.BasicField}
-        name="wallet_name"
-        placeholder="Wallet name"
+        name={type === "JSON file" ? "jsonFile" : "privateKey"}
+        placeholder={type === "JSON file" ? "Type password" : "Your private key"}
         props={{
           inputId: 'wallet_name',
           styleWrapper: {
@@ -101,9 +111,17 @@ ImportWalletForm.propTypes = {
 ImportWalletForm.defaultProps = {
 };
 
+// MyForm = connect(state => ({
+//   type: selector(state, "username")
+// }))( MyForm );
 
+const selector = formValueSelector("importWalletForm");
 export default compose(
+  connect(state => ({ type: selector(state, "type") })),
   reduxForm({
     form: 'importWalletForm',
+    initialValues: {
+      type: "JSON file"
+    }
   }),
-)(ImportWalletForm);
+)(ImportWalletForm)
