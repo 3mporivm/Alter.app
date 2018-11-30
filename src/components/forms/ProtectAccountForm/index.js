@@ -7,7 +7,6 @@ import { required, minLength, password } from 'validators';
 import { token } from 'helpers';
 import iconLock from 'assets/img/lock.svg';
 
-
 import './style.scss';
 
 const ProtectAccountForm = ({
@@ -53,7 +52,6 @@ const ProtectAccountForm = ({
     </div>
     <ui.Buttons.NextButton
       title="Continue"
-      style={{ marginBottom: 50 }}
       onPress={handleSubmit}
       isLoading={isFetching}
       isDisabled={invalid || isFetching}
@@ -65,11 +63,12 @@ ProtectAccountForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
 };
 
 
 ProtectAccountForm.defaultProps = {
+  error: "",
 };
 
 

@@ -28,7 +28,6 @@ const AccountScreen = ({
       <img className="account-layout__image" src={ImportAccountIcon} alt=""/>
       <span className="account-layout__title">Import Account Via Seed</span>
     </div>
-    <ui.InfoBlock/>
   </div>
 );
 
@@ -53,7 +52,7 @@ export default compose(
     },
     onImport: ({ router }) => () => {
       router.history.push({
-        pathname: '/auth/welcome',
+        pathname: '/auth/import-account',
       });
     },
   })

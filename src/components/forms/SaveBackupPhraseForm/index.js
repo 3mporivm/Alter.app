@@ -22,7 +22,6 @@ const SaveBackupPhraseForm = ({
       <div style={styleTitle} className="enter-wallet-form__title">
         Save Backup Phrase
       </div>
-
       <Field
         validate={required}
         component={ui.Fields.MultilineField}
@@ -36,7 +35,7 @@ const SaveBackupPhraseForm = ({
           label: 'Seed',
         }}
       />
-      <div className="save-backup-phrase-form__label">Please carefully write down these 15 words or copy them</div>
+      <div className="save-backup-phrase-form__label">Please carefully write down these 12 words or copy them</div>
       <div className="save-backup-phrase-form__background"/>
     </div>
     <ui.Buttons.NextButton

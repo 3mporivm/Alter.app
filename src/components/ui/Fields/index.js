@@ -1,5 +1,5 @@
 import BasicField from './BasicField';
-import CircleField from './CircleField';
+import AvatarField from './AvatarField';
 import MultilineField from './MultilineField';
 import PuzzlesField from './PuzzlesField';
 import CopyField from './CopyField';
@@ -8,7 +8,7 @@ import FileField from './FileField';
 
 export default {
   BasicField,
-  CircleField,
+  AvatarField,
   MultilineField,
   PuzzlesField,
   CopyField,

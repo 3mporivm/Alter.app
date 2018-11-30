@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router';
 import { ui, apiHOCs } from 'components';
 import {
   branch,
-  compose,
+  compose, lifecycle,
   renderComponent,
   withProps,
 } from 'recompose';
@@ -21,21 +21,17 @@ const HomeScreen = () => (
   </Switch>
 );
 
-const redirectComponent = withProps({ to: '/auth' })(Redirect);
-
-// todo симуляция авторизации
-let isAuth = false
-
-export const setAuth = () => {
-  isAuth = true
-};
-export const getAuth = () => isAuth;
-
 export default compose(
-  //apiHOCs.AuthApiHOC(),
-
+  apiHOCs.BootApiHOC(),
   branch(
-    ({ getUserSuccess }) => !isAuth,
-    renderComponent(redirectComponent),
+    () => {
+      let profile = JSON.parse(localStorage.getItem("profile"));
+      return !(profile && profile.isRegistered)
+    },
+    renderComponent(withProps({ to: '/auth' })(Redirect)),
+  ),
+  branch(
+    () => localStorage.getItem("isClosedBrowser"),
+    renderComponent(withProps({ to: '/settings' })(Redirect)),
   ),
 )(HomeScreen);

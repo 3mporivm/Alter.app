@@ -10,7 +10,7 @@ import App from './App';
 import './assets/main.scss';
 
 const history = createHistory();
-const store = configureStore(history);
+export const store = configureStore(history);
 
 const render = Component =>
   ReactDOM.render(

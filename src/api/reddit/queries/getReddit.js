@@ -3,7 +3,7 @@ import endpoints from 'api/endpoints';
 import Immutable from 'immutable';
 import { reddit } from 'schemas';
 
-export default ({ redditName, resultKey = 'reddits', requestCallback }) => ({
+export default ({ redditName, resultKey = 'reddits' }) => ({
   url: endpoints.getRedditUrl({ redditName }),
   transform: response =>
     normalize(response.data.children, reddit.arrayOfPostSchemas).entities,

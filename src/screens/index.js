@@ -2,7 +2,7 @@ import AuthorizationScreen from './AuthorizationScreen';
 import GetStartedScreen from './GetStartedScreen';
 import ProtectAccountScreen from './ProtectAccountScreen';
 import AccountScreen from './AccountScreen';
-import WelcomeBackScreen from './WelcomeBackScreen';
+import ImportAccountScreen from './ImportAccountScreen';
 import CreateAccountScreen from './CreateAccountScreen';
 import AccountNameScreen from './AccountNameScreen';
 import SaveBackupPhraseScreen from './SaveBackupPhraseScreen';
@@ -21,7 +21,7 @@ export {
   GetStartedScreen,
   ProtectAccountScreen,
   AccountScreen,
-  WelcomeBackScreen,
+  ImportAccountScreen,
   CreateAccountScreen,
   AccountNameScreen,
   SaveBackupPhraseScreen,

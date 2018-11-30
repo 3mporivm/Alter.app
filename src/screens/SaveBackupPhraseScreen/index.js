@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import Immutable from "immutable";
+import bip39 from "bip39";
 import { compose, getContext, withHandlers } from "recompose";
 import { ui, forms } from 'components';
 
@@ -17,15 +18,13 @@ const SaveBackupPhraseScreen = ({
       onSubmit={onSubmit}
       isFetching={false}
       initialValues={Immutable.Map({
-        phrase: "ketchup viable sport car man jungle coin green coat shoes web dog table jeans milk"
+        phrase: bip39.generateMnemonic()
       })}
     />
     <ui.Buttons.TransparentButton
       title="Cancel Creation"
       onPress={onCancel}
-      style={{ marginBottom: 50 }}
     />
-    <ui.InfoBlock/>
   </div>
 );
 
@@ -42,8 +41,13 @@ export default compose(
     }).isRequired,
   }),
   withHandlers({
-    onSubmit: ({ router }) => () => {
-      router.history.push({ pathname: '/auth/confirm-backup' });
+    onSubmit: ({ router }) => values => {
+      router.history.push({
+        pathname: '/auth/confirm-backup',
+        state: {
+          phrase: values.get('phrase'),
+        },
+      });
     },
     onCancel: ({ router }) => () => {
       router.history.push({ pathname: '/auth/account' });

@@ -16,22 +16,23 @@ export default () => next => (action) => {
     const { headers } = action.options;
 
     delete callAPI.meta.authToken;
+    return next(action);
 
-    return token.getToken()
-      .then((T) => {
-        if (T) {
-          callAPI.options.headers = {
-            ...headers,
-            Authorization: `Bearer ${T}`,
-          };
-        }
-
-        return next(action);
-      })
-      .catch((err) => {
-        console.log(err);
-        return next(action);
-      });
+    // return token.getToken()
+    //   .then((T) => {
+    //     if (T) {
+    //       callAPI.options.headers = {
+    //         ...headers,
+    //         Authorization: `Bearer ${T}`,
+    //       };
+    //     }
+    //
+    //     return next(action);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     return next(action);
+    //   });
   } else {
     return next(action);
   }

@@ -1,5 +1,7 @@
-import * as token from './token';
+import * as password from './password';
+import * as blockchain from './blockchain';
 
 export {
-  token,
+  password,
+  blockchain,
 };

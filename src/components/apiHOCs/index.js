@@ -1,5 +1,9 @@
-import RedditApiHOC from './RedditApiHOC';
+import BootApiHOC from './BootApiHOC';
+import ProfileApiHOC from './ProfileApiHOC';
+import WalletsApiHOC from './WalletsApiHOC';
 
 export default {
-  RedditApiHOC,
+  BootApiHOC,
+  ProfileApiHOC,
+  WalletsApiHOC,
 };

@@ -1,10 +1,10 @@
 import React from 'react';
-import { ui, forms } from 'components';
+import PropTypes from "prop-types";
+import { ui, forms, apiHOCs } from 'components';
+import { compose, getContext, withHandlers } from "recompose";
 
 import 'assets/screens.scss';
 import './style.scss';
-import {compose, getContext, withHandlers} from "recompose";
-import PropTypes from "prop-types";
 
 const CreateAccountScreen = ({
   onSubmit,
@@ -15,7 +15,6 @@ const CreateAccountScreen = ({
       onSubmit={onSubmit}
       isFetching={false}
     />
-    <ui.InfoBlock/>
   </div>
 );
 
@@ -24,6 +23,7 @@ CreateAccountScreen.propTypes = {
 };
 
 export default compose(
+  apiHOCs.ProfileApiHOC(),
   getContext({
     router: PropTypes.shape({
       history: PropTypes.shape({
@@ -32,7 +32,8 @@ export default compose(
     }).isRequired,
   }),
   withHandlers({
-    onSubmit: ({ router }) => () => {
+    onSubmit: ({ router, updateProfile }) => (values) => {
+      updateProfile({ avatar: values.get("avatar") });
       router.history.push({
         pathname: '/auth/account-name',
       });

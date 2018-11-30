@@ -6,10 +6,10 @@
 
 .create-account-form {
   background: rgba(62,25,87,1);
-  background: linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
+  background: url("../../../assets/img/background-form.png") bottom no-repeat, linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
   margin-bottom: 20px;
   border-radius: 20px;
-  height: 230px;
+  height: 180px;
   position: relative;
   box-sizing: border-box;
   padding: 20px;
@@ -28,24 +28,5 @@
     font-family: 'ProximaNova-Regular';
     color: rgba(255, 255, 255, 0.3);
     font-size: 14px;
-  }
-
-  &__address {
-    margin-top: 5px;
-    font-family: 'ProximaNova-Regular';
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 14px;
-  }
-
-  &__background {
-    flex: 1;
-    position: absolute;
-    border-radius: 20px;
-    background: url("../../../assets/img/background-form.png") no-repeat 0 77%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
   }
 }

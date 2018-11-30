@@ -2,11 +2,20 @@
   margin-top: 40px;
   display: flex;
   flex-direction: column;
+
+  &__error {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-family: 'ProximaNova-Regular';
+    font-size: 13px;
+    color: rgba(255, 0, 0, 0.6);
+    text-align: center;
+  }
 }
 
 .confirm-backup-form {
   background: rgba(62,25,87,1);
-  background: linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
+  background: url("../../../assets/img/background-form.png") bottom no-repeat, linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
   margin-bottom: 20px;
   border-radius: 20px;
   position: relative;
@@ -27,17 +36,5 @@
     font-family: 'ProximaNova-Regular';
     color: rgba(255, 255, 255, 0.4);
     font-size: 14px;
-  }
-
-  &__background {
-    flex: 1;
-    position: absolute;
-    border-radius: 20px;
-    background: url("../../../assets/img/background-form.png") no-repeat 0 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
   }
 }

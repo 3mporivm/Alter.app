@@ -1,32 +1,37 @@
-const NETWORK = 'livenet';
-const BTC_LIKE = {
+import iconAvatar1 from 'assets/img/avatars/19.png';
+import iconAvatar2 from 'assets/img/avatars/21.png';
+import iconAvatar3 from 'assets/img/avatars/25.png';
+import iconAvatar4 from 'assets/img/avatars/26.png';
+import iconAvatar5 from 'assets/img/avatars/28.png';
+import iconAvatar6 from 'assets/img/avatars/30.png';
+
+export const NETWORK = 'livenet';
+export const BTC_LIKE = {
     'btc': true,
-    'BTC': true,
     'ltc': true,
-    'LTC': true,
     'bch': true,
-    'BCH': true,
     'dash': true,
-    'DASH': true,
-    'doge': true,
-    'DOGE': true
-}
-const ETH_LIKE = {
+    'doge': true
+};
+export const ETH_LIKE = {
     'eth': true,
     'ETH': true,
     'etc': true,
     'ETC': true
-}
-const ERC20 = {
-    'bnb': true,
-    'BNB': true,
-    'ht': true,
-    'HT':true
-}
+};
+export const ERC20 = {
+  'bnb': true,
+  'BNB': true,
+  'ht': true,
+  'HT':true
+};
+export const COINS = ["btc", "ltc", "bch", "dash", "doge"];
 
-module.exports = {
-    NETWORK: NETWORK,
-    BTC_LIKE: BTC_LIKE,
-    ETH_LIKE: ETH_LIKE,
-    ERC20: ERC20
-}
+export const AVATARS = [
+  iconAvatar1,
+  iconAvatar2,
+  iconAvatar3,
+  iconAvatar4,
+  iconAvatar5,
+  iconAvatar6,
+];

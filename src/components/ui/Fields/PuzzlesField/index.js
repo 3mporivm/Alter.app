@@ -72,23 +72,7 @@ PuzzlesField.defaultProps = {
 };
 
 export default compose(
-  withState('words', 'updateWords', [
-    { word: "Ketchup" },
-    { word: "Viable" },
-    { word: "Sport" },
-    { word: "Car" },
-    { word: "Man" },
-    { word: "Jungle" },
-    { word: "Coin" },
-    { word: "Green" },
-    { word: "Coat" },
-    { word: "Shoes" },
-    { word: "Web" },
-    { word: "Dog" },
-    { word: "Table" },
-    { word: "Jeans" },
-    { word: "Milk" },
-  ]),
+  withState('words', 'updateWords', ({ phrase }) => phrase.split(" ").sort(() => Math.random() - 0.5).map(word => ({ word }))),
   withHandlers({
     handleChange: ({ words, updateWords, input: { onChange, value } }) => ({ word, isSelected }) => {
       !isSelected && onChange(value.concat(word));

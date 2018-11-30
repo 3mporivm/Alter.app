@@ -27,6 +27,7 @@ const BasicButton = ({
         : [
           icon && (
             <div
+              key="icon"
               className="basic-button__img-wrapper"
               style={styleIcon}
             >

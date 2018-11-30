@@ -4,14 +4,15 @@ import { ui } from 'components';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form/immutable';
 import iconPencil from 'assets/img/pencil.svg';
-import { required } from 'validators';
+import { required, minLength } from 'validators';
+
+const minLength6 = minLength(6)
 
 import './style.scss';
 
 const AccountNameForm = ({
   handleSubmit,
   facebookLoginRequest,
-  isFetching,
   invalid,
   styleForm,
   styleTitle,
@@ -23,7 +24,7 @@ const AccountNameForm = ({
         Account Name
       </div>
       <Field
-        validate={required}
+        validate={[ required, minLength6 ]}
         component={ui.Fields.BasicField}
         name="name"
         placeholder="Enter account name"
@@ -37,17 +38,14 @@ const AccountNameForm = ({
       <div className="account-name-form__label">The account name will be known only to you</div>
     </div>
     <ui.Buttons.NextButton
-      style={{ marginBottom: 50 }}
       onPress={handleSubmit}
-      isLoading={isFetching}
-      isDisabled={invalid || isFetching}
+      isDisabled={invalid}
     />
   </form>
 );
 
 AccountNameForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
 };
 
 export default compose(

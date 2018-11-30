@@ -1,32 +1,34 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import Immutable from "immutable";
-import { compose, getContext, withHandlers } from "recompose";
-import { ui, forms } from 'components';
-import { setAuth } from '../HomeScreen';
+import { compose, getContext, withHandlers, withProps } from "recompose";
+import { ui, forms, apiHOCs } from 'components';
+import { blockchain } from 'helpers';
 
 import 'assets/screens.scss';
 import './style.scss';
 
 const ConfirmBackupScreen = ({
   onSubmit,
+  phrase,
 }) => (
   <div className="save-backup-phrase-layout">
     <ui.Header/>
     <forms.ConfirmBackupForm
       onSubmit={onSubmit}
       isFetching={false}
+      phrase={phrase}
     />
-    <ui.InfoBlock/>
   </div>
 );
 
-
 ConfirmBackupScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  phrase: PropTypes.string.isRequired,
 };
 
 export default compose(
+  apiHOCs.ProfileApiHOC(),
+  apiHOCs.WalletsApiHOC(),
   getContext({
     router: PropTypes.shape({
       history: PropTypes.shape({
@@ -34,9 +36,15 @@ export default compose(
       }).isRequired,
     }).isRequired,
   }),
+  withProps(({ location }) => ({
+    phrase: _.get(location, 'state.phrase'),
+  })),
   withHandlers({
-    onSubmit: ({ router }) => () => {
-      setAuth();
+    onSubmit: ({ router, updateProfile, phrase, createFirstWallets }) => () => {
+      // создаем по одному кошельку, каждой валюты
+      createFirstWallets(blockchain.createCoins(phrase));
+
+      updateProfile({ isRegistered: true, phrase });
       router.history.push('/');
     },
   })

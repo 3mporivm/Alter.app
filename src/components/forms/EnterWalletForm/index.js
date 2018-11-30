@@ -1,8 +1,9 @@
 import React from 'react';
-import { compose } from 'recompose';
-import { ui } from 'components';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form/immutable';
+import { compose, withHandlers } from 'recompose';
+import { ui } from 'components';
+import { Field, reduxForm, SubmissionError } from 'redux-form/immutable';
+import bip39 from "bip39";
 
 import iconEnter from 'assets/img/enter.svg';
 import iconImport from 'assets/img/import.svg';
@@ -13,13 +14,14 @@ import './style.scss';
 
 const EnterWalletForm = ({
   handleSubmit,
+  submit,
   facebookLoginRequest,
-  isFetching,
   invalid,
   styleForm,
   styleTitle,
+  error,
 }) => (
-  <form onSubmit={handleSubmit} className="enter-wallet-form-layout">
+  <form onSubmit={handleSubmit(submit)} className="enter-wallet-form-layout">
     <div className="enter-wallet-form">
       <ui.Badge
         icon={iconEnter}
@@ -31,23 +33,24 @@ const EnterWalletForm = ({
       <Field
         validate={required}
         component={ui.Fields.BasicField}
-        name="wallet"
+        name="seed"
         placeholder="Enter wallet seed"
         props={{
-          inputId: 'wallet',
+          inputId: 'seed',
           styleWrapper: {
             marginTop: 20,
           },
         }}
       />
-      <div className="enter-wallet-form__background"/>
     </div>
+    {
+      error &&
+      <div className="enter-wallet-form__error">{error}</div>
+    }
     <ui.Buttons.BasicButton
       title="Import Via Seed"
-      style={{ marginBottom: 50 }}
-      onPress={handleSubmit}
-      isLoading={isFetching}
-      isDisabled={invalid || isFetching}
+      onPress={handleSubmit(submit)}
+      isDisabled={invalid}
       icon={iconImport}
     />
   </form>
@@ -55,11 +58,13 @@ const EnterWalletForm = ({
 
 EnterWalletForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  submit: PropTypes.func.isRequired,
+  error: PropTypes.string,
 };
 
 
 EnterWalletForm.defaultProps = {
+  error: "",
 };
 
 
@@ -67,4 +72,14 @@ export default compose(
   reduxForm({
     form: 'enterWalletForm',
   }),
+  withHandlers({
+    submit: ({ phrase, onSubmit }) => values => {
+      if (!bip39.validateMnemonic(values.get("seed"))) {
+        throw new SubmissionError({
+          _error: 'Invalid seed!'
+        })
+      }
+      onSubmit(values);
+    },
+  })
 )(EnterWalletForm);

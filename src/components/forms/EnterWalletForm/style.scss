@@ -6,7 +6,7 @@
 
 .enter-wallet-form {
   background: rgba(62,25,87,1);
-  background: linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
+  background: url("../../../assets/img/background-form.png") bottom no-repeat, linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
   margin-bottom: 20px;
   border-radius: 20px;
   height: 180px;
@@ -14,18 +14,6 @@
   box-sizing: border-box;
   padding: 20px;
   z-index: 1;
-
-  &__background {
-    flex: 1;
-    position: absolute;
-    border-radius: 20px;
-    background: url("../../../assets/img/background-form.png") no-repeat 0 30%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-  }
 
   &__title {
     margin-top: 30px;
@@ -37,5 +25,14 @@
 
   input::placeholder {
     color: rgba(255, 255, 255, 0.6)
+  }
+
+  &__error {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-family: 'ProximaNova-Regular';
+    font-size: 13px;
+    color: rgba(255, 0, 0, 0.6);
+    text-align: center;
   }
 }

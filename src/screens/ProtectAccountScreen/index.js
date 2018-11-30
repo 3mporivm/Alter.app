@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { compose, getContext , withHandlers } from "recompose";
-import { ui, forms } from 'components';
+import { ui, forms, apiHOCs } from 'components';
+import { password } from 'helpers';
 
 import 'assets/screens.scss';
 import './style.scss';
@@ -15,7 +16,6 @@ const ProtectAccountScreen = ({
       onSubmit={onSubmit}
       isFetching={false}
     />
-    <ui.InfoBlock/>
   </div>
 );
 
@@ -33,7 +33,7 @@ export default compose(
   }),
   withHandlers({
     onSubmit: ({ router }) => (values) => {
-      //console.log("finish", values.toJS())
+      password.set(values.get("password"))
       router.history.push({
         pathname: '/auth/account',
       });

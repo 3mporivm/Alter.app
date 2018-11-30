@@ -5,6 +5,7 @@ import { ui, apiHOCs } from 'components';
 
 import 'assets/screens.scss';
 import './style.scss';
+import BootApiHOC from "../../components/apiHOCs/BootApiHOC";
 
 const GetStartedScreen = ({
   onGetStarted
@@ -14,9 +15,7 @@ const GetStartedScreen = ({
     <ui.Buttons.NextButton
       title="Get Started"
       onPress={onGetStarted}
-      style={{ marginBottom: 50 }}
     />
-    <ui.InfoBlock />
   </div>
 );
 
@@ -26,7 +25,6 @@ GetStartedScreen.propTypes = {
 };
 
 export default compose(
-  apiHOCs.RedditApiHOC(),
   getContext({
     router: PropTypes.shape({
       history: PropTypes.shape({
@@ -41,9 +39,4 @@ export default compose(
       });
     },
   }),
-  lifecycle({
-    componentDidMount() {
-      this.props.getReddit({ redditName: 'reactjs' });
-    }
-  })
 )(GetStartedScreen);

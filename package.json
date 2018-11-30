@@ -7,7 +7,7 @@
     "lint": "eslint src",
     "prebuild": "rimraf dist",
     "build": "cross-env NODE_ENV=production webpack -p --config webpack.config.production.js",
-    "postbuild": "copyfiles index.html manifest.json dist"
+    "postbuild": "copyfiles index.html manifest.json background.js dist"
   },
   "repository": {
     "type": "git",
@@ -74,7 +74,6 @@
     "preact-compat": "^3.18.4",
     "prop-types": "^15.6.0",
     "react": "^16.4.1",
-    "react-code-input": "^3.8.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
