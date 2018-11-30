@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { compose, getContext, withHandlers, withState } from "recompose";
+import { compose, getContext, withHandlers } from "recompose";
 import { ui, forms, modals } from 'components';
-import iconSendWhite from 'assets/img/send-white.svg';
-import Immutable from 'immutable';
 
 import 'assets/screens.scss';
 import './style.scss';

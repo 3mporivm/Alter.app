@@ -26,12 +26,19 @@ const ReceiveForm = ({
       />
       <Field
         validate={required}
-        component={ui.Fields.AmountField}
+        component={ui.Fields.BasicField}
         name="amount"
         props={{
           inputId: 'amount',
           styleWrapper: {
+            height: 65,
             marginTop: 20,
+          },
+          styleInput: {
+            fontSize: 34,
+            lineHeight: "22px",
+            color: '#ffffff',
+            fontFamily: 'ProximaNova-Bold'
           },
           label: 'Amount',
         }}

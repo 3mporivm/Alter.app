@@ -35,7 +35,7 @@ const SendForm = ({
           },
           styleInput: {
             fontSize: 34,
-            lineHeight: 22,
+            lineHeight: "22px",
             color: '#ffffff',
             fontFamily: 'ProximaNova-Bold'
           },
