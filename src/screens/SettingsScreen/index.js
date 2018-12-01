@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { compose, getContext, withHandlers } from "recompose";
-import { ui, forms } from 'components';
+import { ui, forms, apiHOCs } from 'components';
 import iconClose from 'assets/img/close.svg';
 import iconLogOut from 'assets/img/log_out.svg';
+import { password } from 'helpers';
 
 import 'assets/screens.scss';
 import './style.scss';
 
 const SettingsScreen = ({
   onClose,
-  onNetwork,
+  onLogOut,
   onChangePassword,
 }) => (
   <div className="setting-layout">
@@ -29,7 +30,7 @@ const SettingsScreen = ({
       title="Log Out"
       color="purple"
       icon={iconLogOut}
-      onPress={() => {}}
+      onPress={onLogOut}
       style={{
         marginTop: 90,
       }}
@@ -44,11 +45,12 @@ const SettingsScreen = ({
 
 SettingsScreen.propTypes = {
   onClose: PropTypes.func.isRequired,
-  onNetwork: PropTypes.func.isRequired,
   onChangePassword: PropTypes.func.isRequired,
+  onLogOut: PropTypes.func.isRequired,
 };
 
 export default compose(
+  apiHOCs.ProfileApiHOC(),
   getContext({
     router: PropTypes.shape({
       history: PropTypes.shape({
@@ -62,6 +64,12 @@ export default compose(
     },
     onChangePassword: ({ router }) => () => {
       router.history.push({ pathname: '/change-password' });
+    },
+    onLogOut: ({ router, cleanStore }) => () => {
+      cleanStore();
+      localStorage.removeItem('profile');
+      password.remove();
+      router.history.push({ pathname: '/' });
     },
   })
 )(SettingsScreen);

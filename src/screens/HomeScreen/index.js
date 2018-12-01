@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router';
 import { ui, apiHOCs } from 'components';
 import {
   branch,
-  compose, lifecycle,
+  compose,
   renderComponent,
   withProps,
 } from 'recompose';
