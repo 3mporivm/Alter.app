@@ -17,15 +17,11 @@ const OverviewScreen = ({
   <div className="wallet-screen-layout">
     <ui.Header
       styleContent={{ zIndex: 1 }}
-      isDropDown
+      //isDropDown
       isExtended
       onCenterPress={() => alert('onCenterPress')}
       onRightPress={onSettings}
-      modal={
-          <modals.DropDown
-            onPress={() => {}}
-          />
-      }
+      //modal={<modals.DropDown onPress={() => {}}/>}
       title="Wallet one"
     />
     <ui.BalanceBlock

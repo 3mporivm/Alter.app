@@ -7,15 +7,10 @@ import { password } from 'helpers';
 import 'assets/screens.scss';
 import './style.scss';
 
-const ProtectAccountScreen = ({
-  onSubmit,
-}) => (
+const ProtectAccountScreen = ({ onSubmit }) => (
   <div className="protect-account-layout">
     <ui.Header/>
-    <forms.ProtectAccountForm
-      onSubmit={onSubmit}
-      isFetching={false}
-    />
+    <forms.ProtectAccountForm onSubmit={onSubmit}/>
   </div>
 );
 

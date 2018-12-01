@@ -26,6 +26,7 @@ export const ERC20 = {
   'HT':true
 };
 export const COINS = ["btc", "ltc", "bch", "dash", "doge"];
+export const SALT = "$2a$10$J8GCNLf7N7W85iQGm5fhbu";
 
 export const AVATARS = [
   iconAvatar1,

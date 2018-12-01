@@ -15,6 +15,7 @@ const BootApiHOC = () => WrappedComponent => compose(
       ...bindActionCreators({
         initialStore: (values) => updateEntities({
           profile: () => Immutable.Map(values.profile),
+          wallets: () => Immutable.Map(values.wallets),
         }),
       }, dispatch),
     }),
@@ -22,7 +23,8 @@ const BootApiHOC = () => WrappedComponent => compose(
   withHandlers({
     getStore: ({ initialStore }) => () => {
       initialStore({
-        profile: JSON.parse(localStorage.getItem("profile"))
+        profile: JSON.parse(localStorage.getItem("profile")),
+        wallets: JSON.parse(localStorage.getItem("wallets"))
       });
     },
   }),

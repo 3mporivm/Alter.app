@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { ui, forms, modals } from 'components';
+import { ui, forms, modals, apiHOCs } from 'components';
 import { compose, getContext, lifecycle, withHandlers, withStateHandlers } from "recompose";
 import iconBitcoin from 'assets/img/bitcoin.svg';
 import iconPlusPurple from 'assets/img/plus_purple.svg';
@@ -134,6 +134,7 @@ CoinScreen.defaultProps = {
 
 
 export default compose(
+  //apiHOCs.WalletsApiHOC(),
   withStateHandlers(
     { isFooterModalOpen: false },
     {
