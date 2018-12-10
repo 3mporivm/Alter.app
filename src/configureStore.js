@@ -3,12 +3,12 @@ import { queryMiddleware } from '@digitalwing.co/redux-query-immutable';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'remote-redux-devtools';
 import reducers, { getQueries, getEntities, getResults } from 'reducers';
-import { authTokenMiddleware, localStorage } from 'middlewares';
+import { authTokenMiddleware, localStorageMiddleware } from 'middlewares';
 import { Iterable } from 'immutable';
 
 export default () => {
   let middlewares = [
-    localStorage,
+    localStorageMiddleware,
     authTokenMiddleware,
     queryMiddleware(getQueries, getEntities, getResults),
   ];

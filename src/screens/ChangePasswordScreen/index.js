@@ -4,8 +4,7 @@ import { ui, forms } from 'components';
 import { compose, getContext, withHandlers } from "recompose";
 import { connect } from 'react-redux'
 import { reset } from 'redux-form';
-import { SALT } from 'constants/constants';
-const bcrypt = require('bcryptjs');
+import { password } from 'helpers';
 
 import 'assets/screens.scss';
 import './style.scss';
@@ -37,7 +36,7 @@ export default compose(
     },
     onSubmit: ({ dispatch }) => (values) => {
       // save new password in storage
-      localStorage.setItem('password', bcrypt.hashSync(values.get('newPassword'), SALT));
+      password.set(values.get("newPassword"));
       // reset form
       dispatch(reset('changePasswordForm'));
     },
