@@ -26,9 +26,13 @@ export const createAddress = (chain, seedPhrase, childCount) => {
 };
 
 export const createCoins = (phrase) => {
-  let wallets = {};
-  COINS.map(coin => wallets[coin] = [createAddress(coin, phrase, 1)]);
-  return wallets;
+  let currencies = [];
+  COINS.map(({ name, fullName }) => currencies.push({
+    wallets: [createAddress(name, phrase, 1)],
+    name,
+    fullName,
+  }));
+  return currencies;
 };
 
 // console.log(createAddress('doge', 'reunion nothing resist donor suspect include sustain script erase rack invite heart', 1));

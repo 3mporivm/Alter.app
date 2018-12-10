@@ -16,12 +16,14 @@ const SendForm = ({
   facebookLoginRequest,
   isFetching,
   invalid,
+  balance,
+  currency,
 }) => (
   <form onSubmit={handleSubmit} className="send-form-wrapper">
     <div className="send-form">
       <ui.Badge icon={iconSendWhite}/>
       <div className="send-form__title">
-        Balance: 1.23567815
+        {`Balance: ${balance}`}
       </div>
       <Field
         validate={required}
@@ -53,10 +55,10 @@ const SendForm = ({
       <Field
         validate={required}
         component={ui.Fields.BasicField}
-        name="BTC_address"
-        placeholder="BTC address"
+        name="address"
+        placeholder={`${currency} address`}
         props={{
-          inputId: 'BTC_address',
+          inputId: 'address',
           styleWrapper: {
             marginTop: 20,
           },
@@ -78,12 +80,9 @@ const SendForm = ({
 SendForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  balance: PropTypes.number.isRequired,
+  coin: PropTypes.string.isRequired,
 };
-
-
-SendForm.defaultProps = {
-};
-
 
 export default compose(
   reduxForm({

@@ -1,8 +1,7 @@
 import authTokenMiddleware from './authTokenMiddleware';
-import localStorage from './localStorage';
+import localStorageMiddleware from './localStorageMiddleware';
 
-// export default {};
 export {
   authTokenMiddleware,
-  localStorage,
+  localStorageMiddleware,
 };

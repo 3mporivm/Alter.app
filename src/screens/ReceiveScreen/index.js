@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { compose, getContext, withHandlers } from "recompose";
+import {compose, getContext, withHandlers, withProps} from "recompose";
 import { ui, forms, modals } from 'components';
 
 import 'assets/screens.scss';
 import './style.scss';
 
 const ReceiveScreen = ({
-  currencies,
   onCoin,
   onSettings,
   onBack,
+  currency,
 }) => (
   <div className="receive-screen-layout">
     <ui.Header
@@ -18,7 +18,7 @@ const ReceiveScreen = ({
       isExtended
       onCenterPress={() => alert('onCenterPress')}
       onRightPress={onSettings}
-      title="Receive BTC"
+      title={`Receive ${currency.toUpperCase()}`}
     />
     <forms.ReceiveForm
       onSubmit={() => {}}
@@ -35,9 +35,7 @@ ReceiveScreen.propTypes = {
   onCoin: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
-};
-
-ReceiveScreen.defaultProps = {
+  currency: PropTypes.string.isRequired,
 };
 
 export default compose(
@@ -48,10 +46,11 @@ export default compose(
       }).isRequired,
     }).isRequired,
   }),
+  withProps(({ location }) => ({
+    currency: _.get(location, 'state.currency'),
+  })),
   withHandlers({
-    onBack: ({ router }) => () => {
-      router.history.push('/wallet');
-    },
+    onBack: ({ router }) => () => router.history.goBack(),
     onCoin: ({ router }) => () => {
       router.history.push({
         pathname: '/coin',

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { compose, getContext, withHandlers } from "recompose";
-import { ui, forms, modals } from 'components';
+import { compose, getContext, lifecycle, withHandlers, withState } from "recompose";
+import { ThreeBounce } from 'better-react-spinkit';
+import { ui, forms, modals, apiHOCs } from 'components';
+import { CURRENCY_ICONS } from 'constants/constants';
 import iconBitcoin from 'assets/img/bitcoin.svg';
 import iconEthereum from 'assets/img/ethereum.svg';
 import iconDash from 'assets/img/dash.svg';
@@ -13,6 +15,8 @@ const OverviewScreen = ({
   currencies,
   onCoin,
   onSettings,
+  isFetching,
+  currency,
 }) => (
   <div className="wallet-screen-layout">
     <ui.Header
@@ -36,19 +40,29 @@ const OverviewScreen = ({
     />
     <div className="wallet-screen-layout__currencies">
       {
-        currencies.map((currency) => (
-          <ui.CurrencyCard
-            key={currency.name}
-            onPress={onCoin}
-            name={currency.name}
-            fullName={currency.fullName}
-            icon={currency.icon}
-            backgroundColor={currency.color}
-            course={currency.course}
-            courseUSD={currency.courseUSD}
-            wallets={currency.wallets}
-          />
-        ))
+        isFetching ?
+          <div className="wallet-screen-layout__currencies__loading-wrapper">
+            <ThreeBounce
+              scaleStart={0.4}
+              scaleEnd={0.7}
+              size={25}
+              color="rgba(255, 255, 255, .5)"
+            />
+          </div>
+          :
+          currencies.map((currency) => (
+            <ui.CurrencyCard
+              key={currency.name}
+              onPress={() => onCoin(currency.name)}
+              name={currency.name.toUpperCase()}
+              fullName={currency.fullName}
+              icon={currency.icon}
+              backgroundColor={currency.color}
+              balance={currency.wallets.reduce((accumulator, item) => accumulator + item.balance, 0)}
+              courseUSD={"default" || currency.courseUSD}
+              wallets={currency.wallets.length}
+            />
+          ))
       }
     </div>
     <ui.InfoBlock/>
@@ -56,44 +70,15 @@ const OverviewScreen = ({
 );
 
 OverviewScreen.propTypes = {
-  currencies: PropTypes.array,
+  currencies: PropTypes.object.isRequired,
+  currency: PropTypes.object.isRequired,
   onCoin: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
-};
-
-OverviewScreen.defaultProps = {
-  currencies: [
-    {
-      name: "BTC",
-      fullName: "Bitcoin",
-      icon: iconBitcoin,
-      color: "#F7931A",
-      course: 1.23567815,
-      courseUSD: "6,559.00",
-      wallets: 3,
-    },
-    {
-      name: "ETH",
-      fullName: "Ethereum",
-      icon: iconEthereum,
-      color: "#3F4953",
-      course: 1.23567815,
-      courseUSD: "6,559.00",
-      wallets: 3,
-    },
-    {
-      name: "DASH",
-      fullName: "Dash",
-      icon: iconDash,
-      color: "#2573C2",
-      course: 1.23567815,
-      courseUSD: "6,559.00",
-      wallets: 3,
-    },
-  ],
+  isFetching: PropTypes.bool.isRequired,
 };
 
 export default compose(
+  apiHOCs.WalletsApiHOC(),
   getContext({
     router: PropTypes.shape({
       history: PropTypes.shape({
@@ -102,15 +87,33 @@ export default compose(
     }).isRequired,
   }),
   withHandlers({
-    onCoin: ({ router }) => () => {
-      router.history.push({
-        pathname: '/coin',
-      });
+    onCoin: ({ router }) => (coin) => {
+      router.history.push(`/coin/${coin}`);
     },
     onSettings: ({ router }) => () => {
       router.history.push({
         pathname: '/settings',
       });
     },
-  })
+  }),
+  withState('isFetching', 'setIsFetching', ({ currencies }) => currencies.get(0).wallets[0].balance === undefined),
+  lifecycle({
+    componentWillMount() {
+      // если уже загружали баланс кошельков, дропаем
+      if (!this.props.isFetching) {
+        return;
+      }
+
+      // загружаем баланс кошельков
+      Promise.all(
+        (function (props) {
+          const promises = [];
+          props.currencies.toJS().forEach(({ name, wallets }) =>
+            wallets.forEach(({ address }) => promises.push(props.getBalanceWallet(name, address)))
+          );
+          return promises;
+        }(this.props))
+      ).then(() => this.props.setIsFetching(false));
+    },
+  }),
 )(OverviewScreen);

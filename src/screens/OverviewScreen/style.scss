@@ -11,5 +11,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    &__loading-wrapper {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      margin-top: 20px;
+      margin-bottom: -20px;
+    }
   }
 }

@@ -10,6 +10,7 @@ import './style.scss';
 
 const EditWalletForm = ({
   handleSubmit,
+  currency,
 }) => (
   <form onSubmit={handleSubmit} className="edit-wallet-form">
     <Field
@@ -27,10 +28,10 @@ const EditWalletForm = ({
     />
     <Field
       component={ui.Fields.CopyField}
-      name="btc_address"
+      name="address"
       props={{
-        label: "BTC address",
-        inputId: 'btc_address',
+        label: `${currency.toUpperCase()} address`,
+        inputId: 'address',
         styleWrapper: {
           marginTop: 20,
         }
@@ -58,22 +59,13 @@ const EditWalletForm = ({
         }
       }}
     />
-      {
-        // handleSubmit
-      }
   </form>
 );
 
 EditWalletForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  currency: PropTypes.string.isRequired,
 };
-
-
-EditWalletForm.defaultProps = {
-};
-
 
 export default compose(
   reduxForm({

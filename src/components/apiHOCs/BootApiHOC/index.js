@@ -15,7 +15,7 @@ const BootApiHOC = () => WrappedComponent => compose(
       ...bindActionCreators({
         initialStore: (values) => updateEntities({
           profile: () => Immutable.Map(values.profile),
-          wallets: () => Immutable.Map(values.wallets),
+          currencies: () => Immutable.List(values.currencies),
         }),
       }, dispatch),
     }),
@@ -24,15 +24,15 @@ const BootApiHOC = () => WrappedComponent => compose(
     getStore: ({ initialStore }) => () => {
       initialStore({
         profile: JSON.parse(localStorage.getItem("profile")),
-        wallets: JSON.parse(localStorage.getItem("wallets"))
+        currencies: JSON.parse(localStorage.getItem("currencies"))
       });
     },
   }),
   lifecycle({
-    componentDidMount() {
-      this.props.getStore();
+    componentWillMount() {
+      !this.props.profile.get('isRegistered') && this.props.getStore();
     }
-  })
+  }),
 )(WrappedComponent)
 
 export default BootApiHOC

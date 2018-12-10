@@ -31,9 +31,7 @@ export default compose(
     }).isRequired,
   }),
   withHandlers({
-    onBack: ({ router }) => () => {
-      router.history.push({ pathname: '/settings' });
-    },
+    onBack: ({ router }) => () => router.history.goBack(),
     onSubmit: ({ dispatch }) => (values) => {
       // save new password in storage
       password.set(values.get("newPassword"));

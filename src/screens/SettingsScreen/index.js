@@ -59,12 +59,8 @@ export default compose(
     }).isRequired,
   }),
   withHandlers({
-    onClose: ({ router }) => () => {
-      router.history.push({ pathname: '/' });
-    },
-    onChangePassword: ({ router }) => () => {
-      router.history.push({ pathname: '/change-password' });
-    },
+    onClose: ({ router }) => () => router.history.goBack(),
+    onChangePassword: ({ router }) => () => router.history.push('/change-password'),
     onLogOut: ({ router, cleanStore }) => () => {
       cleanStore();
       localStorage.removeItem('profile');

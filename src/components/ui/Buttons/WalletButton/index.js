@@ -8,7 +8,7 @@ const WalletButton = ({
   icon,
   backgroundColor,
   name,
-  fullName,
+  address,
   wallets,
   balance,
   balanceUSD,
@@ -36,8 +36,8 @@ const WalletButton = ({
         </div>
       </div>
       <div className="wallet-button__content__footer">
-        <div className="wallet-button__content__footer__wallet-full-name">
-          {fullName}
+        <div className="wallet-button__content__footer__wallet-address">
+          {address}
         </div>
         <div className="wallet-button__content__footer__wallet-balance-usd">
           {balanceUSD}
@@ -60,6 +60,7 @@ WalletButton.propTypes = {
   balance: PropTypes.number.isRequired,
   balanceUSD: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
+  address: PropTypes.string.isRequired,
 };
 
 WalletButton.defaultProps = {

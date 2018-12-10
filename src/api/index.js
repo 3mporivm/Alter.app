@@ -1,5 +1,5 @@
-import reddit from './reddit';
+import wallet from './wallet';
 
 export {
-  reddit,
+  wallet,
 };

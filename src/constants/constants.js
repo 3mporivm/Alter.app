@@ -5,6 +5,10 @@ import iconAvatar4 from 'assets/img/avatars/26.png';
 import iconAvatar5 from 'assets/img/avatars/28.png';
 import iconAvatar6 from 'assets/img/avatars/30.png';
 
+import iconBTC from 'assets/img/currency/BTC.svg';
+// import iconLitecoin from 'assets/img/avatars/Litecoin.svg';
+// import iconDash from 'assets/img/avatars/Dash.svg';
+
 export const NETWORK = 'livenet';
 export const BTC_LIKE = {
     'btc': true,
@@ -25,7 +29,36 @@ export const ERC20 = {
   'ht': true,
   'HT':true
 };
-export const COINS = ["btc", "ltc", "bch", "dash", "doge"];
+
+export const COINS = [
+  {
+    name: "btc",
+    fullName: 'Bitcoin',
+  },
+  {
+    name: "ltc",
+    fullName: "Litecoin",
+  },
+  {
+    name: "bch",
+    fullName: "Bitcoin Cash",
+  },
+  {
+    name: "dash",
+    fullName: "Dash",
+  },
+  {
+    name: "doge",
+    fullName: "Doge",
+  },
+];
+export const CURRENCY_ICONS = {
+  btc: iconBTC,
+  //ltc: iconLitecoin,
+  bch: 0,
+  //dash: iconDash,
+  doge: 0,
+};
 export const SALT = "$2a$10$J8GCNLf7N7W85iQGm5fhbu";
 
 export const AVATARS = [

@@ -28,7 +28,7 @@ export default compose(
   }),
   withHandlers({
     onSubmit: ({ router }) => (values) => {
-      password.set(values.get("password"))
+      password.set(values.get("password"));
       router.history.push({
         pathname: '/auth/account',
       });

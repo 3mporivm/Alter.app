@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { ui, forms, modals, apiHOCs } from 'components';
-import { compose, getContext, lifecycle, withHandlers, withStateHandlers } from "recompose";
+import {compose, getContext, lifecycle, withHandlers, withStateHandlers} from "recompose";
 import iconBitcoin from 'assets/img/bitcoin.svg';
 import iconPlusPurple from 'assets/img/plus_purple.svg';
 import iconImport from 'assets/img/import.svg';
@@ -19,6 +19,7 @@ const CoinScreen = ({
   onSettings,
   onWallet,
   setDropdownRef,
+  currency,
 }) => (
   <div className="coin-screen-layout">
     <ui.Header
@@ -26,14 +27,14 @@ const CoinScreen = ({
       isExtended
       onCenterPress={() => alert('onCenterPress')}
       onRightPress={onSettings}
-      title="BTC"
+      title={currency.name.toUpperCase()}
     />
     <ui.BalanceBlock
       icon={iconBitcoin}
       backgroundColor="#F7931A"
-      currency="BTC"
-      balance="1.23567815"
-      course="$6,559.00"
+      currency={currency.name.toUpperCase()}
+      balance={currency.wallets.reduce((accumulator, item) => accumulator + item.balance, 0)}
+      course="$default"
     />
     <div className="coin-screen-layout__buttons">
       <ui.Buttons.BasicButton
@@ -59,15 +60,15 @@ const CoinScreen = ({
       WALLETS
     </div>
     {
-      wallets.map(wallet => (
+      currency.wallets.map(wallet => (
         <ui.Buttons.WalletButton
-          onPress={onWallet}
-          name={wallet.name}
+          onPress={() => onWallet(wallet.address)}
+          name={currency.name.toUpperCase()}
           icon={iconBitcoin}
           backgroundColor="#F7931A"
-          fullName={wallet.fullName}
+          address={wallet.address}
           balance={wallet.balance}
-          balanceUSD={wallet.balanceUSD}
+          balanceUSD={wallet.balanceUSD || 'default'}
         />
       ))
     }
@@ -101,6 +102,7 @@ const CoinScreen = ({
 
 CoinScreen.propTypes = {
   wallets: PropTypes.array,
+  currency: PropTypes.object.isRequired,
   setFooterModalOpen: PropTypes.func.isRequired,
   isFooterModalOpen: PropTypes.string.isRequired,
   onBack: PropTypes.func.isRequired,
@@ -134,7 +136,7 @@ CoinScreen.defaultProps = {
 
 
 export default compose(
-  //apiHOCs.WalletsApiHOC(),
+  apiHOCs.WalletsApiHOC(),
   withStateHandlers(
     { isFooterModalOpen: false },
     {
@@ -159,14 +161,12 @@ export default compose(
     }).isRequired,
   }),
   withHandlers({
-    onBack: ({ router }) => () => {
-      router.history.push('/overview');
-    },
+    onBack: ({ router }) => () => router.history.goBack(),
     onSettings: ({ router }) => () => {
       router.history.push({ pathname: '/settings' });
     },
-    onWallet: ({ router }) => () => {
-      router.history.push({ pathname: '/wallet' });
+    onWallet: ({ router, currency }) => (address) => {
+      router.history.push(`/${currency.name}/wallet/${address}`);
     },
     handleOuterDropdownClick: ({ setFooterModalOpen, dropdownRef }) => (e) => {
       if (dropdownRef.contains(e.target)) {

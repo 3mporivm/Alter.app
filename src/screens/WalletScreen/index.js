@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { ui, forms } from 'components';
+import { ui, forms, apiHOCs } from 'components';
 import { withState, compose, getContext, withHandlers } from "recompose";
 
 import iconBitcoin from 'assets/img/bitcoin.svg';
@@ -16,8 +16,12 @@ const WalletScreen = ({
   onSend,
   onReceive,
   transactions,
+  wallet,
 }) => (
   <div className="wallet-screen-layout">
+    {
+      console.log("wallet", wallet)
+    }
     <ui.Header
       onBackPress={onBack}
       isExtended
@@ -29,17 +33,18 @@ const WalletScreen = ({
       onPress={() => {}}
       icon={iconBitcoin}
       backgroundColor="#F7931A"
-      currency="BTC"
-      balance="1.23567815"
+      currency={wallet.coin.toUpperCase()}
+      balance={wallet.balance}
       course="$6,559.00"
     >
       <forms.EditWalletForm
         onSubmit={() => {}}
+        currency={wallet.coin.toUpperCase()}
         initialValues={{
           wallet_name: "My wallet 1",
-          btc_address: "3LVGbddKk3uKhqfGKz7X7n63LVGbddKk3uKhqfGKz7X7n6",
-          private_key: "3LVGbddKk3uKhqfGKz7X7n63LVGbddKk3uKhqfGKz7X7n6",
-          public_key: "3LVGbddKk3uKhqfGKz7X7n63LVGbddKk3uKhqfGKz7X7n6",
+          address: wallet.address,
+          private_key: wallet.privateKey,
+          public_key: wallet.publicKey,
         }}
       />
     </ui.BalanceBlock>
@@ -93,7 +98,7 @@ WalletScreen.defaultProps = {
       type: "Received",
       address: "3LVGbdd3LVGbdd3LVGbdd3LVGbddE832y",
       sum: 2.23371815,
-      date: "2.11.2018",
+      date: "5.11.2018",
     },
     {
       type: "Sent",
@@ -105,13 +110,13 @@ WalletScreen.defaultProps = {
       type: "Received",
       address: "3LVGbdd…E832y",
       sum: 2.23371815,
-      date: "2.11.2018",
+      date: "7.11.2018",
     },
   ],
 };
 
-
 export default compose(
+  apiHOCs.WalletsApiHOC(),
   withState('isFooterModalOpen', 'setFooterModalOpen', false),
   getContext({
     router: PropTypes.shape({
@@ -121,22 +126,27 @@ export default compose(
     }).isRequired,
   }),
   withHandlers({
-    onBack: ({ router }) => () => {
-      router.history.push('/coin');
-    },
+    onBack: ({ router }) => () => router.history.goBack(),
     onSettings: ({ router }) => () => {
       router.history.push({
         pathname: '/settings',
       });
     },
-    onSend: ({ router }) => () => {
+    onSend: ({ router, wallet }) => () => {
       router.history.push({
         pathname: '/send',
+        state: {
+          currency: wallet.coin,
+          balance: wallet.balance,
+        },
       });
     },
-    onReceive: ({ router }) => () => {
+    onReceive: ({ router, wallet }) => () => {
       router.history.push({
         pathname: '/receive',
+        state: {
+          currency: wallet.coin,
+        },
       });
     },
   })

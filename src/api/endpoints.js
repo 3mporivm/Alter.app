@@ -1,5 +1,5 @@
-const host = 'https://www.reddit.com/r';
+const host = 'http://18.219.20.226:7789';
 
 export default {
-  getRedditUrl: ({ redditName = 'reactjs' }) => `${host}/${redditName}.json`,
+  getWalletBalanceUrl: ({ chain, address }) => `${host}/balance?chain=${chain}&address=${address}`,
 };
