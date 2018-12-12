@@ -5,6 +5,7 @@ import { requestAsync, updateEntities } from '@digitalwing.co/redux-query-immuta
 import { wallet } from 'api';
 import Immutable from "immutable";
 import { getCurrency, getCurrencies, getWallet } from './selectors'
+import _ from "lodash";
 
 const WalletsApiHOC = () => WrappedComponent => compose(
   connect(
@@ -17,6 +18,21 @@ const WalletsApiHOC = () => WrappedComponent => compose(
       ...bindActionCreators({
         createFirstWallets: (values) => updateEntities({
           currencies: () => Immutable.List(values),
+        }),
+        addWallet: (wallet, currencyName) => updateEntities({
+          currencies: (prevCurrencies = Immutable.List()) => {
+            if (prevCurrencies.size === 0) {
+              return prevCurrencies;
+            }
+            const indexCurrencies = prevCurrencies.findIndex(({ name }) => name === currencyName);
+            return prevCurrencies.update(indexCurrencies, currencies => ({
+              ...currencies,
+              wallets: [
+                ...currencies.wallets,
+                wallet,
+              ]
+            }))
+          }
         }),
         getBalanceWallet: (chain, address) => requestAsync(
           wallet.queries.getBalance(({ chain, address })),

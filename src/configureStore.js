@@ -3,12 +3,12 @@ import { queryMiddleware } from '@digitalwing.co/redux-query-immutable';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'remote-redux-devtools';
 import reducers, { getQueries, getEntities, getResults } from 'reducers';
-import { authTokenMiddleware, localStorageMiddleware } from 'middlewares';
+import { authTokenMiddleware } from 'middlewares';
 import { Iterable } from 'immutable';
+import { localStorage } from 'helpers';
 
 export default () => {
   let middlewares = [
-    localStorageMiddleware,
     authTokenMiddleware,
     queryMiddleware(getQueries, getEntities, getResults),
   ];
@@ -30,8 +30,10 @@ export default () => {
     middlewares = composeEnhancers(middlewares);
   }
 
+  const persistedState = localStorage.loadState();
   return createStore(
     reducers,
+    persistedState,
     middlewares,
   );
 };

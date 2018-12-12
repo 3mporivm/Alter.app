@@ -23,9 +23,9 @@ const SelectField = ({
       value={value}
       onChange={handleChange}
     >
-      <option value="" disabled selected hidden>{placeholder}</option>
+      <option disabled hidden>{placeholder}</option>
       {
-        options.map((value, index) => <option value={value}>{value}</option>)
+        options.map(value => <option key={value} value={value}>{value}</option>)
       }
     </select>
   </div>

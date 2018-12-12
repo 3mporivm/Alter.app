@@ -34,7 +34,7 @@ export default compose(
       // создаем по одному кошельку, каждой валюты
       createFirstWallets(blockchain.createCoins(values.get("seed")));
 
-      updateProfile({ isRegistered: true });
+      updateProfile({ isRegistered: true, phrase: values.get("seed") });
       router.history.push({ pathname: '/' });
     },
   })

@@ -27,8 +27,8 @@ export const createAddress = (chain, seedPhrase, childCount) => {
 
 export const createCoins = (phrase) => {
   let currencies = [];
-  COINS.map(({ name, fullName }) => currencies.push({
-    wallets: [createAddress(name, phrase, 1)],
+  COINS.map(({ name, fullName }, index) => currencies.push({
+    wallets: [{...createAddress(name, phrase, 1), name: `My wallet ${index + 1}` }],
     name,
     fullName,
   }));

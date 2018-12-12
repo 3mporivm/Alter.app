@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { ui, forms, modals, apiHOCs } from 'components';
-import {compose, getContext, lifecycle, withHandlers, withStateHandlers} from "recompose";
+import {compose, getContext, lifecycle, withHandlers, withState, withStateHandlers} from "recompose";
+import { blockchain } from 'helpers';
 import iconBitcoin from 'assets/img/bitcoin.svg';
 import iconPlusPurple from 'assets/img/plus_purple.svg';
 import iconImport from 'assets/img/import.svg';
@@ -12,7 +13,6 @@ import 'assets/screens.scss';
 import './style.scss';
 
 const CoinScreen = ({
-  wallets,
   setFooterModalOpen,
   isFooterModalOpen,
   onBack,
@@ -20,6 +20,8 @@ const CoinScreen = ({
   onWallet,
   setDropdownRef,
   currency,
+  onSubmit,
+  isFetching,
 }) => (
   <div className="coin-screen-layout">
     <ui.Header
@@ -63,7 +65,7 @@ const CoinScreen = ({
       currency.wallets.map(wallet => (
         <ui.Buttons.WalletButton
           onPress={() => onWallet(wallet.address)}
-          name={currency.name.toUpperCase()}
+          name={wallet.name}
           icon={iconBitcoin}
           backgroundColor="#F7931A"
           address={wallet.address}
@@ -82,8 +84,9 @@ const CoinScreen = ({
       style={{ bottom: isFooterModalOpen === "generate" ? 0 : -500 }}
     >
       <forms.NewWalletForm
+        onSubmit={onSubmit}
         onCancel={() => setFooterModalOpen(false)}
-        isFetching={false}
+        isFetching={isFetching}
       />
     </modals.Footer>
     <modals.Footer
@@ -92,8 +95,8 @@ const CoinScreen = ({
       backgroundColor="#63CEFF"
     >
       <forms.ImportWalletForm
-        onCancel={() => setFooterModalOpen(false)}
-        isFetching={false}
+        onCancel={() => !isFetching && setFooterModalOpen(false)}
+        isFetching={isFetching}
       />
     </modals.Footer>
     </div>
@@ -101,7 +104,6 @@ const CoinScreen = ({
 );
 
 CoinScreen.propTypes = {
-  wallets: PropTypes.array,
   currency: PropTypes.object.isRequired,
   setFooterModalOpen: PropTypes.func.isRequired,
   isFooterModalOpen: PropTypes.string.isRequired,
@@ -109,34 +111,14 @@ CoinScreen.propTypes = {
   onSettings: PropTypes.func.isRequired,
   onWallet: PropTypes.func.isRequired,
   setDropdownRef: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
-
-CoinScreen.defaultProps = {
-  wallets: [
-    {
-      name: "My Wallet 1",
-      fullName: "3LVGbdd3LVGbdd3LVGbdd3LVGbddE832y",
-      balance: 2.23371815,
-      balanceUSD: "$3,223.00",
-    },
-    {
-      name: "My Wallet 2",
-      fullName: "3LVGbdd3LVGbdd 3LVG bdd3LVG bddE832y",
-      balance: 2.23371815,
-      balanceUSD: "$3,223.00",
-    },
-    {
-      name: "My Wallet 3",
-      fullName: "3LVGbdd…E832y",
-      balance: 2.23371815,
-      balanceUSD: "$3,223.00",
-    },
-  ],
-};
-
 
 export default compose(
   apiHOCs.WalletsApiHOC(),
+  apiHOCs.ProfileApiHOC(),
+  withState('isFetching', 'setIsFetching', false),
   withStateHandlers(
     { isFooterModalOpen: false },
     {
@@ -162,17 +144,25 @@ export default compose(
   }),
   withHandlers({
     onBack: ({ router }) => () => router.history.goBack(),
-    onSettings: ({ router }) => () => {
-      router.history.push({ pathname: '/settings' });
-    },
+    onSettings: ({ router }) => () => router.history.push('/settings'),
     onWallet: ({ router, currency }) => (address) => {
       router.history.push(`/${currency.name}/wallet/${address}`);
     },
-    handleOuterDropdownClick: ({ setFooterModalOpen, dropdownRef }) => (e) => {
+    handleOuterDropdownClick: ({ setFooterModalOpen, dropdownRef, isFetching }) => (e) => {
       if (dropdownRef.contains(e.target)) {
         return;
       }
-      setFooterModalOpen(false);
+      !isFetching && setFooterModalOpen(false);
+    },
+    onSubmit: ({ addWallet, currency, profile, getBalanceWallet, setFooterModalOpen, setIsFetching }) => values => {
+      setIsFetching(true);
+      const wallet = blockchain.createAddress(currency.name, profile, currency.wallets.length + 1);
+      addWallet({ ...wallet, name: values.get('wallet_name') }, currency.name);
+      getBalanceWallet(currency.name, wallet.address).then(() => {
+        setIsFetching(false);
+        // hide modal
+        setFooterModalOpen(false);
+      });
     },
   }),
   lifecycle({

@@ -3,10 +3,10 @@ import { compose } from 'recompose';
 import { ui } from 'components';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form/immutable';
+import { required, minLength } from 'validators';
+const minLength3 = minLength(3);
 
 import iconPlusPurple from 'assets/img/plus_purple.svg';
-
-import { required } from 'validators';
 
 import './style.scss';
 
@@ -24,7 +24,7 @@ const NewWalletForm = ({
       Generate new wallet
     </div>
     <Field
-      validate={required}
+      validate={[required, minLength3]}
       component={ui.Fields.BasicField}
       name="wallet_name"
       placeholder="Wallet name"
@@ -36,6 +36,9 @@ const NewWalletForm = ({
           borderBottomColor: 'rgba(26, 39, 78, 0.15)',
           borderBottomStyle: 'solid',
         },
+        styleInput: {
+          color: '#000',
+        }
       }}
     />
     <div className="new-wallet-form__buttons">
@@ -66,11 +69,6 @@ NewWalletForm.propTypes = {
   onCancel: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
 };
-
-
-NewWalletForm.defaultProps = {
-};
-
 
 export default compose(
   reduxForm({

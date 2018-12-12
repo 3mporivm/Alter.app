@@ -19,9 +19,6 @@ const WalletScreen = ({
   wallet,
 }) => (
   <div className="wallet-screen-layout">
-    {
-      console.log("wallet", wallet)
-    }
     <ui.Header
       onBackPress={onBack}
       isExtended
@@ -41,7 +38,7 @@ const WalletScreen = ({
         onSubmit={() => {}}
         currency={wallet.coin.toUpperCase()}
         initialValues={{
-          wallet_name: "My wallet 1",
+          wallet_name: wallet.name,
           address: wallet.address,
           private_key: wallet.privateKey,
           public_key: wallet.publicKey,

@@ -4,7 +4,6 @@ import { compose, getContext, withHandlers, withProps } from "recompose";
 import { ui, forms, apiHOCs } from 'components';
 import { blockchain } from 'helpers';
 
-import 'assets/screens.scss';
 import './style.scss';
 
 const ConfirmBackupScreen = ({

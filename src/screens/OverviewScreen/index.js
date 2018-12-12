@@ -19,6 +19,9 @@ const OverviewScreen = ({
   currency,
 }) => (
   <div className="wallet-screen-layout">
+    {
+      console.log("re-render")
+    }
     <ui.Header
       styleContent={{ zIndex: 1 }}
       //isDropDown
@@ -96,20 +99,15 @@ export default compose(
       });
     },
   }),
-  withState('isFetching', 'setIsFetching', ({ currencies }) => currencies.get(0).wallets[0].balance === undefined),
+  withState('isFetching', 'setIsFetching', false),
   lifecycle({
     componentWillMount() {
-      // если уже загружали баланс кошельков, дропаем
-      if (!this.props.isFetching) {
-        return;
-      }
-
       // загружаем баланс кошельков
       Promise.all(
         (function (props) {
           const promises = [];
-          props.currencies.toJS().forEach(({ name, wallets }) =>
-            wallets.forEach(({ address }) => promises.push(props.getBalanceWallet(name, address)))
+          props.currencies.toJS().forEach(({name, wallets}) =>
+            wallets.forEach(({address}) => promises.push(props.getBalanceWallet(name, address)))
           );
           return promises;
         }(this.props))
