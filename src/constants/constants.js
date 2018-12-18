@@ -5,7 +5,7 @@ import iconAvatar4 from 'assets/img/avatars/26.png';
 import iconAvatar5 from 'assets/img/avatars/28.png';
 import iconAvatar6 from 'assets/img/avatars/30.png';
 
-import iconBTC from 'assets/img/currency/BTC.svg';
+import iconBTC from 'assets/img/currency/btc.svg';
 import iconLTC from 'assets/img/currency/ltc.svg';
 import iconBCH from 'assets/img/currency/bch.svg';
 import iconDASH from 'assets/img/currency/dash.svg';
