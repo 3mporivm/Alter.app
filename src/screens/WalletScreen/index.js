@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { ui, forms, apiHOCs } from 'components';
 import { withState, compose, getContext, withHandlers, withProps, lifecycle } from "recompose";
 import { ThreeBounce } from 'better-react-spinkit';
+import moment from 'moment';
 import { CURRENCY_ICONS } from 'constants/constants';
 
 import iconReceive from 'assets/img/receive.svg';
@@ -26,7 +27,7 @@ const WalletScreen = ({
       isExtended
       onCenterPress={() => alert('onCenterPress')}
       onRightPress={onSettings}
-      title="My wallet 1"
+      title={wallet.name}
     />
     <ui.BalanceBlock
       onPress={onDeleteWallet}
@@ -34,7 +35,7 @@ const WalletScreen = ({
       backgroundColor="#F7931A"
       currency={wallet.currencyName.toUpperCase()}
       balance={wallet.balance}
-      course="$6,559.00"
+      balanceUSD={wallet.currency}
     >
       <forms.EditWalletForm
         onSubmit={() => {}}
@@ -84,7 +85,7 @@ const WalletScreen = ({
               type={transaction.get('value') > 0 ? 'Received' : 'Sent'}
               hash={transaction.get('hash')}
               amount={(transaction.get('value') > 0 ? transaction.get('value').toString() : transaction.get('value').toString().slice(1))}
-              date={transaction.date || 'date'}
+              date={moment(transaction.get('time') * 1000).format('DD.MM.YYYY')}
             />
           ))
       }
@@ -107,12 +108,12 @@ WalletScreen.propTypes = {
   getTransactionsIsFetching: PropTypes.bool,
 };
 
-
 WalletScreen.defaultProps = {
   getTransactionsIsFetching: false,
 };
 
 export default compose(
+  apiHOCs.WalletsApiHOC(),
   apiHOCs.TransactionsApiHOC(),
   withState('isFooterModalOpen', 'setFooterModalOpen', false),
   getContext({
@@ -126,7 +127,8 @@ export default compose(
     wallet: _.get(location, 'state.wallet'),
   })),
   withHandlers({
-    onDeleteWallet: ({ router }) => () => {
+    onDeleteWallet: ({ router, deleteWallet, wallet }) => () => {
+      deleteWallet(wallet);
       router.history.goBack();
     },
     onBack: ({ router }) => () => router.history.goBack(),

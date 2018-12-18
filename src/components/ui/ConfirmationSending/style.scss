@@ -31,19 +31,10 @@
       color: black;
     }
 
-    &__icon-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #F7931A;
+    &__icon {
       border-radius: 10px;
       width: 30px;
       height: 30px;
-    }
-
-    &__icon {
-      width: 15px;
-      height: 20px;
     }
   }
 

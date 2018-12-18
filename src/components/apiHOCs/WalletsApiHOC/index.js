@@ -38,6 +38,24 @@ const WalletsApiHOC = () => WrappedComponent => compose(
             }))
           }
         }),
+        deleteWallet: (wallet) => updateEntities({
+          currencies: (prevCurrencies = Immutable.List()) => {
+            if (prevCurrencies.size === 0) {
+              return prevCurrencies;
+            }
+            const indexCurrencies = prevCurrencies.findIndex(({ name }) => name === wallet.currencyName);
+            return prevCurrencies.update(indexCurrencies, currencies => {
+              const indexWallet = currencies.wallets.findIndex(({ address }) => address === wallet.address);
+              return ({
+                ...currencies,
+                wallets: [
+                  ...currencies.wallets.slice(0, indexWallet),
+                  ...currencies.wallets.slice(indexWallet + 1),
+                ]
+              })
+            })
+          }
+        }),
         getBalanceWallet: (chain, address) => requestAsync(
           wallet.queries.getBalance(({ chain, address })),
         ),

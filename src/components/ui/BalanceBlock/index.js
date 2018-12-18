@@ -9,7 +9,7 @@ const BalanceBlock = ({
   icon,
   currency,
   balance,
-  course,
+  balanceUSD,
   children,
   onPress,
   isHideExtended,
@@ -35,7 +35,7 @@ const BalanceBlock = ({
       {balance}
     </div>
     <div className="balance-block__course">
-      {course}
+      {`$${balanceUSD}`}
     </div>
     {
       children && children.$$typeof &&
@@ -63,7 +63,7 @@ BalanceBlock.propTypes = {
   icon: PropTypes.any.isRequired,
   currency: PropTypes.string,
   balance: PropTypes.string.isRequired,
-  course: PropTypes.string.isRequired,
+  balanceUSD: PropTypes.number.isRequired,
   children: PropTypes.any,
   onPress: PropTypes.oneOfType([
     PropTypes.func,

@@ -4,7 +4,6 @@ import { compose, getContext, withHandlers, withProps, withState } from "recompo
 import { ui, forms, modals } from 'components';
 import Immutable from 'immutable';
 import iconSendWhite from 'assets/img/send-white.svg';
-import { CURRENCY_ICONS } from 'constants/constants';
 
 import './style.scss';
 
@@ -43,7 +42,7 @@ const SendScreen = ({
         style={{ bottom: confirmationSending.get('amount') ? 0 : -500 }}
       >
         <ui.ConfirmationSending
-          iconCurrency={CURRENCY_ICONS[name]}
+          currency={currency}
           onCancel={() => setFooterModalOpen(Immutable.Map())}
           onSend={() => {}}
           values={confirmationSending}

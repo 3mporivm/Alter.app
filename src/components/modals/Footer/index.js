@@ -4,12 +4,7 @@ import { ui } from 'components';
 
 import './style.scss';
 
-const Footer = ({
-  children,
-  icon,
-  style,
-  backgroundColor,
-}) => (
+const Footer = ({ children, icon, style }) => (
   <div
     style={style}
     className="footer-modal"
@@ -20,23 +15,19 @@ const Footer = ({
         top: -50,
       }}
       icon={icon}
-      backgroundColor={backgroundColor}
     />
     {children}
   </div>
 );
 
 Footer.propTypes = {
-  onPress: PropTypes.func.isRequired,
   icon: PropTypes.any.isRequired,
-  isLoading: PropTypes.bool,
-  wallets: PropTypes.array,
-  backgroundColor: PropTypes.string.isRequired,
+  style: PropTypes.any,
+  children: PropTypes.element.isRequired,
 };
 
 Footer.defaultProps = {
-  isLoading: false,
-  title: "Continue",
+  style: null,
 };
 
 export default Footer;

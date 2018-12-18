@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ui, forms, modals } from 'components';
 import iconSend from 'assets/img/send.svg';
+import { CURRENCY_ICONS } from 'constants/constants';
 
 import './style.scss';
 
@@ -10,20 +11,18 @@ const ConfirmationSending = ({
   onSend,
   isFetching,
   values,
-  iconCurrency,
+  currency,
 }) => (
   <div className="confirmation_sending">
     <span className="confirmation_sending__title">
-      Confirmation sending BTC
+      {`Confirmation sending ${currency}`}
     </span>
     <div className="confirmation_sending__label">
       Amount
     </div>
     <div className="confirmation_sending__amount-wrapper">
       <div className="confirmation_sending__amount-wrapper__value">{values.get('amount')}</div>
-      <div className="confirmation_sending__amount-wrapper__icon-wrapper">
-        <img className="confirmation_sending__amount-wrapper__icon" src={iconCurrency} alt="" />
-      </div>
+      <img className="confirmation_sending__amount-wrapper__icon" src={CURRENCY_ICONS[currency]} alt="" />
     </div>
     <div className="confirmation_sending__label">
       Fee:
@@ -71,7 +70,7 @@ ConfirmationSending.propTypes = {
   onSend: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   values: PropTypes.object.isRequired,
-  iconCurrency: PropTypes.any.isRequired,
+  currency: PropTypes.string.isRequired,
 };
 
 export default ConfirmationSending;

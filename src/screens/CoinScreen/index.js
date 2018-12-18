@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { ui, forms, modals, apiHOCs } from 'components';
 import {compose, getContext, lifecycle, withHandlers, withState, withStateHandlers} from "recompose";
 import { blockchain } from 'helpers';
+import _ from 'lodash';
 import { CURRENCY_ICONS } from 'constants/constants';
 import iconPlusPurple from 'assets/img/plus_purple.svg';
 import iconImport from 'assets/img/import.svg';
@@ -34,7 +35,7 @@ const CoinScreen = ({
       icon={CURRENCY_ICONS[currency.name]}
       currency={currency.name.toUpperCase()}
       balance={currency.wallets.reduce((accumulator, item) => accumulator + item.balance, 0)}
-      course="$default"
+      balanceUSD={currency.wallets.reduce((accumulator, item) => accumulator + item.currency, 0)}
     />
     <div className="coin-screen-layout__buttons">
       <ui.Buttons.BasicButton
@@ -89,7 +90,6 @@ const CoinScreen = ({
     <modals.Footer
       icon={iconEnter}
       style={{ bottom: isFooterModalOpen === "import" ? 0 : -500 }}
-      backgroundColor="#63CEFF"
     >
       <forms.ImportWalletForm
         onCancel={() => !isFetching && setFooterModalOpen(false)}
@@ -161,7 +161,8 @@ export default compose(
     },
     onSubmit: ({ addWallet, currency, profile, getBalanceWallet, setFooterModalOpen, setIsFetching }) => values => {
       setIsFetching(true);
-      const wallet = blockchain.createAddress(currency.name, profile, currency.wallets.length + 1);
+      const lastWallet = _.findLast(currency.wallets, ({ number }) => number);
+      const wallet = blockchain.createAddress(currency.wallets, currency.name, profile, lastWallet.number + 1);
       addWallet({ ...wallet, name: values.get('wallet_name') }, currency.name);
       getBalanceWallet(currency.name, wallet.address).then(() => {
         setIsFetching(false);
