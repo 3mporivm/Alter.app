@@ -13,9 +13,7 @@ body {
 
   &::-webkit-scrollbar {
     width: 8px; /* 1px wider than Lion. */
-
     /* This is more usable for users trying to click it. */
-    //background-color: rgba(0,0,0,0);
     background: rgba(13, 24, 57, 1);
     -webkit-border-radius: 0;
   }
@@ -25,18 +23,15 @@ body {
     /* This is the EXACT color of Mac OS scrollbars.
        Yes, I pulled out digital color meter */
     background: rgba(255, 255, 255, .15);
-    //background-color: #747474;
     -webkit-border-radius: 100px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    //background: #4C4C4C;
     background: rgba(255, 255, 255, .2);
   }
 
   &::-webkit-scrollbar-thumb:vertical:active {
-    background: rgba(255, 255, 255, .25);
-    //background: #505050; /* Some darker color when you click it */
+    background: rgba(255, 255, 255, .25); /* Some darker color when you click it */
     -webkit-border-radius: 100px;
   }
 }
@@ -54,7 +49,6 @@ button {
 button {
   background: none;
   border: 0;
-
   &:focus {
     outline: none;
   }
@@ -63,7 +57,6 @@ button {
 a {
   text-decoration: none;
   color: inherit;
-
   &:focus {
     outline: none;
   }
@@ -71,18 +64,15 @@ a {
 
 input {
   border: 0;
-
   &:focus {
     outline: none;
   }
-
   &:invalid {
     box-shadow: none;
   }
 }
 
 textarea {
-
   &:focus {
     outline: none;
   }

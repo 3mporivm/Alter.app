@@ -4,7 +4,6 @@ import { compose, getContext , withHandlers } from "recompose";
 import { ui, forms, apiHOCs } from 'components';
 import { password } from 'helpers';
 
-import 'assets/screens.scss';
 import './style.scss';
 
 const ProtectAccountScreen = ({ onSubmit }) => (

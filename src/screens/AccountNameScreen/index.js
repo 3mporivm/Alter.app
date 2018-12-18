@@ -3,15 +3,10 @@ import PropTypes from "prop-types";
 import { compose, getContext, withHandlers } from "recompose";
 import { ui, forms, apiHOCs } from 'components';
 
-import 'assets/screens.scss';
-import './style.scss';
-
 const AccountNameScreen = ({ onSubmit }) => (
   <div className="account-name-layout">
     <ui.Header/>
-    <forms.AccountNameForm
-      onSubmit={onSubmit}
-    />
+    <forms.AccountNameForm onSubmit={onSubmit}/>
   </div>
 );
 

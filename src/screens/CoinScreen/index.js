@@ -4,13 +4,11 @@ import { ui, forms, modals, apiHOCs } from 'components';
 import {compose, getContext, lifecycle, withHandlers, withState, withStateHandlers} from "recompose";
 import { blockchain } from 'helpers';
 import { CURRENCY_ICONS } from 'constants/constants';
-import iconBitcoin from 'assets/img/bitcoin.svg';
 import iconPlusPurple from 'assets/img/plus_purple.svg';
 import iconImport from 'assets/img/import.svg';
 import iconPlusWhite from 'assets/img/plus_white.svg';
 import iconEnter from 'assets/img/enter.svg';
 
-import 'assets/screens.scss';
 import './style.scss';
 
 const CoinScreen = ({

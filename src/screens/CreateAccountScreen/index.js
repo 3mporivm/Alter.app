@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { ui, forms, apiHOCs } from 'components';
 import { compose, getContext, withHandlers } from "recompose";
 
-import 'assets/screens.scss';
 import './style.scss';
 
 const CreateAccountScreen = ({

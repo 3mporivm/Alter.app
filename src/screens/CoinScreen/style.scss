@@ -1,10 +1,7 @@
-@import '../../assets/screens.scss';
-
 .coin-screen-layout {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  //position: relative;
 
   &__buttons {
     display: flex;

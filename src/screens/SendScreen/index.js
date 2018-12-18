@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {compose, getContext, withHandlers, withProps, withState} from "recompose";
+import { compose, getContext, withHandlers, withProps, withState } from "recompose";
 import { ui, forms, modals } from 'components';
-import iconSendWhite from 'assets/img/send-white.svg';
 import Immutable from 'immutable';
+import iconSendWhite from 'assets/img/send-white.svg';
+import { CURRENCY_ICONS } from 'constants/constants';
 
-import 'assets/screens.scss';
 import './style.scss';
 
 const SendScreen = ({
@@ -43,6 +43,7 @@ const SendScreen = ({
         style={{ bottom: confirmationSending.get('amount') ? 0 : -500 }}
       >
         <ui.ConfirmationSending
+          iconCurrency={CURRENCY_ICONS[name]}
           onCancel={() => setFooterModalOpen(Immutable.Map())}
           onSend={() => {}}
           values={confirmationSending}

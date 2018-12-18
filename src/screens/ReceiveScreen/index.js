@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {compose, getContext, withHandlers, withProps} from "recompose";
 import { ui, forms, modals } from 'components';
 
-import 'assets/screens.scss';
 import './style.scss';
 
 const ReceiveScreen = ({

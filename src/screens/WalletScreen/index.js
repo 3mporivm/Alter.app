@@ -8,7 +8,6 @@ import { CURRENCY_ICONS } from 'constants/constants';
 import iconReceive from 'assets/img/receive.svg';
 import iconSend from 'assets/img/send.svg';
 
-import 'assets/screens.scss';
 import './style.scss';
 
 const WalletScreen = ({

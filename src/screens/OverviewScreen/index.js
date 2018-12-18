@@ -4,9 +4,6 @@ import {compose, getContext, lifecycle, withHandlers, withState, withStateHandle
 import { ThreeBounce } from 'better-react-spinkit';
 import { ui, forms, modals, apiHOCs } from 'components';
 import { CURRENCY_ICONS } from 'constants/constants';
-import iconBitcoin from 'assets/img/bitcoin.svg';
-
-import 'assets/screens.scss';
 import './style.scss';
 
 const OverviewScreen = ({
@@ -27,7 +24,7 @@ const OverviewScreen = ({
       title="Wallet one"
     />
     <ui.BalanceBlock
-      icon={iconBitcoin}
+      icon={CURRENCY_ICONS.btc}
       backgroundColor="#F7931A"
       currency="TOTAL"
       balance="$26,808.00"
@@ -35,9 +32,7 @@ const OverviewScreen = ({
     />
     {
       !isFetching &&
-      <forms.SearchForm
-        onChange={searchCurrencies}
-      />
+      <forms.SearchForm onChange={searchCurrencies}/>
     }
     <div className="overview-screen-layout__currencies">
       {

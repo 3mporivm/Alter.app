@@ -12,9 +12,6 @@ import {
   ConfirmBackupScreen,
 } from 'screens';
 
-import 'assets/screens.scss';
-import './style.scss';
-
 const AuthorizationScreen = () => (
   <div className="auth-layout">
     <Switch>
@@ -32,6 +29,5 @@ const AuthorizationScreen = () => (
     />
   </div>
 );
-
 
 export default AuthorizationScreen;

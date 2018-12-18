@@ -5,7 +5,6 @@ import { compose, getContext, withHandlers } from "recompose";
 import CreateAccountIcon from 'assets/img/create-account.svg';
 import ImportAccountIcon from 'assets/img/import-account.svg';
 
-import 'assets/screens.scss';
 import './style.scss';
 
 const AccountScreen = ({

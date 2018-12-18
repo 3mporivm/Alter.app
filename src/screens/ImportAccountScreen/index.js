@@ -4,8 +4,6 @@ import { compose, getContext, withHandlers } from "recompose";
 import { ui, forms, apiHOCs } from 'components';
 import { blockchain } from 'helpers';
 
-import 'assets/screens.scss';
-
 const ImportAccountScreen = ({ onSubmit }) => (
   <div>
     <ui.Header/>

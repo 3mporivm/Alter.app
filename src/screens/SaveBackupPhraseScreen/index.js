@@ -5,7 +5,6 @@ import bip39 from "bip39";
 import { compose, getContext, withHandlers } from "recompose";
 import { ui, forms } from 'components';
 
-import 'assets/screens.scss';
 import './style.scss';
 
 const SaveBackupPhraseScreen = ({

@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { reset } from 'redux-form';
 import { password } from 'helpers';
 
-import 'assets/screens.scss';
 import './style.scss';
 
 const ChangePasswordScreen = ({ onBack, onSubmit }) => (

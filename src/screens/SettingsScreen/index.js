@@ -6,7 +6,6 @@ import iconClose from 'assets/img/close.svg';
 import iconLogOut from 'assets/img/log_out.svg';
 import { password } from 'helpers';
 
-import 'assets/screens.scss';
 import './style.scss';
 
 const SettingsScreen = ({

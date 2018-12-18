@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, lifecycle, withHandlers, getContext } from 'recompose';
+import { compose, withHandlers, getContext } from 'recompose';
 import { ui, apiHOCs } from 'components';
 
-import 'assets/screens.scss';
 import './style.scss';
-import BootApiHOC from "../../components/apiHOCs/BootApiHOC";
 
 const GetStartedScreen = ({
   onGetStarted
