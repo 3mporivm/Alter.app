@@ -1,27 +1,22 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { compose, getContext, lifecycle, withHandlers, withState } from "recompose";
+import {compose, getContext, lifecycle, withHandlers, withState, withStateHandlers} from "recompose";
 import { ThreeBounce } from 'better-react-spinkit';
 import { ui, forms, modals, apiHOCs } from 'components';
 import { CURRENCY_ICONS } from 'constants/constants';
 import iconBitcoin from 'assets/img/bitcoin.svg';
-import iconEthereum from 'assets/img/ethereum.svg';
-import iconDash from 'assets/img/dash.svg';
 
 import 'assets/screens.scss';
 import './style.scss';
 
 const OverviewScreen = ({
-  currencies,
   onCoin,
   onSettings,
   isFetching,
-  currency,
+  currenciesSearch,
+  searchCurrencies,
 }) => (
-  <div className="wallet-screen-layout">
-    {
-      console.log("re-render")
-    }
+  <div className="overview-screen-layout">
     <ui.Header
       styleContent={{ zIndex: 1 }}
       //isDropDown
@@ -38,13 +33,16 @@ const OverviewScreen = ({
       balance="$26,808.00"
       course="1.23567815 BTC"
     />
-    <forms.SearchForm
-      onChange={(value) => console.log(value.get('find_coin'))}
-    />
-    <div className="wallet-screen-layout__currencies">
+    {
+      !isFetching &&
+      <forms.SearchForm
+        onChange={searchCurrencies}
+      />
+    }
+    <div className="overview-screen-layout__currencies">
       {
         isFetching ?
-          <div className="wallet-screen-layout__currencies__loading-wrapper">
+          <div className="overview-screen-layout__currencies__loading-wrapper">
             <ThreeBounce
               scaleStart={0.4}
               scaleEnd={0.7}
@@ -53,17 +51,17 @@ const OverviewScreen = ({
             />
           </div>
           :
-          currencies.map((currency) => (
+          currenciesSearch.map(({ name, fullName, color, wallets }) => (
             <ui.CurrencyCard
-              key={currency.name}
-              onPress={() => onCoin(currency.name)}
-              name={currency.name.toUpperCase()}
-              fullName={currency.fullName}
-              icon={currency.icon}
-              backgroundColor={currency.color}
-              balance={currency.wallets.reduce((accumulator, item) => accumulator + item.balance, 0)}
-              courseUSD={"default" || currency.courseUSD}
-              wallets={currency.wallets.length}
+              key={name}
+              onPress={() => onCoin(name)}
+              name={name.toUpperCase()}
+              fullName={fullName}
+              icon={CURRENCY_ICONS[name]}
+              backgroundColor={color}
+              balance={wallets.reduce((accumulator, item) => accumulator + item.balance, 0)}
+              balanceUSD={wallets.reduce((accumulator, item) => accumulator + item.currency, 0)}
+              wallets={wallets.length}
             />
           ))
       }
@@ -78,6 +76,8 @@ OverviewScreen.propTypes = {
   onCoin: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  currenciesSearch: PropTypes.object.isRequired,
+  searchCurrencies: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -99,19 +99,37 @@ export default compose(
       });
     },
   }),
+  withStateHandlers(
+    ({ currencies }) => ({ currenciesSearch: currencies }),
+    {
+      searchCurrencies: (_, { currencies }) => value => {
+        if (!(value.get('find_coin') && value.get('find_coin').trim())) {
+          return ({ currenciesSearch: currencies });
+        }
+        const re = new RegExp(value.get('find_coin').trim(), "gi");
+        return ({
+          currenciesSearch: currencies.filter(({ name, fullName }) => {
+            return name.search(re) !== -1 || fullName.search(re) !== -1;
+          })
+        });
+      }
+    }
+  ),
   withState('isFetching', 'setIsFetching', false),
   lifecycle({
     componentWillMount() {
-      // загружаем баланс кошельков
-      Promise.all(
-        (function (props) {
-          const promises = [];
-          props.currencies.toJS().forEach(({name, wallets}) =>
-            wallets.forEach(({address}) => promises.push(props.getBalanceWallet(name, address)))
-          );
-          return promises;
-        }(this.props))
-      ).then(() => this.props.setIsFetching(false));
+      // загружаем баланс кошельков, если еще не згружали
+      if (!this.props.getBalanceIsFinished) {
+        Promise.all(
+          (function (props) {
+            const promises = [];
+            props.currencies.toJS().forEach(({name, wallets}) =>
+              wallets.forEach(({address}) => promises.push(props.getBalanceWallet(name, address)))
+            );
+            return promises;
+          }(this.props))
+        ).then(() => this.props.setIsFetching(false));
+      }
     },
   }),
 )(OverviewScreen);

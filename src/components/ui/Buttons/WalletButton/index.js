@@ -6,7 +6,6 @@ import './style.scss';
 
 const WalletButton = ({
   icon,
-  backgroundColor,
   name,
   address,
   wallets,
@@ -16,16 +15,11 @@ const WalletButton = ({
 }) => (
   <button onClick={onPress} className="wallet-button">
     <div className="wallet-button__left-border"/>
-    <div
-      className="wallet-button__icon-wrapper"
-      style={{ backgroundColor }}
-    >
-      <img
-        className="wallet-button__icon"
-        src={icon}
-        alt=""
-      />
-    </div>
+    <img
+      className="wallet-button__icon"
+      src={icon}
+      alt=""
+    />
     <div className="wallet-button__content">
       <div className="wallet-button__content__header">
         <div className="wallet-button__content__header__wallet-name">
@@ -54,17 +48,12 @@ const WalletButton = ({
 
 WalletButton.propTypes = {
   icon: PropTypes.any.isRequired,
-  backgroundColor: PropTypes.string,
   styleImg: PropTypes.any,
   wallets: PropTypes.number.isRequired,
   balance: PropTypes.number.isRequired,
   balanceUSD: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
   address: PropTypes.string.isRequired,
-};
-
-WalletButton.defaultProps = {
-  backgroundColor: "#B076FF",
 };
 
 export default WalletButton;

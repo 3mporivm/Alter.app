@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {compose, lifecycle, withHandlers, withState, withStateHandlers} from "recompose";
-import Badge from '../Badge';
+import { compose, withHandlers, withState, withStateHandlers } from "recompose";
 import iconTrash from 'assets/img/trash.svg';
 import iconArrow from 'assets/img/arrow-bottom.svg';
 
 import './style.scss';
 const BalanceBlock = ({
   icon,
-  backgroundColor,
   currency,
   balance,
   course,
@@ -22,12 +20,13 @@ const BalanceBlock = ({
     className={`balance-block ${children && children.$$typeof ? "extended" : ""}`}
     style={children && children.$$typeof ? { height: isHideExtended ? 197 : 479 } : {}}
   >
-    <Badge
-      icon={icon}
-      backgroundColor={backgroundColor}
+    <img
+      className="balance-block__badge"
+      src={icon}
+      alt=""
     />
     {
-      onPress && <img className="balance-block__icon-trash" src={iconTrash} alt="" />
+      onPress && <img onClick={onPress} className="balance-block__icon-trash" src={iconTrash} alt="" />
     }
     <div className="balance-block__title">
       {`${currency} BALANCE`}
@@ -62,7 +61,6 @@ const BalanceBlock = ({
 
 BalanceBlock.propTypes = {
   icon: PropTypes.any.isRequired,
-  backgroundColor: PropTypes.string.isRequired,
   currency: PropTypes.string,
   balance: PropTypes.string.isRequired,
   course: PropTypes.string.isRequired,

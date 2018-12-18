@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { ui, forms, modals, apiHOCs } from 'components';
 import {compose, getContext, lifecycle, withHandlers, withState, withStateHandlers} from "recompose";
 import { blockchain } from 'helpers';
+import { CURRENCY_ICONS } from 'constants/constants';
 import iconBitcoin from 'assets/img/bitcoin.svg';
 import iconPlusPurple from 'assets/img/plus_purple.svg';
 import iconImport from 'assets/img/import.svg';
@@ -32,8 +33,7 @@ const CoinScreen = ({
       title={currency.name.toUpperCase()}
     />
     <ui.BalanceBlock
-      icon={iconBitcoin}
-      backgroundColor="#F7931A"
+      icon={CURRENCY_ICONS[currency.name]}
       currency={currency.name.toUpperCase()}
       balance={currency.wallets.reduce((accumulator, item) => accumulator + item.balance, 0)}
       course="$default"
@@ -64,13 +64,12 @@ const CoinScreen = ({
     {
       currency.wallets.map(wallet => (
         <ui.Buttons.WalletButton
-          onPress={() => onWallet(wallet.address)}
+          onPress={() => onWallet(wallet)}
           name={wallet.name}
-          icon={iconBitcoin}
-          backgroundColor="#F7931A"
+          icon={CURRENCY_ICONS[currency.name]}
           address={wallet.address}
           balance={wallet.balance}
-          balanceUSD={wallet.balanceUSD || 'default'}
+          balanceUSD={`$${wallet.currency}`}
         />
       ))
     }
@@ -145,8 +144,16 @@ export default compose(
   withHandlers({
     onBack: ({ router }) => () => router.history.goBack(),
     onSettings: ({ router }) => () => router.history.push('/settings'),
-    onWallet: ({ router, currency }) => (address) => {
-      router.history.push(`/${currency.name}/wallet/${address}`);
+    onWallet: ({ router, currency }) => (wallet) => {
+      router.history.push({
+        pathname: `/${currency.name}/wallet/${wallet.address}`,
+        state: {
+          wallet: {
+            ...wallet,
+            currencyName: currency.name,
+          },
+        },
+      });
     },
     handleOuterDropdownClick: ({ setFooterModalOpen, dropdownRef, isFetching }) => (e) => {
       if (dropdownRef.contains(e.target)) {

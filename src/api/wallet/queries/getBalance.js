@@ -5,7 +5,7 @@ import Immutable from 'immutable';
 export default ({ chain, address }) => ({
   url: endpoints.getWalletBalanceUrl({ chain, address }),
   transform: response => ({ currencies: _.omit(response, ['status'])}),
-  queryKey: endpoints.getWalletBalanceUrl({ chain, address }),
+  queryKey: endpoints.getWalletBalanceUrl({}),
   meta: {},
   force: true,
   options: {
@@ -24,7 +24,8 @@ export default ({ chain, address }) => ({
               ...currencies.wallets.slice(0, indexWallet),
               {
                 ...currencies.wallets[indexWallet],
-                balance: +wallet.get('balance')
+                balance: +wallet.get('balance'),
+                currency: +wallet.get('currency'),
               },
               ...currencies.wallets.slice(indexWallet + 1),
             ]

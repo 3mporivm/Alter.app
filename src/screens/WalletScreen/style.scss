@@ -26,6 +26,19 @@
     background-color: rgba(255, 255, 255, 0.05);
     margin-top: 20px;
     padding: 0 20px;
+
+    &__loading-wrapper {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    &__empty {
+      color: rgba(255, 255, 255, .4);
+      padding: 20px 0;
+      text-align: center;
+    }
   }
 
   &__wallets {

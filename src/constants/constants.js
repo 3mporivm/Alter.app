@@ -6,8 +6,10 @@ import iconAvatar5 from 'assets/img/avatars/28.png';
 import iconAvatar6 from 'assets/img/avatars/30.png';
 
 import iconBTC from 'assets/img/currency/BTC.svg';
-// import iconLitecoin from 'assets/img/avatars/Litecoin.svg';
-// import iconDash from 'assets/img/avatars/Dash.svg';
+import iconLTC from 'assets/img/currency/ltc.svg';
+import iconBCH from 'assets/img/currency/bch.svg';
+import iconDASH from 'assets/img/currency/dash.svg';
+import iconDOGE from 'assets/img/currency/doge.svg';
 
 export const NETWORK = 'livenet';
 export const BTC_LIKE = {
@@ -54,10 +56,10 @@ export const COINS = [
 ];
 export const CURRENCY_ICONS = {
   btc: iconBTC,
-  //ltc: iconLitecoin,
-  bch: 0,
-  //dash: iconDash,
-  doge: 0,
+  ltc: iconLTC,
+  bch: iconBCH,
+  dash: iconDASH,
+  doge: iconDOGE,
 };
 export const SALT = "$2a$10$J8GCNLf7N7W85iQGm5fhbu";
 

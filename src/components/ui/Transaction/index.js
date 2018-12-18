@@ -8,8 +8,8 @@ import './style.scss';
 
 const Transaction = ({
   type,
-  address,
-  sum,
+  hash,
+  amount,
   date,
 }) => (
   <div className="transaction">
@@ -37,12 +37,12 @@ const Transaction = ({
           }}
         >
           { type === "Sent" ? "- " : "+ "}
-          {sum}
+          {amount}
         </span>
       </div>
       <div className="transaction__content__footer">
         <span className="transaction__content__footer__address">
-          {address}
+          {hash}
         </span>
         <span className="transaction__content__footer__date">
           {date}
@@ -54,11 +54,9 @@ const Transaction = ({
 
 Transaction.propTypes = {
   type: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired,
-  sum: PropTypes.number.isRequired,
+  hash: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
 };
-
-Transaction.defaultProps = {};
 
 export default Transaction;

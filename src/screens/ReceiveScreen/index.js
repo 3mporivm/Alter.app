@@ -13,6 +13,9 @@ const ReceiveScreen = ({
   currency,
 }) => (
   <div className="receive-screen-layout">
+    {
+      console.log("currency", currency)
+    }
     <ui.Header
       onBackPress={onBack}
       isExtended
@@ -47,7 +50,7 @@ export default compose(
     }).isRequired,
   }),
   withProps(({ location }) => ({
-    currency: _.get(location, 'state.currency'),
+    currency: _.get(location, 'state.currency', ''),
   })),
   withHandlers({
     onBack: ({ router }) => () => router.history.goBack(),

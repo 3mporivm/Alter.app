@@ -10,28 +10,23 @@ const CurrencyCard = ({
   fullName,
   wallets,
   balance,
-  courseUSD,
+  balanceUSD,
   onPress,
 }) => (
   <div className="currency_card">
     <div className="currency_card__header">
-      <div
+      <img
         className="currency_card__header__badge"
-        style={{ backgroundColor }}
-      >
-        <img
-          className="currency_card__header__badge-image"
-          src={icon}
-          alt=""
-        />
-      </div>
+        src={icon}
+        alt=""
+      />
       <div className="currency_card__header__right">
         <div className="currency_card__header__right-name">{name}</div>
         <div className="currency_card__header__right-full-name">{fullName}</div>
       </div>
     </div>
     <div className="currency_card__balance">{balance}</div>
-    <div className="currency_card__course-usd">{`$${courseUSD}`}</div>
+    <div className="currency_card__course-usd">{`$${balanceUSD}`}</div>
     <button onClick={onPress} className="currency_card__button">
       {`${wallets} wallets`}
     </button>
@@ -44,7 +39,7 @@ CurrencyCard.propTypes = {
   styleImg: PropTypes.any,
   wallets: PropTypes.number.isRequired,
   balance: PropTypes.number.isRequired,
-  courseUSD: PropTypes.string.isRequired,
+  balanceUSD: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
 };
 
