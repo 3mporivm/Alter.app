@@ -9,6 +9,14 @@
     input {
       color: rgba(0, 0, 0, .5);
     }
+
+    &__error {
+      margin-top: 10px;
+      font-family: 'ProximaNova-Regular';
+      font-size: 13px;
+      color: rgba(255, 0, 0, 0.6);
+      //text-align: center;
+    }
   }
 
   &__title {

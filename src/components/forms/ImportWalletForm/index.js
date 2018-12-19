@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
+import { compose, withHandlers } from 'recompose';
 import { ui } from 'components';
-import { Field, reduxForm, formValueSelector } from 'redux-form/immutable';
+import {Field, reduxForm, formValueSelector, SubmissionError} from 'redux-form/immutable';
 import { connect } from "react-redux";
-
-
+import bitcore from "bitcore-lib";
 import iconEnterBlue from 'assets/img/enter-blue.svg';
 
 import { required } from 'validators';
@@ -21,8 +20,10 @@ const ImportWalletForm = ({
   styleTitle,
   onCancel,
   type,
+  error,
+  submit,
 }) => (
-  <form onSubmit={handleSubmit} className="import-wallet-form">
+  <form onSubmit={handleSubmit(submit)} className="import-wallet-form">
     <div style={styleTitle} className="import-wallet-form__title">
       Import wallet
     </div>
@@ -37,7 +38,7 @@ const ImportWalletForm = ({
         },
         options: [
           "Private key",
-          "JSON file",
+          //"JSON file",
         ]
       }}
     />
@@ -72,6 +73,10 @@ const ImportWalletForm = ({
           },
         }}
       />
+      {
+        error &&
+        <div className="import-wallet-form__field-wrapper__error">{error}</div>
+      }
     </div>
     <span className="import-wallet-form__description">
       Imported accounts will not be associated with your
@@ -91,7 +96,7 @@ const ImportWalletForm = ({
       <ui.Buttons.BasicButton
         title="Generate"
         color="blue"
-        onPress={handleSubmit}
+        onPress={handleSubmit(submit)}
         icon={iconEnterBlue}
         isLoading={isFetching}
         isDisabled={invalid || isFetching}
@@ -103,25 +108,33 @@ const ImportWalletForm = ({
 
 ImportWalletForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  error: PropTypes.string,
 };
-
 
 ImportWalletForm.defaultProps = {
+  error: "",
 };
 
-// MyForm = connect(state => ({
-//   type: selector(state, "username")
-// }))( MyForm );
-
-const selector = formValueSelector("importWalletForm");
+const selector = formValueSelector('importWalletForm');
 export default compose(
   connect(state => ({ type: selector(state, "type") })),
   reduxForm({
     form: 'importWalletForm',
     initialValues: {
-      type: "JSON file"
+      type: "Private key"
     }
   }),
+  withHandlers({
+    submit: ({ onSubmit }) => values => {
+      if (!bitcore.PrivateKey.isValid(values.get('privateKey'))) {
+        throw new SubmissionError({
+          _error: 'Invalid private key!'
+        })
+      }
+      onSubmit(values);
+    },
+  })
 )(ImportWalletForm)

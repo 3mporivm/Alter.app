@@ -9,6 +9,7 @@ import iconPlusPurple from 'assets/img/plus_purple.svg';
 import iconImport from 'assets/img/import.svg';
 import iconPlusWhite from 'assets/img/plus_white.svg';
 import iconEnter from 'assets/img/enter.svg';
+import bitcore from "bitcore-lib";
 
 import './style.scss';
 
@@ -22,6 +23,7 @@ const CoinScreen = ({
   currency,
   onSubmit,
   isFetching,
+  onImportWallet,
 }) => (
   <div className="coin-screen-layout">
     <ui.Header
@@ -92,6 +94,7 @@ const CoinScreen = ({
       style={{ bottom: isFooterModalOpen === "import" ? 0 : -500 }}
     >
       <forms.ImportWalletForm
+        onSubmit={onImportWallet}
         onCancel={() => !isFetching && setFooterModalOpen(false)}
         isFetching={isFetching}
       />
@@ -110,6 +113,7 @@ CoinScreen.propTypes = {
   setDropdownRef: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  onImportWallet: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -169,6 +173,29 @@ export default compose(
         // hide modal
         setFooterModalOpen(false);
       });
+    },
+    onImportWallet: ({ currency, addWallet, getBalanceWallet, setIsFetching, setFooterModalOpen }) => values => {
+      setIsFetching(true);
+      if (values.get("type") === "Private key") {
+        const privateKey = new bitcore.PrivateKey(values.get('privateKey'));
+        const publicKey = privateKey.toPublicKey();
+        const address = publicKey.toAddress(bitcore.Networks.livenet);
+        addWallet({
+            name: `My wallet ${currency.wallets.length + 1}`,
+            address: address.toString(),
+            publicKey: publicKey.toString(),
+            privateKey: values.get('privateKey'),
+            balance: 0,
+            currency: 0,
+          },
+          currency.name
+        );
+        getBalanceWallet(currency.name, address.toString()).then(() => {
+          setIsFetching(false);
+          // hide modal
+          setFooterModalOpen(false);
+        });
+      }
     },
   }),
   lifecycle({
