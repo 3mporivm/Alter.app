@@ -3,10 +3,10 @@ import { compose } from 'recompose';
 import { ui } from 'components';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form/immutable';
+import QRCode from 'qrcode.react';
 
 import iconReceiveWhite from 'assets/img/receive-white.svg';
 import iconReceive from 'assets/img/receive.svg';
-import iconQR from 'assets/img/qr.png';
 
 import { required } from 'validators';
 
@@ -15,7 +15,6 @@ import './style.scss';
 const ReceiveForm = ({
   handleSubmit,
   facebookLoginRequest,
-  isFetching,
   invalid,
 }) => (
   <form onSubmit={handleSubmit} className="receive-form-wrapper">
@@ -25,7 +24,6 @@ const ReceiveForm = ({
         icon={iconReceiveWhite}
       />
       <Field
-        validate={required}
         component={ui.Fields.BasicField}
         name="amount"
         props={{
@@ -41,13 +39,15 @@ const ReceiveForm = ({
             fontFamily: 'ProximaNova-Bold'
           },
           label: 'Amount',
+          readOnly: true,
         }}
       />
       <div className="receive-form__qr-wrapper">
-        <img
-          className="receive-form__qr"
-          src={iconQR}
-          alt=""
+        <QRCode
+          value="http://facebook.github.io/react/"
+          bgColor="transparent"
+          fgColor="white"
+          size={112.5}
         />
       </div>
       <Field
@@ -64,8 +64,7 @@ const ReceiveForm = ({
       title="Receive"
       icon={iconReceive}
       onPress={handleSubmit}
-      isLoading={isFetching}
-      isDisabled={invalid || isFetching}
+      isDisabled={invalid}
       style={{ marginTop: 20 }}
     />
   </form>
@@ -73,11 +72,6 @@ const ReceiveForm = ({
 
 ReceiveForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-};
-
-
-ReceiveForm.defaultProps = {
 };
 
 

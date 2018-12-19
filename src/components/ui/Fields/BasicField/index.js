@@ -19,6 +19,7 @@ const BasicField = ({
   isSecurity,
   isSearch,
   label,
+  readOnly,
 }) => (
   <div
     style={styleWrapper}
@@ -50,6 +51,7 @@ const BasicField = ({
         placeholder={placeholder}
         type={isSecurity ? "password" : "text"}
         className="basic-field__input-wrapper__input"
+        readOnly={readOnly}
       />
       {
         isSearch &&
@@ -76,6 +78,7 @@ BasicField.propTypes = {
   inputId: PropTypes.string,
   isSecurity: PropTypes.bool,
   isSearch: PropTypes.bool,
+  readOnly: PropTypes.bool,
 };
 
 BasicField.defaultProps = {
@@ -86,6 +89,7 @@ BasicField.defaultProps = {
   inputId: '',
   isSecurity: false,
   isSearch: false,
+  readOnly: false,
 };
 
 export default compose(

@@ -143,6 +143,8 @@ export default compose(
         state: {
           currency: wallet.currencyName,
           balance: wallet.balance,
+          address: wallet.address,
+          privateKey: wallet.privateKey,
         },
       });
     },
@@ -150,7 +152,7 @@ export default compose(
       router.history.push({
         pathname: '/receive',
         state: {
-          currency: wallet.currencyName,
+          wallet,
         },
       });
     },

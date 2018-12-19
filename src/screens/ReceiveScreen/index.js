@@ -9,24 +9,24 @@ const ReceiveScreen = ({
   onCoin,
   onSettings,
   onBack,
-  currency,
+  wallet,
 }) => (
   <div className="receive-screen-layout">
     {
-      console.log("currency", currency)
+      console.log("wallet", wallet)
     }
     <ui.Header
       onBackPress={onBack}
       isExtended
       onCenterPress={() => alert('onCenterPress')}
       onRightPress={onSettings}
-      title={`Receive ${currency.toUpperCase()}`}
+      title={`Receive ${wallet.currencyName.toUpperCase()}`}
     />
     <forms.ReceiveForm
       onSubmit={() => {}}
       initialValues={{
-        amount: "0.17846838",
-        code: "3LVGbddKk3uKhqfGKz7X7n6dz7X7n6d78",
+        amount: wallet.balance,
+        code: wallet.address,
       }}
     />
     <ui.InfoBlock/>
@@ -37,7 +37,7 @@ ReceiveScreen.propTypes = {
   onCoin: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
-  currency: PropTypes.string.isRequired,
+  wallet: PropTypes.object.isRequired,
 };
 
 export default compose(
@@ -49,7 +49,7 @@ export default compose(
     }).isRequired,
   }),
   withProps(({ location }) => ({
-    currency: _.get(location, 'state.currency', ''),
+    wallet: _.get(location, 'state.wallet', {}),
   })),
   withHandlers({
     onBack: ({ router }) => () => router.history.goBack(),
