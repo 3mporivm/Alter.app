@@ -23,6 +23,8 @@ const createTxBody = async (options) => {
 };
 
 export const createTransaction = async (options, privateKey) => {
+  console.log("options", options)
+  console.log("privateKey", privateKey)
   const txBody = await createTxBody(options);
   let tx;
   if (options.chain === 'bch') {
@@ -31,10 +33,6 @@ export const createTransaction = async (options, privateKey) => {
     tx = new bitcore.Transaction(txBody);
   }
   tx.sign(privateKey);
-  console.log("tx", tx)
-  console.log("tx", tx.toString())
   tx.serialize();
-  console.log("tx", tx)
-  console.log("tx", tx.toString())
   return tx.toString();
 };

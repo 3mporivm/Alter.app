@@ -107,7 +107,7 @@ export default compose(
         chain: currency,
         ...confirmationSending.toJS(),
         fee,
-        sourceAddress: "1b2oDpEUeVk2yzyho3dYAwLHs8wkERNj3",
+        sourceAddress,
       }, privateKey);
       console.log("rawTx", rawTx)
       dispatch(reset('sendForm'));
