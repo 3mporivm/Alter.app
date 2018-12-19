@@ -18,6 +18,7 @@ const SendForm = ({
   invalid,
   balance,
   currency,
+  fee,
 }) => (
   <form onSubmit={handleSubmit} className="send-form-wrapper">
     <div className="send-form">
@@ -46,19 +47,16 @@ const SendForm = ({
       />
       <div className="send-form__fee">
         <span className="send-form__fee__left">
-          Estimated fee: <span className="send-form__fee__left-fee">0.0000001</span>
-        </span>
-          <span className="send-form__fee__right">
-          Edit
+          Estimated fee: <span className="send-form__fee__left-fee">{fee}</span>
         </span>
       </div>
       <Field
         validate={required}
         component={ui.Fields.BasicField}
-        name="address"
+        name="targetAddress"
         placeholder={`${currency} address`}
         props={{
-          inputId: 'address',
+          inputId: 'targetAddress',
           styleWrapper: {
             marginTop: 20,
           },
@@ -82,6 +80,7 @@ SendForm.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   balance: PropTypes.number.isRequired,
   coin: PropTypes.string.isRequired,
+  fee: PropTypes.number.isRequired,
 };
 
 export default compose(

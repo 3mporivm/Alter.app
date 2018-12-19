@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { compose, getContext, withHandlers, withProps, withState } from "recompose";
-import { ui, forms, modals } from 'components';
+import {compose, getContext, lifecycle, withHandlers, withProps, withState} from "recompose";
+import { ui, forms, modals, apiHOCs } from 'components';
 import Immutable from 'immutable';
+import { broadcast } from 'helpers';
+import { connect } from "react-redux";
+import { reset } from 'redux-form';
 import iconSendWhite from 'assets/img/send-white.svg';
 
 import './style.scss';
@@ -12,10 +15,12 @@ const SendScreen = ({
   onCoin,
   onSettings,
   onBack,
+  onSend,
   setFooterModalOpen,
   confirmationSending,
   currency,
   balance,
+  fee,
 }) => (
   <div className="send-screen-layout">
     <ui.Header
@@ -27,11 +32,9 @@ const SendScreen = ({
     />
     <forms.SendForm
       onSubmit={(value) => setFooterModalOpen(value)}
-      initialValues={{
-        amount: "0.17846838",
-      }}
       balance={balance}
       currency={currency.toUpperCase()}
+      fee={fee}
     />
     {
       confirmationSending.get('amount') && <div className="header__hide-background"/>
@@ -44,8 +47,9 @@ const SendScreen = ({
         <ui.ConfirmationSending
           currency={currency}
           onCancel={() => setFooterModalOpen(Immutable.Map())}
-          onSend={() => {}}
+          onSend={onSend}
           values={confirmationSending}
+          fee={fee}
         />
       </modals.Footer>
     }
@@ -54,6 +58,7 @@ const SendScreen = ({
 );
 
 SendScreen.propTypes = {
+  onSend: PropTypes.func.isRequired,
   onCoin: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
@@ -61,10 +66,15 @@ SendScreen.propTypes = {
   isFooterModalOpen: PropTypes.bool.isRequired,
   currency: PropTypes.string.isRequired,
   balance: PropTypes.number.isRequired,
+  fee: PropTypes.number.isRequired,
 };
 
 export default compose(
+  connect(),
+  apiHOCs.TransactionsApiHOC(),
   withState('confirmationSending', 'setFooterModalOpen', Immutable.Map()),
+  withState('isFetching', 'setIsFetching', false),
+  withState('fee', 'setFee', 0),
   getContext({
     router: PropTypes.shape({
       history: PropTypes.shape({
@@ -75,6 +85,8 @@ export default compose(
   withProps(({ location }) => ({
     currency: _.get(location, 'state.currency', ''),
     balance: _.get(location, 'state.balance', 0),
+    sourceAddress: _.get(location, 'state.address'),
+    privateKey: _.get(location, 'state.privateKey'),
   })),
   withHandlers({
     onBack: ({ router }) => () => router.history.goBack(),
@@ -88,5 +100,28 @@ export default compose(
         pathname: '/settings',
       });
     },
-  })
+    onSend: ({ fee, setIsFetching, currency, confirmationSending, sourceAddress, privateKey, postBroadcast, dispatch }) => async () => {
+      setIsFetching(true);
+      // create rawTx
+      const rawTx = await broadcast.createTransaction({
+        chain: currency,
+        ...confirmationSending.toJS(),
+        fee,
+        sourceAddress: "1b2oDpEUeVk2yzyho3dYAwLHs8wkERNj3",
+      }, privateKey);
+      console.log("rawTx", rawTx)
+      dispatch(reset('sendForm'));
+      // send money
+      // postBroadcast(currency, rawTx).then(({ body }) => {
+      //   console.log(body);
+      //   setIsFetching(false);
+      // });
+    },
+  }),
+  lifecycle({
+    componentDidMount() {
+      this.props.getCommission(this.props.currency)
+        .then(({ body }) => this.props.setFee(body.data));
+    }
+  }),
 )(SendScreen);

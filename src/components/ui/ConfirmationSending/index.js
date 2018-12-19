@@ -12,10 +12,11 @@ const ConfirmationSending = ({
   isFetching,
   values,
   currency,
+  fee,
 }) => (
   <div className="confirmation_sending">
     <span className="confirmation_sending__title">
-      {`Confirmation sending ${currency}`}
+      {`Confirmation sending ${currency.toUpperCase()}`}
     </span>
     <div className="confirmation_sending__label">
       Amount
@@ -28,19 +29,13 @@ const ConfirmationSending = ({
       Fee:
     </div>
     <div className="confirmation_sending__value">
-      {values.get('fee')}
+      {fee}
     </div>
     <div className="confirmation_sending__label">
-      BTC address
+      {`${currency.toUpperCase()} address`}
     </div>
     <div className="confirmation_sending__value">
-      {values.get('BTC_address')}
-    </div>
-    <div className="confirmation_sending__label">
-      Payment ID
-    </div>
-    <div className="confirmation_sending__value">
-      {values.get('payment_id')}
+      {values.get('targetAddress')}
     </div>
     <div className="confirmation_sending__buttons">
       <ui.Buttons.TransparentButton
@@ -71,6 +66,7 @@ ConfirmationSending.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   values: PropTypes.object.isRequired,
   currency: PropTypes.string.isRequired,
+  fee: PropTypes.number.isRequired,
 };
 
 export default ConfirmationSending;
