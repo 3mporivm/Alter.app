@@ -65,11 +65,12 @@ const CoinScreen = ({
     {
       currency.wallets.map(wallet => (
         <ui.Buttons.WalletButton
+          key={wallet.address}
           onPress={() => onWallet(wallet)}
           name={wallet.name}
           icon={CURRENCY_ICONS[currency.name]}
           address={wallet.address}
-          balance={wallet.balance}
+          balance={wallet.balance || 0}
           balanceUSD={`$${wallet.currency}`}
         />
       ))
@@ -165,7 +166,7 @@ export default compose(
     },
     onSubmit: ({ addWallet, currency, profile, getBalanceWallet, setFooterModalOpen, setIsFetching }) => values => {
       setIsFetching(true);
-      const lastWallet = _.findLast(currency.wallets, ({ number }) => number);
+      const lastWallet = _.findLast(currency.wallets, ({ number }) => number) || { number: 0 };
       const wallet = blockchain.createAddress(currency.name, profile, lastWallet.number + 1);
       addWallet({ ...wallet, name: values.get('wallet_name') }, currency.name);
       getBalanceWallet(currency.name, wallet.address).then(() => {
