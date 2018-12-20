@@ -11,6 +11,7 @@ import './style.scss';
 const SettingsScreen = ({
   onClose,
   onLogOut,
+  onDeleteAccount,
   onChangePassword,
 }) => (
   <div className="setting-layout">
@@ -37,7 +38,7 @@ const SettingsScreen = ({
     <ui.Buttons.TransparentButton
       title="Delete Account"
       style={{ marginTop: 30, marginBottom: 30 }}
-      onPress={() => {}}
+      onPress={onDeleteAccount}
     />
   </div>
 );
@@ -46,6 +47,7 @@ SettingsScreen.propTypes = {
   onClose: PropTypes.func.isRequired,
   onChangePassword: PropTypes.func.isRequired,
   onLogOut: PropTypes.func.isRequired,
+  onDeleteAccount: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -60,11 +62,15 @@ export default compose(
   withHandlers({
     onClose: ({ router }) => () => router.history.goBack(),
     onChangePassword: ({ router }) => () => router.history.push('/change-password'),
-    onLogOut: ({ router, cleanStore }) => () => {
-      cleanStore();
-      localStorage.removeItem('profile');
-      password.remove();
+    onLogOut: ({ router }) => () => {
+      localStorage.removeItem("isLogin");
       router.history.push({ pathname: '/' });
+    },
+    onDeleteAccount: ({ router, cleanStore }) => () => {
+      cleanStore();
+      password.remove();
+      localStorage.removeItem("isLogin");
+      setTimeout(() => router.history.push({ pathname: '/' }), 1000);
     },
   })
 )(SettingsScreen);

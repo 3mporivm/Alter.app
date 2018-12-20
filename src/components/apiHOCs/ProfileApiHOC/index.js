@@ -15,7 +15,8 @@ const ProfileApiHOC = () => WrappedComponent => compose(
         }),
         cleanStore: () => updateEntities({
           profile: () => Immutable.Map(),
-          wallets: () => Immutable.Map(),
+          currencies: () => Immutable.List(),
+          transactions: () => Immutable.List(),
         }),
       }, dispatch),
     }),
