@@ -8,7 +8,6 @@ const WalletButton = ({
   icon,
   name,
   address,
-  wallets,
   balance,
   balanceUSD,
   onPress,
@@ -49,7 +48,6 @@ const WalletButton = ({
 WalletButton.propTypes = {
   icon: PropTypes.any.isRequired,
   styleImg: PropTypes.any,
-  wallets: PropTypes.number.isRequired,
   balance: PropTypes.number.isRequired,
   balanceUSD: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,

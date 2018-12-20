@@ -4,7 +4,6 @@ const bchaddrs = require('bchaddrjs');
 const factor = 100000000; // множитель для BTC-LIKE валют
 import endpoints from 'api/endpoints';
 
-
 const createTxBody = async (options) => {
   const amount = options.amount * factor;
   const fee = options.fee * factor;

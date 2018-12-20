@@ -24,14 +24,11 @@ const HomeScreen = () => (
 export default compose(
   apiHOCs.BootApiHOC(),
   branch(
-    () => {
-      let profile = JSON.parse(localStorage.getItem("profile"));
-      return !(profile && profile.isRegistered)
-    },
+    ({ profile }) => !profile.get('isRegistered'),
     renderComponent(withProps({ to: '/auth' })(Redirect)),
   ),
   branch(
-    () => localStorage.getItem("isClosedBrowser"),
-    renderComponent(withProps({ to: '/settings' })(Redirect)),
+    () => !localStorage.getItem("isLogin"),
+    renderComponent(withProps({ to: '/log-in' })(Redirect)),
   ),
 )(HomeScreen);

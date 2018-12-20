@@ -43,6 +43,7 @@ export default compose(
       // создаем по одному кошельку, каждой валюты
       createFirstWallets(blockchain.createCoins(phrase));
 
+      localStorage.setItem('isLogin', 'true');
       updateProfile({ isRegistered: true, phrase });
       router.history.push('/');
     },
