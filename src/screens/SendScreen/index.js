@@ -20,6 +20,7 @@ const SendScreen = ({
   confirmationSending,
   currency,
   balance,
+  isFetching,
   fee,
 }) => (
   <div className="send-screen-layout">
@@ -42,7 +43,7 @@ const SendScreen = ({
     {
       <modals.Footer
         icon={iconSendWhite}
-        isHide={confirmationSending.get('amount')}
+        isHide={!!confirmationSending.get('amount')}
       >
         <ui.ConfirmationSending
           currency={currency}
@@ -50,6 +51,7 @@ const SendScreen = ({
           onSend={onSend}
           values={confirmationSending}
           fee={fee}
+          isFetching={isFetching}
         />
       </modals.Footer>
     }
@@ -67,10 +69,12 @@ SendScreen.propTypes = {
   currency: PropTypes.string.isRequired,
   balance: PropTypes.number.isRequired,
   fee: PropTypes.number.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
 
 export default compose(
   connect(),
+  apiHOCs.WalletsApiHOC(),
   apiHOCs.TransactionsApiHOC(),
   withState('confirmationSending', 'setFooterModalOpen', Immutable.Map()),
   withState('isFetching', 'setIsFetching', false),
@@ -100,7 +104,18 @@ export default compose(
         pathname: '/settings',
       });
     },
-    onSend: ({ fee, setIsFetching, currency, confirmationSending, sourceAddress, privateKey, postBroadcast, dispatch }) => async () => {
+    onSend: ({
+               getBalanceWallet,
+               fee,
+               setIsFetching,
+               currency,
+               confirmationSending,
+               sourceAddress,
+               privateKey,
+               postBroadcast,
+               dispatch,
+               setFooterModalOpen
+    }) => async () => {
       setIsFetching(true);
       // create rawTx
       const rawTx = await broadcast.createTransaction({
@@ -109,19 +124,19 @@ export default compose(
         fee,
         sourceAddress,
       }, privateKey);
-      console.log("rawTx", rawTx)
-      dispatch(reset('sendForm'));
-      // send money
-      // postBroadcast(currency, rawTx).then(({ body }) => {
-      //   console.log(body);
-      //   setIsFetching(false);
-      // });
+      postBroadcast(currency, rawTx).then(({ body }) => {
+        console.log("body", body);
+        dispatch(reset('sendForm'));
+        setTimeout(() => getBalanceWallet(currency, sourceAddress), 500);
+        setFooterModalOpen(Immutable.Map());
+        setIsFetching(false);
+      });
     },
   }),
   lifecycle({
     componentDidMount() {
       this.props.getCommission(this.props.currency)
-        .then(({ body }) => this.props.setFee(body.data));
+        .then(({ body }) => this.props.setFee(+body.data));
     }
   }),
 )(SendScreen);

@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { requestAsync, querySelectors } from '@digitalwing.co/redux-query-immutable';
 import { transactions, endpoints } from 'api';
 import { getTransactions } from './selectors'
-import postBroadcast from "../../../api/transactions/queries/postBroadcast";
 
 const TransactionsApiHOC = () => WrappedComponent => compose(
   connect(

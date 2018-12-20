@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 import { getEntities, getResults } from 'reducers';
 import Immutable from 'immutable';
+import { denormalize } from "normalizr";
+import { course } from 'schemas';
 
 export const getCurrencies = createSelector(
   (state, resultKey) => getEntities(state).get(resultKey, Immutable.List()),
@@ -17,6 +19,7 @@ export const getWallet = createSelector(
     if (!address) {
       return {};
     }
+    console.log()
     let currency = getEntities(state).get("currencies", {}).find(({ name }) => name === coin);
     return {
       coin: currency.name,
@@ -25,4 +28,14 @@ export const getWallet = createSelector(
     }
   },
   entities => entities
+);
+
+export const getCourse = createSelector(
+  (state, key) => getResults(state).get(key, Immutable.Map()),
+  state => getEntities(state),
+  (result, entities) => denormalize(
+    result,
+    course.courseSchema,
+    entities,
+  ),
 );

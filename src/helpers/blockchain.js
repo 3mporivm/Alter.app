@@ -4,7 +4,7 @@ import bip39 from "bip39"; // для seed-phrase
 import { BTC_LIKE, NETWORK, COINS } from 'constants/constants';
 const net = require('../constants/networks');
 
-export const createAddress = (wallets, chain, seedPhrase, childCount) => {
+export const createAddress = (chain, seedPhrase, childCount) => {
   if (chain in BTC_LIKE) {
     btc_like.Networks.defaultNetwork = btc_like.Networks.add(net[chain]);
     let seed = bip39.mnemonicToSeed(seedPhrase);
@@ -19,9 +19,9 @@ export const createAddress = (wallets, chain, seedPhrase, childCount) => {
     }
 
     return {
-      address: address,
-      publicKey: publicKey,
-      privateKey: privateKey,
+      address,
+      publicKey,
+      privateKey,
       number: childCount,
     }
   }
@@ -30,7 +30,7 @@ export const createAddress = (wallets, chain, seedPhrase, childCount) => {
 export const createCoins = (phrase) => {
   let currencies = [];
   COINS.map(({ name, fullName }, index) => currencies.push({
-    wallets: [{...createAddress(name, phrase, 1), name: `My wallet ${index + 1}` }],
+    wallets: [{...createAddress(name, phrase, 1), name: `My wallet ${index + 1}`}],
     name,
     fullName,
   }));

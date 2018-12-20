@@ -4,6 +4,7 @@
   flex: 1;
   box-sizing: content-box;
   padding: 0 35px 30px 35px;
+  min-width: 50px;
 
   &__title {
     font-family: 'ProximaNova-Bold';
@@ -43,6 +44,9 @@
     font-family: 'ProximaNova-Regular';
     font-size: 16px;
     color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__buttons {

@@ -8,8 +8,8 @@ import './style.scss';
 const BalanceBlock = ({
   icon,
   currency,
-  balance,
-  balanceUSD,
+  balanceTop,
+  balanceBottom,
   children,
   onPress,
   isHideExtended,
@@ -32,10 +32,10 @@ const BalanceBlock = ({
       {`${currency} BALANCE`}
     </div>
     <div className="balance-block__total">
-      {balance}
+      {balanceTop}
     </div>
     <div className="balance-block__course">
-      {`$${balanceUSD}`}
+      {balanceBottom}
     </div>
     {
       children && children.$$typeof &&
@@ -62,8 +62,8 @@ const BalanceBlock = ({
 BalanceBlock.propTypes = {
   icon: PropTypes.any.isRequired,
   currency: PropTypes.string,
-  balance: PropTypes.string.isRequired,
-  balanceUSD: PropTypes.number.isRequired,
+  balanceTop: PropTypes.string.isRequired,
+  balanceBottom: PropTypes.string.isRequired,
   children: PropTypes.any,
   onPress: PropTypes.oneOfType([
     PropTypes.func,

@@ -25,7 +25,7 @@ const CurrencyCard = ({
         <div className="currency_card__header__right-full-name">{fullName}</div>
       </div>
     </div>
-    <div className="currency_card__balance">{balance}</div>
+    <div className="currency_card__balance">{balance ? balance.toFixed(8) : balance}</div>
     <div className="currency_card__course-usd">{`$${balanceUSD}`}</div>
     <button onClick={onPress} className="currency_card__button">
       {`${wallets} wallets`}
@@ -39,7 +39,7 @@ CurrencyCard.propTypes = {
   styleImg: PropTypes.any,
   wallets: PropTypes.number.isRequired,
   balance: PropTypes.number.isRequired,
-  balanceUSD: PropTypes.string.isRequired,
+  balanceUSD: PropTypes.number.isRequired,
   onPress: PropTypes.func.isRequired,
 };
 

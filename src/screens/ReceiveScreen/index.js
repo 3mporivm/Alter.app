@@ -12,15 +12,12 @@ const ReceiveScreen = ({
   wallet,
 }) => (
   <div className="receive-screen-layout">
-    {
-      console.log("wallet", wallet)
-    }
     <ui.Header
       onBackPress={onBack}
       isExtended
       onCenterPress={() => alert('onCenterPress')}
       onRightPress={onSettings}
-      title={`Receive ${wallet.currencyName.toUpperCase()}`}
+      title={`Receive ${wallet.coin.toUpperCase()}`}
     />
     <forms.ReceiveForm
       onSubmit={() => {}}

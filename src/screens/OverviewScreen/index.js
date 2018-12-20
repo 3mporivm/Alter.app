@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {compose, getContext, lifecycle, withHandlers, withState, withStateHandlers} from "recompose";
+import {compose, getContext, lifecycle, withHandlers, withProps, withState, withStateHandlers} from "recompose";
 import { ThreeBounce } from 'better-react-spinkit';
 import { ui, forms, modals, apiHOCs } from 'components';
 import { CURRENCY_ICONS, COINS } from 'constants/constants';
 import './style.scss';
+
+//let render = 0;
 
 const OverviewScreen = ({
   onCoin,
@@ -12,8 +14,16 @@ const OverviewScreen = ({
   isFetching,
   currenciesSearch,
   searchCurrencies,
+  course,
+  totalBalanceUSD,
 }) => (
   <div className="overview-screen-layout">
+    {
+      //render = render + 1
+    }
+    {
+      //console.log("re-render", render)
+    }
     <ui.Header
       styleContent={{ zIndex: 1 }}
       //isDropDown
@@ -23,13 +33,16 @@ const OverviewScreen = ({
       //modal={<modals.DropDown onPress={() => {}}/>}
       title="Wallet one"
     />
-    <ui.BalanceBlock
-      icon={CURRENCY_ICONS.btc}
-      backgroundColor="#F7931A"
-      currency="TOTAL"
-      balance="$26,808.00"
-      course="1.23567815 BTC"
-    />
+    {
+      !isFetching &&
+      <ui.BalanceBlock
+        icon={CURRENCY_ICONS.btc}
+        backgroundColor="#F7931A"
+        currency="TOTAL"
+        balanceTop={`$${totalBalanceUSD}`}
+        balanceBottom={`${course.size ? (totalBalanceUSD * course.get('rate')).toFixed(8) : 0} BTC`}
+      />
+    }
     {
       !isFetching &&
       <forms.SearchForm onChange={searchCurrencies}/>
@@ -73,6 +86,8 @@ OverviewScreen.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   currenciesSearch: PropTypes.object.isRequired,
   searchCurrencies: PropTypes.func.isRequired,
+  course: PropTypes.object.isRequired,
+  totalBalanceUSD: PropTypes.number.isRequired,
 };
 
 export default compose(
@@ -93,6 +108,13 @@ export default compose(
         pathname: '/settings',
       });
     },
+  }),
+  withProps(({ currencies }) => {
+    let totalBalanceUSD = 0;
+    currencies.forEach(({ wallets }) => {
+      totalBalanceUSD += wallets.reduce((accumulator, { currency }) => accumulator + currency, 0);
+    });
+    return ({ totalBalanceUSD })
   }),
   withStateHandlers(
     ({ currencies }) => ({ currenciesSearch: currencies }),
@@ -127,6 +149,9 @@ export default compose(
           this.props.setCurrencies(this.props.currencies);
         });
       }
+
+      // загружаем курс валлют
+      this.props.getCourse();
     },
   }),
 )(OverviewScreen);

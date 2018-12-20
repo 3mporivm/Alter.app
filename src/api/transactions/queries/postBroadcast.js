@@ -2,8 +2,12 @@ import endpoints from 'api/endpoints';
 import { transactions } from 'schemas';
 
 export default ({ chain, rawTx }) => ({
-  url: endpoints.getBroadcastUrl({ chain, rawTx }),
-  queryKey: endpoints.getBroadcastUrl({ chain, rawTx }),
+  url: endpoints.getBroadcastUrl(),
+  queryKey: endpoints.getBroadcastUrl(),
+  body: {
+    chain,
+    rawTx,
+  },
   meta: {},
   force: true,
   options: {

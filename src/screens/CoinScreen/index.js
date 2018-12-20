@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { ui, forms, modals, apiHOCs } from 'components';
-import {compose, getContext, lifecycle, withHandlers, withState, withStateHandlers} from "recompose";
+import { compose, getContext, lifecycle, withHandlers, withState, withStateHandlers, withProps } from "recompose";
 import { blockchain } from 'helpers';
 import _ from 'lodash';
 import { CURRENCY_ICONS } from 'constants/constants';
+import net from 'constants/networks';
 import iconPlusPurple from 'assets/img/plus_purple.svg';
 import iconImport from 'assets/img/import.svg';
 import iconPlusWhite from 'assets/img/plus_white.svg';
@@ -24,6 +25,8 @@ const CoinScreen = ({
   onSubmit,
   isFetching,
   onImportWallet,
+  balance,
+  balanceUSD,
 }) => (
   <div className="coin-screen-layout">
     <ui.Header
@@ -36,8 +39,8 @@ const CoinScreen = ({
     <ui.BalanceBlock
       icon={CURRENCY_ICONS[currency.name]}
       currency={currency.name.toUpperCase()}
-      balance={currency.wallets.reduce((accumulator, item) => accumulator + item.balance, 0)}
-      balanceUSD={currency.wallets.reduce((accumulator, item) => accumulator + item.currency, 0)}
+      balanceTop={`${balance ? balance.toFixed(8) : balance}`}
+      balanceBottom={`$${balanceUSD}`}
     />
     <div className="coin-screen-layout__buttons">
       <ui.Buttons.BasicButton
@@ -115,14 +118,20 @@ CoinScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   onImportWallet: PropTypes.func.isRequired,
+  balance: PropTypes.number.isRequired,
+  balanceUSD: PropTypes.number.isRequired,
 };
 
 export default compose(
   apiHOCs.WalletsApiHOC(),
   apiHOCs.ProfileApiHOC(),
   withState('isFetching', 'setIsFetching', false),
+  withProps(({ currency }) => ({
+    balance: currency.wallets.reduce((accumulator, item) => accumulator + item.balance, 0),
+    balanceUSD: currency.wallets.reduce((accumulator, item) => accumulator + item.currency, 0),
+  })),
   withStateHandlers(
-    { isFooterModalOpen: false },
+    { isFooterModalOpen: '' },
     {
       setFooterModalOpen: () => value => ({ isFooterModalOpen: value })
     }
@@ -150,12 +159,6 @@ export default compose(
     onWallet: ({ router, currency }) => (wallet) => {
       router.history.push({
         pathname: `/${currency.name}/wallet/${wallet.address}`,
-        state: {
-          wallet: {
-            ...wallet,
-            currencyName: currency.name,
-          },
-        },
       });
     },
     handleOuterDropdownClick: ({ setFooterModalOpen, dropdownRef, isFetching }) => (e) => {
@@ -178,9 +181,9 @@ export default compose(
     onImportWallet: ({ currency, addWallet, getBalanceWallet, setIsFetching, setFooterModalOpen }) => values => {
       setIsFetching(true);
       if (values.get("type") === "Private key") {
-        const privateKey = new bitcore.PrivateKey(values.get('privateKey'));
+        const privateKey = new bitcore.PrivateKey(values.get('privateKey').trim());
         const publicKey = privateKey.toPublicKey();
-        const address = publicKey.toAddress(bitcore.Networks.livenet);
+        const address = publicKey.toAddress(bitcore.Networks.add(net[currency.name]));
         addWallet({
             name: `My wallet ${currency.wallets.length + 1}`,
             address: address.toString(),
@@ -193,7 +196,6 @@ export default compose(
         );
         getBalanceWallet(currency.name, address.toString()).then(() => {
           setIsFetching(false);
-          // hide modal
           setFooterModalOpen(false);
         });
       }

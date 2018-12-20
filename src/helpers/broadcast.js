@@ -6,7 +6,7 @@ import endpoints from 'api/endpoints';
 
 const createTxBody = async (options) => {
   const amount = options.amount * factor;
-  const fee = options.fee * factor;
+  const fee = Math.round(options.fee * factor);
   if (options.chain === 'bch') { // transform to legacy format for bch
     options.sourceAddress = bchaddrs.toLegacyAddress(options.sourceAddress);
     options.targetAddress = bchaddrs.toLegacyAddress(options.targetAddress);
@@ -22,8 +22,6 @@ const createTxBody = async (options) => {
 };
 
 export const createTransaction = async (options, privateKey) => {
-  console.log("options", options)
-  console.log("privateKey", privateKey)
   const txBody = await createTxBody(options);
   let tx;
   if (options.chain === 'bch') {

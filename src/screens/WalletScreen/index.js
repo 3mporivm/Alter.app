@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { ui, forms, apiHOCs } from 'components';
-import { withState, compose, getContext, withHandlers, withProps, lifecycle } from "recompose";
+import { withState, compose, getContext, withHandlers, lifecycle } from "recompose";
 import { ThreeBounce } from 'better-react-spinkit';
 import moment from 'moment';
 import { CURRENCY_ICONS } from 'constants/constants';
@@ -31,15 +31,15 @@ const WalletScreen = ({
     />
     <ui.BalanceBlock
       onPress={onDeleteWallet}
-      icon={CURRENCY_ICONS[wallet.currencyName]}
+      icon={CURRENCY_ICONS[wallet.coin]}
       backgroundColor="#F7931A"
-      currency={wallet.currencyName.toUpperCase()}
-      balance={wallet.balance}
-      balanceUSD={wallet.currency}
+      currency={wallet.coin.toUpperCase()}
+      balanceTop={`${wallet.balance}`}
+      balanceBottom={`$${wallet.currency}`}
     >
       <forms.EditWalletForm
         onSubmit={() => {}}
-        currency={wallet.currencyName.toUpperCase()}
+        currency={wallet.coin.toUpperCase()}
         initialValues={{
           wallet_name: wallet.name,
           address: wallet.address,
@@ -122,12 +122,9 @@ export default compose(
       }).isRequired,
     }).isRequired,
   }),
-  withProps(({ location }) => ({
-    wallet: _.get(location, 'state.wallet'),
-  })),
   withHandlers({
     onDeleteWallet: ({ router, deleteWallet, wallet }) => () => {
-      deleteWallet(wallet);
+      deleteWallet(wallet.address, wallet.coin);
       router.history.goBack();
     },
     onBack: ({ router }) => () => router.history.goBack(),
@@ -140,7 +137,7 @@ export default compose(
       router.history.push({
         pathname: '/send',
         state: {
-          currency: wallet.currencyName,
+          currency: wallet.coin,
           balance: wallet.balance,
           address: wallet.address,
           privateKey: wallet.privateKey,
@@ -158,8 +155,8 @@ export default compose(
   }),
   lifecycle({
     componentDidMount() {
-      const { wallet } = this.props;
-      this.props.getTransactions(wallet.currencyName, wallet.address);
+      const { coin, address } = this.props.wallet;
+      this.props.getTransactions(coin, address);
     },
   }),
 )(WalletScreen);
