@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {compose, getContext, lifecycle, withHandlers, withState, withStateHandlers} from "recompose";
 import { ThreeBounce } from 'better-react-spinkit';
 import { ui, forms, modals, apiHOCs } from 'components';
-import { CURRENCY_ICONS } from 'constants/constants';
+import { CURRENCY_ICONS, COINS } from 'constants/constants';
 import './style.scss';
 
 const OverviewScreen = ({
@@ -46,7 +46,7 @@ const OverviewScreen = ({
             />
           </div>
           :
-          currenciesSearch.map(({ name, fullName, color, wallets }) => (
+          currenciesSearch.toJS().map(({ name, fullName, color, wallets }) => (
             <ui.CurrencyCard
               key={name}
               onPress={() => onCoin(name)}
@@ -103,14 +103,13 @@ export default compose(
         }
         const re = new RegExp(value.get('find_coin').trim(), "gi");
         return ({
-          currenciesSearch: currencies.filter(({ name, fullName }) => {
-            return name.search(re) !== -1 || fullName.search(re) !== -1;
-          })
+          currenciesSearch: currencies.filter(({ name, fullName }) => name.search(re) !== -1 || fullName.search(re) !== -1)
         });
-      }
+      },
+      setCurrencies: () => currencies => ({ currenciesSearch: currencies }),
     }
   ),
-  withState('isFetching', 'setIsFetching', false),
+  withState('isFetching', 'setIsFetching', props => !props.getBalanceIsFinished),
   lifecycle({
     componentWillMount() {
       // загружаем баланс кошельков, если еще не згружали
@@ -123,7 +122,10 @@ export default compose(
             );
             return promises;
           }(this.props))
-        ).then(() => this.props.setIsFetching(false));
+        ).then(() => {
+          this.props.setIsFetching(false);
+          this.props.setCurrencies(this.props.currencies);
+        });
       }
     },
   }),

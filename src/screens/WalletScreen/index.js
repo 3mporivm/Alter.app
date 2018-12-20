@@ -53,10 +53,9 @@ const WalletScreen = ({
         title="Send"
         icon={iconSend}
         color="purple"
-        style={{
-          marginRight: 21,
-        }}
+        style={{ marginRight: 21 }}
         onPress={onSend}
+        isDisabled={wallet.balance === 0}
       />
       <ui.Buttons.BasicButton
         title="Receive"
