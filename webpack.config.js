@@ -19,7 +19,6 @@ module.exports = {
     // the entry point of our app
   ],
 
-
   output: {
     filename: 'bundle.js',
     // the output bundle

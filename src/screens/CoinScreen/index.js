@@ -75,31 +75,31 @@ const CoinScreen = ({
       ))
     }
     <ui.InfoBlock style={{ marginTop: 50 }}/>
+    <div ref={ref => setDropdownRef(ref)}>
+      <modals.Footer
+        isHide={isFooterModalOpen === "generate"}
+        icon={iconPlusWhite}
+      >
+        <forms.NewWalletForm
+          onSubmit={onSubmit}
+          onCancel={() => setFooterModalOpen(false)}
+          isFetching={isFetching}
+        />
+      </modals.Footer>
+      <modals.Footer
+        icon={iconEnter}
+        isHide={isFooterModalOpen === "import"}
+      >
+        <forms.ImportWalletForm
+          onSubmit={onImportWallet}
+          onCancel={() => !isFetching && setFooterModalOpen(false)}
+          isFetching={isFetching}
+        />
+      </modals.Footer>
+    </div>
     {
       isFooterModalOpen && <div className="header__hide-background"/>
     }
-    <div ref={ref => setDropdownRef(ref)}>
-    <modals.Footer
-      icon={iconPlusWhite }
-      style={{ bottom: isFooterModalOpen === "generate" ? 0 : -500 }}
-    >
-      <forms.NewWalletForm
-        onSubmit={onSubmit}
-        onCancel={() => setFooterModalOpen(false)}
-        isFetching={isFetching}
-      />
-    </modals.Footer>
-    <modals.Footer
-      icon={iconEnter}
-      style={{ bottom: isFooterModalOpen === "import" ? 0 : -500 }}
-    >
-      <forms.ImportWalletForm
-        onSubmit={onImportWallet}
-        onCancel={() => !isFetching && setFooterModalOpen(false)}
-        isFetching={isFetching}
-      />
-    </modals.Footer>
-    </div>
   </div>
 );
 
@@ -166,7 +166,7 @@ export default compose(
     onSubmit: ({ addWallet, currency, profile, getBalanceWallet, setFooterModalOpen, setIsFetching }) => values => {
       setIsFetching(true);
       const lastWallet = _.findLast(currency.wallets, ({ number }) => number);
-      const wallet = blockchain.createAddress(currency.wallets, currency.name, profile, lastWallet.number + 1);
+      const wallet = blockchain.createAddress(currency.name, profile, lastWallet.number + 1);
       addWallet({ ...wallet, name: values.get('wallet_name') }, currency.name);
       getBalanceWallet(currency.name, wallet.address).then(() => {
         setIsFetching(false);

@@ -42,7 +42,7 @@ const SendScreen = ({
     {
       <modals.Footer
         icon={iconSendWhite}
-        style={{ bottom: confirmationSending.get('amount') ? 0 : -500 }}
+        isHide={confirmationSending.get('amount')}
       >
         <ui.ConfirmationSending
           currency={currency}

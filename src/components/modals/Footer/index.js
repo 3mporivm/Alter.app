@@ -4,10 +4,10 @@ import { ui } from 'components';
 
 import './style.scss';
 
-const Footer = ({ children, icon, style }) => (
+const Footer = ({ children, icon, isHide }) => (
   <div
-    style={style}
     className="footer-modal"
+    style={{ bottom: isHide ? 0 : -500 }}
   >
     <ui.Badge
       style={{
@@ -22,12 +22,12 @@ const Footer = ({ children, icon, style }) => (
 
 Footer.propTypes = {
   icon: PropTypes.any.isRequired,
-  style: PropTypes.any,
+  isHide: PropTypes.bool,
   children: PropTypes.element.isRequired,
 };
 
 Footer.defaultProps = {
-  style: null,
+  isHide: false,
 };
 
 export default Footer;

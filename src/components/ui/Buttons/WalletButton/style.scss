@@ -20,6 +20,12 @@
     transition-duration: 200ms;
   }
 
+  &:hover &__left-border {
+    width: 10px;
+    transition-property: width;
+    transition-duration: 200ms;
+  }
+
   &:nth-child(2n) &__left-border {
     background-color: #63CEFF;
   }
@@ -91,11 +97,5 @@
 
   &:hover &__icon-arrow {
     opacity: 1;
-  }
-
-  &:hover &__left-border {
-    width: 10px;
-    transition-property: width;
-    transition-duration: 200ms;
   }
 }
