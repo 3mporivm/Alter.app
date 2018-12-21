@@ -39,8 +39,8 @@ const OverviewScreen = ({
         icon={CURRENCY_ICONS.btc}
         backgroundColor="#F7931A"
         currency="TOTAL"
-        balanceTop={`$${totalBalanceUSD}`}
-        balanceBottom={`${course.size ? (totalBalanceUSD * course.get('rate')).toFixed(8) : 0} BTC`}
+        balanceTop={`$${totalBalanceUSD ? totalBalanceUSD.toFixed(2) : 0}`}
+        balanceBottom={`${course.size ? (totalBalanceUSD * course.get('rate')).toFixed(7) : 0} BTC`}
       />
     }
     {
