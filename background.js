@@ -1,7 +1,9 @@
 // Add a listener for the close browser action
 
-const browser = browser || chrome;
+chrome && chrome.windows.onRemoved.addListener(() => {
+  localStorage.removeItem('isLogin');
+});
 
-browser.windows.onRemoved.addListener(() => {
+browser && browser.windows.onRemoved.addListener(() => {
   localStorage.removeItem('isLogin');
 });

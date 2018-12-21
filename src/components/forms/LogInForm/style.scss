@@ -1,0 +1,36 @@
+.login-form-layout {
+  margin-top: 20px;
+}
+
+.login-form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background: rgba(62,25,87,1);
+  background: url("../../../assets/img/background-form.png") bottom no-repeat, linear-gradient(45deg, rgba(62,25,87,1) 0%, rgba(32,101,130,1) 100%);
+  margin-bottom: 20px;
+  border-radius: 20px;
+  height: 200px;
+  position: relative;
+  box-sizing: border-box;
+  padding: 20px;
+
+  &__title {
+    margin-top: 20px;
+    font-family: 'ProximaNova-Bold';
+    font-size: 18px;
+    color: #FFFFFF;
+    text-align: center;
+  }
+
+  &__error {
+    margin-top: 10px;
+    font-family: 'ProximaNova-Regular';
+    font-size: 13px;
+    color: rgba(255, 0, 0, 0.6);
+  }
+
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.6)
+  }
+}

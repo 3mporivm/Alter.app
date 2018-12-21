@@ -68,7 +68,7 @@ const OverviewScreen = ({
               icon={CURRENCY_ICONS[name]}
               backgroundColor={color}
               balance={wallets.reduce((accumulator, item) => accumulator + item.balance, 0)}
-              balanceUSD={wallets.reduce((accumulator, item) => accumulator + item.currency, 0)}
+              balanceUSD={wallets.reduce((accumulator, item) => accumulator + item.currency, 0).toFixed(2)}
               wallets={wallets.length}
             />
           ))

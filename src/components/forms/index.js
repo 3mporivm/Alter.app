@@ -12,6 +12,7 @@ import SendForm from './SendForm';
 import ReceiveForm from './ReceiveForm';
 import EditWalletForm from './EditWalletForm';
 import ImportWalletForm from './ImportWalletForm';
+import LogInForm from './LogInForm';
 
 export default {
   ProtectAccountForm,
@@ -28,4 +29,5 @@ export default {
   ReceiveForm,
   EditWalletForm,
   ImportWalletForm,
+  LogInForm,
 };
