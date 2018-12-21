@@ -14,6 +14,7 @@ const createTxBody = async (options) => {
   const response = await fetch(endpoints.getUtxosUrl(options.chain, options.sourceAddress)); // получить по API: /utxos
   const { utxos } = await response.json();
   let tx = new bitcore.Transaction();
+
   tx.from(utxos)
     .to(options.targetAddress, amount)
     .change(options.sourceAddress) // адрес возврата "сдачи"

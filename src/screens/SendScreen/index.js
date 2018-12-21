@@ -124,8 +124,8 @@ export default compose(
         fee,
         sourceAddress,
       }, privateKey);
+
       postBroadcast(currency, rawTx).then(({ body }) => {
-        console.log("body", body);
         dispatch(reset('sendForm'));
         setTimeout(() => getBalanceWallet(currency, sourceAddress), 500);
         setFooterModalOpen(Immutable.Map());

@@ -188,7 +188,7 @@ export default compose(
             name: `My wallet ${currency.wallets.length + 1}`,
             address: address.toString(),
             publicKey: publicKey.toString(),
-            privateKey: values.get('privateKey'),
+            privateKey: values.get('privateKey').trim(),
             balance: 0,
             currency: 0,
           },
