@@ -11,6 +11,7 @@ import iconImport from 'assets/img/import.svg';
 import iconPlusWhite from 'assets/img/plus_white.svg';
 import iconEnter from 'assets/img/enter.svg';
 import bitcore from "bitcore-lib";
+import bchaddrs from 'bchaddrjs';
 
 import './style.scss';
 
@@ -182,9 +183,22 @@ export default compose(
     onImportWallet: ({ currency, addWallet, getBalanceWallet, setIsFetching, setFooterModalOpen }) => values => {
       setIsFetching(true);
       if (values.get("type") === "Private key") {
+        // let privateKey;
+        // if (currency.name === 'btc' || currency.name === 'bch')          
+        //   privateKey = new bitcore.PrivateKey(values.get('privateKey').trim());
+        // else
+        //   privateKey = new bitcore.PrivateKey(values.get('privateKey').trim(), bitcore.Networks.add(net[currency.name]));
+        console.log(currency.name);
         const privateKey = new bitcore.PrivateKey(values.get('privateKey').trim());
         const publicKey = privateKey.toPublicKey();
-        const address = publicKey.toAddress(bitcore.Networks.add(net[currency.name]));
+        let address;
+        if (currency.name === 'bch' || currency.name === 'btc')
+          address = privateKey.toAddress();
+        else
+          address = privateKey.toAddress(bitcore.Networks.add(net[currency.name]));
+        console.log(address);
+        if (currency.name === 'bch')
+          address = bchaddrs.toCashAddress(address.toString());
         addWallet({
             name: `My wallet ${currency.wallets.length + 1}`,
             address: address.toString(),

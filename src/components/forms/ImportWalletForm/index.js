@@ -5,6 +5,8 @@ import { ui } from 'components';
 import {Field, reduxForm, formValueSelector, SubmissionError} from 'redux-form/immutable';
 import { connect } from "react-redux";
 import bitcore from "bitcore-lib";
+import net from 'constants/networks';
+import WAValidator from 'wallet-address-validator';
 import iconEnterBlue from 'assets/img/enter-blue.svg';
 
 import { required } from 'validators';
@@ -129,6 +131,8 @@ export default compose(
   }),
   withHandlers({
     submit: ({ onSubmit, currency }) => values => {
+      const network = bitcore.Networks.add(net[currency]);
+      bitcore.Networks.defaultNetwork = network;
       // todo currency
       if (!bitcore.PrivateKey.isValid(values.get('privateKey').trim())) {
         throw new SubmissionError({
