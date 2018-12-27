@@ -128,7 +128,8 @@ export default compose(
     }
   }),
   withHandlers({
-    submit: ({ onSubmit }) => values => {
+    submit: ({ onSubmit, currency }) => values => {
+      // todo currency
       if (!bitcore.PrivateKey.isValid(values.get('privateKey').trim())) {
         throw new SubmissionError({
           _error: 'Invalid private key!'

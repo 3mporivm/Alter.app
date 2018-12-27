@@ -98,6 +98,7 @@ const CoinScreen = ({
           onSubmit={onImportWallet}
           onCancel={() => !isFetching && setFooterModalOpen(false)}
           isFetching={isFetching}
+          currency={currency.name}
         />
       </modals.Footer>
     </div>
