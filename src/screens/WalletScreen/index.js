@@ -78,13 +78,13 @@ const WalletScreen = ({
             />
           </div>
           :
-          transactions.map(transaction => (
+          transactions.toJS().map(transaction => (
             <ui.Transaction
-              key={transaction.get('hash')}
-              type={transaction.get('value') > 0 ? 'Received' : 'Sent'}
-              hash={transaction.get('hash')}
-              amount={(transaction.get('value') > 0 ? transaction.get('value').toString() : transaction.get('value').toString().slice(1))}
-              date={moment(transaction.get('time') * 1000).format('DD.MM.YYYY')}
+              key={transaction.hash}
+              type={transaction.value > 0 ? 'Received' : 'Sent'}
+              hash={transaction.hash}
+              amount={(transaction.value > 0 ? transaction.value.toString() : transaction.value.toString().slice(1))}
+              date={moment(transaction.time * 1000).format('DD.MM.YYYY')}
             />
           ))
       }
