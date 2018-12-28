@@ -25,6 +25,7 @@ const ReceiveScreen = ({
         amount: wallet.balance,
         code: wallet.address,
       }}
+      code={wallet.address}
     />
     <ui.InfoBlock/>
   </div>

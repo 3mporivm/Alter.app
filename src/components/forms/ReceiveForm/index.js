@@ -16,6 +16,7 @@ const ReceiveForm = ({
   handleSubmit,
   facebookLoginRequest,
   invalid,
+  code,
 }) => (
   <form onSubmit={handleSubmit} className="receive-form-wrapper">
     <div className="receive-form">
@@ -44,7 +45,7 @@ const ReceiveForm = ({
       />
       <div className="receive-form__qr-wrapper">
         <QRCode
-          value="http://facebook.github.io/react/"
+          value={code}
           bgColor="transparent"
           fgColor="white"
           size={112.5}
@@ -72,6 +73,7 @@ const ReceiveForm = ({
 
 ReceiveForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  code: PropTypes.string.isRequired,
 };
 
 
