@@ -13,5 +13,3 @@ const App = () => (
 );
 
 export default App;
-
-//console.log("UPDATE_ENTITIES");

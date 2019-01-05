@@ -82,8 +82,7 @@ const ImportWalletForm = ({
     </div>
     <span className="import-wallet-form__description">
       Imported accounts will not be associated with your
-      keyword phrase created by MetaMask. Learn more about
-      importing accounts here.
+      seed phrase.
     </span>
     <div className="import-wallet-form__buttons">
       <ui.Buttons.TransparentButton

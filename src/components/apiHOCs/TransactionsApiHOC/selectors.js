@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { createSelector } from 'reselect';
 import { getEntities, getResults } from 'reducers';
 import Immutable from 'immutable';

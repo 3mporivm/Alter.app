@@ -6,5 +6,5 @@ export default {
   getUtxosUrl: (chain, address) => `${host}/utxos?chain=${chain}&address=${address}`,
   getBroadcastUrl: () => `${host}/broadcast`,
   getCommissionUrl: ({ chain }) => `http://18.219.20.226:2000/fee/findout?chain=${chain}`,
-  getCourseUrl: () => "https://ccer.empo.io/v1/currency/USD/BTC",
+  getCourseUrl: () => 'https://ccer.empo.io/v1/currency/USD/BTC',
 };

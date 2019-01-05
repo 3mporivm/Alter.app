@@ -188,7 +188,6 @@ export default compose(
         //   privateKey = new bitcore.PrivateKey(values.get('privateKey').trim());
         // else
         //   privateKey = new bitcore.PrivateKey(values.get('privateKey').trim(), bitcore.Networks.add(net[currency.name]));
-        console.log(currency.name);
         const privateKey = new bitcore.PrivateKey(values.get('privateKey').trim());
         const publicKey = privateKey.toPublicKey();
         let address;
@@ -196,7 +195,6 @@ export default compose(
           address = privateKey.toAddress();
         else
           address = privateKey.toAddress(bitcore.Networks.add(net[currency.name]));
-        console.log(address);
         if (currency.name === 'bch')
           address = bchaddrs.toCashAddress(address.toString());
         addWallet({
