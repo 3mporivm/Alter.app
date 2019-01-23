@@ -80,10 +80,6 @@ const ImportWalletForm = ({
         <div className="import-wallet-form__field-wrapper__error">{error}</div>
       }
     </div>
-    <span className="import-wallet-form__description">
-      Imported accounts will not be associated with your
-      seed phrase.
-    </span>
     <div className="import-wallet-form__buttons">
       <ui.Buttons.TransparentButton
         title="Cancel"
