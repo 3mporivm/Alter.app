@@ -20,11 +20,16 @@ const BalanceBlock = ({
     className={`balance-block ${children && children.$$typeof ? "extended" : ""}`}
     style={children && children.$$typeof ? { height: isHideExtended ? 197 : 479 } : {}}
   >
-    <img
-      className="balance-block__badge"
-      src={icon}
-      alt=""
-    />
+    {
+      icon
+        && (
+          <img
+            className="balance-block__badge"
+            src={icon}
+            alt=""
+          />
+        )
+    }
     {
       onPress && <img onClick={onPress} className="balance-block__icon-trash" src={iconTrash} alt="" />
     }

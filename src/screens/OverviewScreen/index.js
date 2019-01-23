@@ -36,7 +36,6 @@ const OverviewScreen = ({
     {
       !isFetching &&
       <ui.BalanceBlock
-        icon={CURRENCY_ICONS.btc}
         backgroundColor="#F7931A"
         currency="TOTAL"
         balanceTop={`$${totalBalanceUSD ? totalBalanceUSD.toFixed(2) : 0}`}
