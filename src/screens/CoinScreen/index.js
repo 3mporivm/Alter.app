@@ -41,7 +41,7 @@ const CoinScreen = ({
       icon={CURRENCY_ICONS[currency.name]}
       currency={currency.name.toUpperCase()}
       balanceTop={`${balance ? balance.toFixed(8) : balance}`}
-      balanceBottom={`$${balanceUSD}`}
+      balanceBottom={`$${balanceUSD.toFixed(2)}`}
     />
     <div className="coin-screen-layout__buttons">
       <ui.Buttons.BasicButton
@@ -75,7 +75,7 @@ const CoinScreen = ({
           icon={CURRENCY_ICONS[currency.name]}
           address={wallet.address}
           balance={wallet.balance || 0}
-          balanceUSD={`$${wallet.currency}`}
+          balanceUSD={`$${wallet.currency.toFixed(2)}`}
         />
       ))
     }

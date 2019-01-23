@@ -35,7 +35,7 @@ const WalletScreen = ({
       backgroundColor="#F7931A"
       currency={wallet.coin.toUpperCase()}
       balanceTop={`${wallet.balance}`}
-      balanceBottom={`$${wallet.currency}`}
+      balanceBottom={`$${wallet.currency.toFixed(2)}`}
     >
       <forms.EditWalletForm
         onSubmit={() => {}}
