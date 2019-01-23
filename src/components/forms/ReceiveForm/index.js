@@ -24,25 +24,6 @@ const ReceiveForm = ({
         backgroundColor="#63CEFF"
         icon={iconReceiveWhite}
       />
-      <Field
-        component={ui.Fields.BasicField}
-        name="amount"
-        props={{
-          inputId: 'amount',
-          styleWrapper: {
-            height: 65,
-            marginTop: 20,
-          },
-          styleInput: {
-            fontSize: 34,
-            lineHeight: "22px",
-            color: '#ffffff',
-            fontFamily: 'ProximaNova-Bold'
-          },
-          label: 'Amount',
-          readOnly: true,
-        }}
-      />
       <div className="receive-form__qr-wrapper">
         <QRCode
           value={code}
