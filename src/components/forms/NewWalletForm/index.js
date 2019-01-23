@@ -41,6 +41,14 @@ const NewWalletForm = ({
         }
       }}
     />
+    {
+      invalid
+        && (
+          <span className="new-wallet-form__description">
+            The wallet name must be at least 3 characters long.
+          </span>
+        )
+    }
     <div className="new-wallet-form__buttons">
       <ui.Buttons.TransparentButton
         title="Cancel"
