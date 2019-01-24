@@ -2,6 +2,7 @@ const bitcore = require('bitcore-lib');
 const bch = require('bitcore-lib-cash');
 const bchaddrs = require('bchaddrjs');
 const factor = 100000000; // множитель для BTC-LIKE валют
+const net  = require('../constants/networks');
 import endpoints from 'api/endpoints';
 
 const createTxBody = async (options) => {
@@ -13,8 +14,9 @@ const createTxBody = async (options) => {
   }
   const response = await fetch(endpoints.getUtxosUrl(options.chain, options.sourceAddress)); // получить по API: /utxos
   const { utxos } = await response.json();
+  const network = bitcore.Networks.add(net[options.chain]);
+  bitcore.Networks.defaultNetwork = network;
   let tx = new bitcore.Transaction();
-
   tx.from(utxos)
     .to(options.targetAddress, amount)
     .change(options.sourceAddress) // адрес возврата "сдачи"
@@ -32,5 +34,6 @@ export const createTransaction = async (options, privateKey) => {
   }
   tx.sign(privateKey);
   tx.serialize();
+  console.log('Tx body signed');
   return tx.toString();
 };
