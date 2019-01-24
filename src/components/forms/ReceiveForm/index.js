@@ -28,7 +28,7 @@ const ReceiveForm = ({
         <QRCode
           value={code}
           bgColor="transparent"
-          fgColor="white"
+          fgColor="black" // с белым цветом не работало считывание кода
           size={112.5}
         />
       </div>
