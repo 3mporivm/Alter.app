@@ -5,11 +5,28 @@
   justify-content: center;
 
   &__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     // 199
     margin-top: 150px;
-    font-family: 'DIN-AlternateBold';
-    font-size: 40px;
-    color: #FFFFFF;
-    margin-bottom: 50px;
+
+    &__logo {
+      width: 59px;
+      height: 43px;
+      margin-bottom: 10px;
+    }
+    &__text {
+      font-family: 'ProximaNova-Regular';
+      font-size: 40px;
+      color: #FFFFFF;
+      margin-bottom: 50px;
+      font-weight: 300;
+
+      &__bold {
+        font-family: 'ProximaNova-Extrabold';
+        letter-spacing: 1px;
+      }
+    }
   }
 }

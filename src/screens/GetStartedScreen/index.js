@@ -3,13 +3,25 @@ import PropTypes from 'prop-types';
 import { compose, withHandlers, getContext } from 'recompose';
 import { ui, apiHOCs } from 'components';
 
+import logo from '../../assets/img/logo.svg';
+
 import './style.scss';
 
 const GetStartedScreen = ({
-  onGetStarted
+  onGetStarted,
 }) => (
   <div className="get-started-layout">
-    <div className="get-started-layout__title">alter.app</div>
+    <div className="get-started-layout__title">
+      <img src={logo} alt="logo" className="get-started-layout__title__logo" />
+      <div className="get-started-layout__title__text">
+        <span className="get-started-layout__title__text__bold">
+          alter
+        </span>
+        <span>
+          .app
+        </span>
+      </div>
+    </div>
     <ui.Buttons.NextButton
       title="Get Started"
       onPress={onGetStarted}

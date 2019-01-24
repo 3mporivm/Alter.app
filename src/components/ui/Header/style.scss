@@ -29,14 +29,24 @@
   }
 
   &__center {
+    display: flex;
     color: #FFFFFF;
     font-size: 18px;
-    font-family: 'ProximaNova-Bold';
+    font-weight: 300;
+    font-family: 'ProximaNova-Regular';
 
-    &__empty {
+    &__logo {
+      display: flex;
       width: 120px;
-      height: 14px;
-      background-color: rgba(255, 255, 255, 0.05);
+
+      &__img {
+        width: 28px;
+        height: 20px;
+      }
+      &__bold-text {
+        font-weight: bold;
+        margin-left: 8px;
+      }
     }
 
     &__title-wrapper {

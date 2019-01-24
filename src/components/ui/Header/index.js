@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import iconSettings from 'assets/img/settings.svg';
 import iconDropdown from 'assets/img/dropdown.svg';
 import iconBack from 'assets/img/back.svg';
-import { compose, withState, lifecycle, withHandlers, withStateHandlers } from "recompose";
+import {
+ compose, withState, lifecycle, withHandlers, withStateHandlers,
+} from 'recompose';
+
+import logo from '../../../assets/img/logo.svg';
 
 import './style.scss';
 
@@ -24,8 +28,8 @@ const Header = ({
   <div className="header">
     <div className="header__left">
       {
-        onBackPress &&
-        <img
+        onBackPress
+        && <img
           onClick={onBackPress}
           className="header__left__icon-back"
           src={iconBack}
@@ -40,19 +44,28 @@ const Header = ({
       className="header__center"
     >
       {
-        !isExtended ?
-          <div className="header__center__empty"/>
-          :
-          (
+        !isExtended
+          ? (
+            <div className="header__center__logo">
+              <img src={logo} alt="logo" className="header__center__logo__img" />
+              <span className="header__center__logo__bold-text">
+                alter
+              </span>
+              <span className="header__center__logo__text">
+                app
+              </span>
+            </div>
+          )
+          : (
             <div
               onClick={() => isDropDown && setDropdownOpen(!isDropdownOpen)}
-              style={isDropDown ? { cursor: 'pointer'} : {}}
+              style={isDropDown ? { cursor: 'pointer' } : {}}
               className="header__center__title-wrapper"
             >
               <span>{title}</span>
               {
-                isDropDown &&
-                <img
+                isDropDown
+                && <img
                   className="header__center__icon-dropdown"
                   src={iconDropdown}
                   alt=""
@@ -62,14 +75,14 @@ const Header = ({
           )
       }
       {
-        isDropdownOpen &&
-        modal
+        isDropdownOpen
+        && modal
       }
     </div>
     <div style={styleContent} className="header__right">
       {
-        onRightPress &&
-        <img
+        onRightPress
+        && <img
           onClick={onRightPress}
           className="header__right__icon-settings"
           src={rightIcon}
@@ -78,7 +91,7 @@ const Header = ({
       }
     </div>
     {
-      isDropdownOpen && <div className="header__hide-background"/>
+      isDropdownOpen && <div className="header__hide-background" />
     }
   </div>
 );
@@ -104,7 +117,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
-  title: "",
+  title: '',
   isExtended: false,
   isDropDown: false,
   onBackPress: false,
@@ -120,12 +133,12 @@ export default compose(
   withStateHandlers(
     { dropdownRef: null },
     {
-      setDropdownRef: ({ dropdownRef }) => ref => {
+      setDropdownRef: ({ dropdownRef }) => (ref) => {
         if (dropdownRef === null) {
-          return ({ dropdownRef: ref })
+          return ({ dropdownRef: ref });
         }
-      }
-    }
+      },
+    },
   ),
   withHandlers({
     handleOuterDropdownClick: ({ setDropdownOpen, dropdownRef }) => (e) => {
