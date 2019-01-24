@@ -1,12 +1,16 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import {compose, getContext, lifecycle, withHandlers, withProps, withState, withStateHandlers} from "recompose";
+import PropTypes from 'prop-types';
+import {
+ compose, getContext, lifecycle, withHandlers, withProps, withState, withStateHandlers,
+} from 'recompose';
 import { ThreeBounce } from 'better-react-spinkit';
-import { ui, forms, modals, apiHOCs } from 'components';
+import {
+ ui, forms, modals, apiHOCs,
+} from 'components';
 import { CURRENCY_ICONS, COINS } from 'constants/constants';
 import './style.scss';
 
-//let render = 0;
+// let render = 0;
 
 const OverviewScreen = ({
   onCoin,
@@ -16,26 +20,30 @@ const OverviewScreen = ({
   searchCurrencies,
   course,
   totalBalanceUSD,
+  walletsCount,
+  walletIndex,
+  setWalletsCount,
+  setWalletIndex,
 }) => (
   <div className="overview-screen-layout">
     {
-      //render = render + 1
+      // render = render + 1
     }
     {
-      //console.log("re-render", render)
+      // console.log("re-render", render)
     }
     <ui.Header
       styleContent={{ zIndex: 1 }}
-      //isDropDown
+      // isDropDown
       isExtended
       onCenterPress={() => alert('onCenterPress')}
       onRightPress={onSettings}
-      //modal={<modals.DropDown onPress={() => {}}/>}
+      // modal={<modals.DropDown onPress={() => {}}/>}
       title="Wallet one"
     />
     {
-      !isFetching &&
-      <ui.BalanceBlock
+      !isFetching
+      && <ui.BalanceBlock
         backgroundColor="#F7931A"
         currency="TOTAL"
         balanceTop={`$${totalBalanceUSD ? totalBalanceUSD.toFixed(2) : 0}`}
@@ -43,22 +51,29 @@ const OverviewScreen = ({
       />
     }
     {
-      !isFetching &&
-      <forms.SearchForm onChange={searchCurrencies}/>
+      !isFetching
+      && <forms.SearchForm onChange={searchCurrencies} />
     }
     <div className="overview-screen-layout__currencies">
       {
-        isFetching ?
-          <div className="overview-screen-layout__currencies__loading-wrapper">
+        isFetching
+          ? <div className="overview-screen-layout__currencies__loading-wrapper">
             <ThreeBounce
               scaleStart={0.4}
               scaleEnd={0.7}
               size={25}
               color="rgba(255, 255, 255, .5)"
             />
-          </div>
-          :
-          currenciesSearch.toJS().map(({ name, fullName, color, wallets }) => (
+            <span className="overview-screen-layout__currencies__text">
+              Now we load wallets balances
+            </span>
+            <span className="overview-screen-layout__currencies__text-bold">
+              {`${walletsCount} of ${walletIndex}`}
+            </span>
+            </div>
+          : currenciesSearch.toJS().map(({
+ name, fullName, color, wallets,
+}) => (
             <ui.CurrencyCard
               key={name}
               onPress={() => onCoin(name)}
@@ -73,7 +88,7 @@ const OverviewScreen = ({
           ))
       }
     </div>
-    <ui.InfoBlock/>
+    <ui.InfoBlock />
   </div>
 );
 
@@ -87,6 +102,10 @@ OverviewScreen.propTypes = {
   searchCurrencies: PropTypes.func.isRequired,
   course: PropTypes.object.isRequired,
   totalBalanceUSD: PropTypes.number.isRequired,
+  walletsCount: PropTypes.number.isRequired,
+  walletIndex: PropTypes.number.isRequired,
+  setWalletsCount: PropTypes.func.isRequired,
+  setWalletIndex: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -113,24 +132,26 @@ export default compose(
     currencies.forEach(({ wallets }) => {
       totalBalanceUSD += wallets.reduce((accumulator, { currency }) => accumulator + currency, 0);
     });
-    return ({ totalBalanceUSD })
+    return ({ totalBalanceUSD });
   }),
   withStateHandlers(
     ({ currencies }) => ({ currenciesSearch: currencies }),
     {
-      searchCurrencies: (_, { currencies }) => value => {
+      searchCurrencies: (_, { currencies }) => (value) => {
         if (!(value.get('find_coin') && value.get('find_coin').trim())) {
           return ({ currenciesSearch: currencies });
         }
-        const re = new RegExp(value.get('find_coin').trim(), "gi");
+        const re = new RegExp(value.get('find_coin').trim(), 'gi');
         return ({
-          currenciesSearch: currencies.filter(({ name, fullName }) => name.search(re) !== -1 || fullName.search(re) !== -1)
+          currenciesSearch: currencies.filter(({ name, fullName }) => name.search(re) !== -1 || fullName.search(re) !== -1),
         });
       },
       setCurrencies: () => currencies => ({ currenciesSearch: currencies }),
-    }
+    },
   ),
   withState('isFetching', 'setIsFetching', props => !props.getBalanceIsFinished),
+  withState('walletsCount', 'setWalletsCount', 0),
+  withState('walletIndex', 'setWalletIndex', 0),
   lifecycle({
     componentWillMount() {
       // загружаем баланс кошельков, если еще не згружали
@@ -138,11 +159,13 @@ export default compose(
         Promise.all(
           (function (props) {
             const promises = [];
-            props.currencies.toJS().forEach(({name, wallets}) =>
-              wallets.forEach(({address}) => promises.push(props.getBalanceWallet(name, address)))
-            );
+            props.currencies.toJS().forEach(({ name, wallets }, index) => wallets.forEach(({ address }) => {
+              props.setWalletsCount(props.currencies.toJS().length);
+              props.setWalletIndex(index + 1);
+              promises.push(props.getBalanceWallet(name, address));
+            }));
             return promises;
-          }(this.props))
+          }(this.props)),
         ).then(() => {
           this.props.setIsFetching(false);
           this.props.setCurrencies(this.props.currencies);
