@@ -10,9 +10,10 @@ import './style.scss';
 const AccountScreen = ({
   onCreate,
   onImport,
+  onBack,
 }) => (
   <div className="account-layout">
-    <ui.Header/>
+    <ui.Header onBackPress={onBack} />
     <div
       onClick={() => onCreate()}
       className="account-layout__create"
@@ -33,6 +34,7 @@ const AccountScreen = ({
 AccountScreen.propTypes = {
   onCreate: PropTypes.func.isRequired,
   onImport: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -54,5 +56,6 @@ export default compose(
         pathname: '/auth/import-account',
       });
     },
-  })
+    onBack: ({ router }) => () => router.history.goBack(),
+  }),
 )(AccountScreen);

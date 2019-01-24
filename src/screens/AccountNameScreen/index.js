@@ -3,15 +3,16 @@ import PropTypes from "prop-types";
 import { compose, getContext, withHandlers } from "recompose";
 import { ui, forms, apiHOCs } from 'components';
 
-const AccountNameScreen = ({ onSubmit }) => (
+const AccountNameScreen = ({ onSubmit, onBack, }) => (
   <div className="account-name-layout">
-    <ui.Header/>
+    <ui.Header onBackPress={onBack} />
     <forms.AccountNameForm onSubmit={onSubmit}/>
   </div>
 );
 
 AccountNameScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -30,5 +31,6 @@ export default compose(
         pathname: '/auth/save-backup-phrase',
       });
     },
-  })
+    onBack: ({ router }) => () => router.history.goBack(),
+  }),
 )(AccountNameScreen);

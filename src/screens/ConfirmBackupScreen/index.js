@@ -9,9 +9,10 @@ import './style.scss';
 const ConfirmBackupScreen = ({
   onSubmit,
   phrase,
+  onBack,
 }) => (
   <div className="save-backup-phrase-layout">
-    <ui.Header/>
+    <ui.Header onBackPress={onBack} />
     <forms.ConfirmBackupForm
       onSubmit={onSubmit}
       isFetching={false}
@@ -23,6 +24,7 @@ const ConfirmBackupScreen = ({
 ConfirmBackupScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   phrase: PropTypes.string.isRequired,
+  onBack: PropTypes.string.isRequired,
 };
 
 export default compose(
@@ -47,5 +49,6 @@ export default compose(
       updateProfile({ isRegistered: true, phrase });
       router.history.push('/');
     },
-  })
+    onBack: ({ router }) => () => router.history.goBack(),
+  }),
 )(ConfirmBackupScreen);

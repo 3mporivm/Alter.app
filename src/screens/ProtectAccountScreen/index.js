@@ -6,15 +6,16 @@ import { password } from 'helpers';
 
 import './style.scss';
 
-const ProtectAccountScreen = ({ onSubmit }) => (
+const ProtectAccountScreen = ({ onSubmit, onBack }) => (
   <div className="protect-account-layout">
-    <ui.Header/>
+    <ui.Header onBackPress={onBack} />
     <forms.ProtectAccountForm onSubmit={onSubmit}/>
   </div>
 );
 
 ProtectAccountScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -32,5 +33,6 @@ export default compose(
         pathname: '/auth/account',
       });
     },
-  })
+    onBack: ({ router }) => () => router.history.goBack(),
+  }),
 )(ProtectAccountScreen);

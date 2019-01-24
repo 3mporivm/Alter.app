@@ -10,9 +10,10 @@ import './style.scss';
 const SaveBackupPhraseScreen = ({
   onSubmit,
   onCancel,
+  onBack,
 }) => (
   <div className="save-backup-phrase-layout">
-    <ui.Header/>
+    <ui.Header onBackPress={onBack} />
     <forms.SaveBackupPhraseForm
       onSubmit={onSubmit}
       isFetching={false}
@@ -29,6 +30,7 @@ const SaveBackupPhraseScreen = ({
 
 SaveBackupPhraseScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -51,5 +53,6 @@ export default compose(
     onCancel: ({ router }) => () => {
       router.history.push({ pathname: '/auth/account' });
     },
-  })
+    onBack: ({ router }) => () => router.history.goBack(),
+  }),
 )(SaveBackupPhraseScreen);

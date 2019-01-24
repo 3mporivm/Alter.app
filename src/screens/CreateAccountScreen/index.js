@@ -7,9 +7,10 @@ import './style.scss';
 
 const CreateAccountScreen = ({
   onSubmit,
+  onBack,
 }) => (
   <div className="protect-account-layout">
-    <ui.Header/>
+    <ui.Header onBackPress={onBack} />
     <forms.CreateAccountForm
       onSubmit={onSubmit}
       isFetching={false}
@@ -19,6 +20,7 @@ const CreateAccountScreen = ({
 
 CreateAccountScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -37,5 +39,6 @@ export default compose(
         pathname: '/auth/account-name',
       });
     },
-  })
+    onBack: ({ router }) => () => router.history.goBack(),
+  }),
 )(CreateAccountScreen);

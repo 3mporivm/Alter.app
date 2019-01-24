@@ -4,9 +4,9 @@ import { compose, getContext, withHandlers } from "recompose";
 import { ui, forms, apiHOCs } from 'components';
 import { blockchain } from 'helpers';
 
-const ImportAccountScreen = ({ onSubmit }) => (
+const ImportAccountScreen = ({ onSubmit, onBack }) => (
   <div>
-    <ui.Header/>
+    <ui.Header onBackPress={onBack} />
     <forms.EnterWalletForm
       onSubmit={onSubmit}
     />
@@ -15,6 +15,7 @@ const ImportAccountScreen = ({ onSubmit }) => (
 
 ImportAccountScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -36,5 +37,6 @@ export default compose(
       updateProfile({ isRegistered: true, phrase: values.get("seed") });
       router.history.push({ pathname: '/' });
     },
-  })
+    onBack: ({ router }) => () => router.history.goBack(),
+  }),
 )(ImportAccountScreen);
