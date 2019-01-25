@@ -127,7 +127,7 @@ export default compose(
     checkTimeForLogOut: ({ router }) => () => {
       const authTime = new Date(window.localStorage.getItem('authTime'));
       const dateNow = new Date();
-      if (authTime.getDay() !== dateNow.getDay() || authTime.getHours() !== dateNow.getHours()) {
+      if (dateNow >= authTime.setHours(authTime.getHours() + 1)) {
         localStorage.removeItem('isLogin');
         router.history.push({ pathname: '/' });
       }
