@@ -126,7 +126,7 @@ CoinScreen.propTypes = {
 
 export default compose(
   apiHOCs.WalletsApiHOC(),
-  apiHOCs.ProfileApiHOC(),
+  apiHOCs.BootApiHOC(),
   withState('isFetching', 'setIsFetching', false),
   withProps(({ currency }) => ({
     balance: currency.wallets.reduce((accumulator, item) => accumulator + item.balance, 0),
@@ -171,8 +171,9 @@ export default compose(
     },
     onSubmit: ({ addWallet, currency, profile, getBalanceWallet, setFooterModalOpen, setIsFetching }) => values => {
       setIsFetching(true);
+      // alert(profile.get('phrase'));
       const lastWallet = _.findLast(currency.wallets, ({ number }) => number) || { number: 0 };
-      const wallet = blockchain.createAddress(currency.name, profile, lastWallet.number + 1);
+      const wallet = blockchain.createAddress(currency.name, profile.get('phrase'), lastWallet.number + 1);
       addWallet({ ...wallet, name: values.get('wallet_name') }, currency.name);
       getBalanceWallet(currency.name, wallet.address).then(() => {
         setIsFetching(false);
