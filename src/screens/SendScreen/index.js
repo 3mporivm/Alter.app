@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import {compose, getContext, lifecycle, withHandlers, withProps, withState} from "recompose";
+import PropTypes from 'prop-types';
+import {compose, getContext, lifecycle, withHandlers, withProps, withState} from 'recompose';
 import { ui, forms, modals, apiHOCs } from 'components';
+import get from 'lodash/get';
 import Immutable from 'immutable';
 import { broadcast } from 'helpers';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 import iconSendWhite from 'assets/img/send-white.svg';
 
@@ -38,7 +39,7 @@ const SendScreen = ({
       fee={fee}
     />
     {
-      confirmationSending.get('amount') && <div className="header__hide-background"/>
+      confirmationSending.get('amount') && <div className="header__hide-background" />
     }
     {
       <modals.Footer
@@ -87,10 +88,10 @@ export default compose(
     }).isRequired,
   }),
   withProps(({ location }) => ({
-    currency: _.get(location, 'state.currency', ''),
-    balance: _.get(location, 'state.balance', 0),
-    sourceAddress: _.get(location, 'state.address'),
-    privateKey: _.get(location, 'state.privateKey'),
+    currency: get(location, 'state.currency', ''),
+    balance: get(location, 'state.balance', 0),
+    sourceAddress: get(location, 'state.address'),
+    privateKey: get(location, 'state.privateKey'),
   })),
   withHandlers({
     onBack: ({ router }) => () => router.history.goBack(),
@@ -105,16 +106,16 @@ export default compose(
       });
     },
     onSend: ({
-               getBalanceWallet,
-               fee,
-               setIsFetching,
-               currency,
-               confirmationSending,
-               sourceAddress,
-               privateKey,
-               postBroadcast,
-               dispatch,
-               setFooterModalOpen
+      getBalanceWallet,
+      fee,
+      setIsFetching,
+      currency,
+      confirmationSending,
+      sourceAddress,
+      privateKey,
+      postBroadcast,
+      dispatch,
+      setFooterModalOpen,
     }) => async () => {
       setIsFetching(true);
       // create rawTx
@@ -137,6 +138,6 @@ export default compose(
     componentDidMount() {
       this.props.getCommission(this.props.currency)
         .then(({ body }) => this.props.setFee(+body.data));
-    }
+    },
   }),
 )(SendScreen);
