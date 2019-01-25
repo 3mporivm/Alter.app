@@ -22,8 +22,7 @@ const OverviewScreen = ({
   totalBalanceUSD,
   walletsCount,
   walletIndex,
-  setWalletsCount,
-  setWalletIndex,
+  checkTimeForLogOut,
 }) => (
   <div className="overview-screen-layout">
     {
@@ -104,8 +103,7 @@ OverviewScreen.propTypes = {
   totalBalanceUSD: PropTypes.number.isRequired,
   walletsCount: PropTypes.number.isRequired,
   walletIndex: PropTypes.number.isRequired,
-  setWalletsCount: PropTypes.func.isRequired,
-  setWalletIndex: PropTypes.func.isRequired,
+  checkTimeForLogOut: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -125,6 +123,14 @@ export default compose(
       router.history.push({
         pathname: '/settings',
       });
+    },
+    checkTimeForLogOut: ({ router }) => () => {
+      const authTime = new Date(window.localStorage.getItem('authTime'));
+      const dateNow = new Date();
+      if (authTime.getDay() !== dateNow.getDay() || authTime.getHours() < dateNow.getHours()) {
+        localStorage.removeItem('isLogin');
+        router.history.push({ pathname: '/' });
+      }
     },
   }),
   withProps(({ currencies }) => {
@@ -174,6 +180,8 @@ export default compose(
 
       // загружаем курс валлют
       this.props.getCourse();
+      // проверяем время авторизации
+      this.props.checkTimeForLogOut();
     },
   }),
 )(OverviewScreen);

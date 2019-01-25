@@ -9,6 +9,7 @@ import { token } from 'helpers';
 import iconLock from 'assets/img/lock.svg';
 import { SALT } from 'constants/constants';
 import { password } from 'helpers';
+import moment from 'moment';
 const minLength3 = minLength(3);
 
 import './style.scss';
@@ -69,6 +70,7 @@ export default compose(
           _error: 'Wrong password!',
         });
       }
+      window.localStorage.setItem('authTime', moment().toISOString());
       onSubmit(values);
     },
   })

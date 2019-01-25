@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { ui } from 'components';
 import { Field, reduxForm, SubmissionError } from 'redux-form/immutable';
-import bip39 from "bip39";
+import bip39 from 'bip39';
+import moment from 'moment';
 
 import iconEnter from 'assets/img/enter.svg';
 import iconImport from 'assets/img/import.svg';
@@ -79,6 +80,7 @@ export default compose(
           _error: 'Invalid seed!'
         })
       }
+      window.localStorage.setItem('authTime', moment().toISOString());
       onSubmit(values);
     },
   })

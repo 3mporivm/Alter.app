@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form/immutable';
 import iconCheck from 'assets/img/check.svg';
 import { required, minLengthArray } from 'validators';
+import moment from 'moment';
 
 const minLengthArray12 = minLengthArray(12)
 
@@ -78,6 +79,7 @@ export default compose(
           _error: 'Phrase does not match the confirm phrase!'
         })
       }
+      window.localStorage.setItem('authTime', moment().toISOString());
       onSubmit(values);
     },
   })
