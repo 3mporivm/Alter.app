@@ -67,7 +67,7 @@ const OverviewScreen = ({
               Now we load wallets balances
             </span>
             <span className="overview-screen-layout__currencies__text-bold">
-              {`${walletsCount} of ${walletIndex}`}
+              {`${walletIndex} of ${walletsCount}`}
             </span>
             </div>
           : currenciesSearch.toJS().map(({
@@ -165,11 +165,17 @@ export default compose(
         Promise.all(
           (function (props) {
             const promises = [];
-            props.currencies.toJS().forEach(({ name, wallets }, index) => wallets.forEach(({ address }) => {
-              props.setWalletsCount(props.currencies.toJS().length);
-              props.setWalletIndex(index + 1);
-              promises.push(props.getBalanceWallet(name, address));
-            }));
+            let walletsCount = 0;
+            let walletIndex = 0;
+            props.currencies.toJS().forEach(({ name, wallets }) => {
+              walletsCount += wallets.length;
+              props.setWalletsCount(walletsCount);
+              wallets.forEach(({ address }) => {
+                walletIndex += 1;
+                props.setWalletIndex(walletIndex);
+                promises.push(props.getBalanceWallet(name, address));
+              });
+            });
             return promises;
           }(this.props)),
         ).then(() => {
