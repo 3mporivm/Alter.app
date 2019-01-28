@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { ui, forms, modals, apiHOCs } from 'components';
 import { compose, getContext, lifecycle, withHandlers, withState, withStateHandlers, withProps } from "recompose";
 import { blockchain } from 'helpers';
+import { reset } from 'redux-form';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 import { CURRENCY_ICONS } from 'constants/constants';
 import net from 'constants/networks';
@@ -125,6 +127,8 @@ CoinScreen.propTypes = {
 };
 
 export default compose(
+  connect(),
+
   apiHOCs.WalletsApiHOC(),
   apiHOCs.BootApiHOC(),
   withState('isFetching', 'setIsFetching', false),
@@ -169,7 +173,7 @@ export default compose(
       }
       !isFetching && setFooterModalOpen(false);
     },
-    onSubmit: ({ addWallet, currency, profile, getBalanceWallet, setFooterModalOpen, setIsFetching }) => values => {
+    onSubmit: ({ addWallet, currency, profile, getBalanceWallet, setFooterModalOpen, setIsFetching, dispatch }) => values => {
       setIsFetching(true);
       // alert(profile.get('phrase'));
       const lastWallet = _.findLast(currency.wallets, ({ number }) => number) || { number: 0 };
@@ -179,6 +183,7 @@ export default compose(
         setIsFetching(false);
         // hide modal
         setFooterModalOpen(false);
+        dispatch(reset('newWalletForm'));
       });
     },
     onImportWallet: ({ currency, addWallet, getBalanceWallet, setIsFetching, setFooterModalOpen }) => values => {
