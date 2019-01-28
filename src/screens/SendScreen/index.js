@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {compose, getContext, lifecycle, withHandlers, withProps, withState} from 'recompose';
-import { ui, forms, modals, apiHOCs } from 'components';
+import {
+ compose, getContext, lifecycle, withHandlers, withProps, withState,
+} from 'recompose';
+import {
+ ui, forms, modals, apiHOCs,
+} from 'components';
 import get from 'lodash/get';
 import Immutable from 'immutable';
 import { broadcast } from 'helpers';
@@ -33,7 +37,7 @@ const SendScreen = ({
       title={`Send ${currency.toUpperCase()}`}
     />
     <forms.SendForm
-      onSubmit={(value) => setFooterModalOpen(value)}
+      onSubmit={value => setFooterModalOpen(value)}
       balance={balance}
       currency={currency.toUpperCase()}
       fee={fee}
@@ -56,7 +60,7 @@ const SendScreen = ({
         />
       </modals.Footer>
     }
-    <ui.InfoBlock/>
+    <ui.InfoBlock />
   </div>
 );
 
@@ -88,10 +92,10 @@ export default compose(
     }).isRequired,
   }),
   withProps(({ location }) => ({
-    currency: get(location, 'state.currency', ''),
-    balance: get(location, 'state.balance', 0),
-    sourceAddress: get(location, 'state.address'),
-    privateKey: get(location, 'state.privateKey'),
+    currency: get(location, 'state.currency', '') || window.localStorage.getItem('currency'),
+    balance: get(location, 'state.balance', 0) || window.localStorage.getItem('balance'),
+    sourceAddress: get(location, 'state.address') || window.localStorage.getItem('address'),
+    privateKey: get(location, 'state.privateKey') || window.localStorage.getItem('privateKey'),
   })),
   withHandlers({
     onBack: ({ router }) => () => router.history.goBack(),
@@ -136,6 +140,13 @@ export default compose(
   }),
   lifecycle({
     componentDidMount() {
+      const { currency, balance, sourceAddress, privateKey } = this.props;
+      window.localStorage.setItem('lastPath', '/send');
+      // сохраняем пропы в local storage
+      window.localStorage.setItem('currency', currency);
+      window.localStorage.setItem('balance', balance);
+      window.localStorage.setItem('sourceAddress', sourceAddress);
+      window.localStorage.setItem('privateKey', privateKey);
       this.props.getCommission(this.props.currency)
         .then(({ body }) => this.props.setFee(+body.data));
     },

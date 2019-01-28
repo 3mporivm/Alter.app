@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { compose, getContext, withHandlers } from "recompose";
+import { compose, getContext, withHandlers, lifecycle } from "recompose";
 import { ui, forms, apiHOCs } from 'components';
 import iconClose from 'assets/img/close.svg';
 import iconLogOut from 'assets/img/log_out.svg';
@@ -70,7 +70,13 @@ export default compose(
       cleanStore();
       password.remove();
       localStorage.removeItem("isLogin");
+      localStorage.removeItem('lastPath');
       setTimeout(() => router.history.push({ pathname: '/' }), 1000);
     },
-  })
+  }),
+  lifecycle({
+    componentWillMount() {
+      window.localStorage.setItem('lastPath', '/settings');
+    }
+  }),
 )(SettingsScreen);

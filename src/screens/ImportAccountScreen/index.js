@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { compose, getContext, withHandlers } from "recompose";
+import { compose, getContext, withHandlers, lifecycle } from 'recompose';
 import { ui, forms, apiHOCs } from 'components';
 import { blockchain } from 'helpers';
 
@@ -38,5 +38,10 @@ export default compose(
       router.history.push({ pathname: '/' });
     },
     onBack: ({ router }) => () => router.history.goBack(),
+  }),
+  lifecycle({
+    componentWillMount() {
+      window.localStorage.setItem('lastPath', '/auth/import-account');
+    },
   }),
 )(ImportAccountScreen);

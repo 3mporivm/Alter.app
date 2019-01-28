@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
+import { compose, getContext, lifecycle } from 'recompose';
 import { ui, forms } from 'components';
 import {
   GetStartedScreen,
@@ -11,6 +12,7 @@ import {
   SaveBackupPhraseScreen,
   ConfirmBackupScreen,
 } from 'screens';
+import PropTypes from 'prop-types';
 
 const AuthorizationScreen = () => (
   <div className="auth-layout">
@@ -30,4 +32,23 @@ const AuthorizationScreen = () => (
   </div>
 );
 
-export default AuthorizationScreen;
+export default compose(
+  getContext({
+    router: PropTypes.shape({
+      history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }),
+  lifecycle({
+    componentWillMount() {
+      // загружаем баланс кошельков, если еще не згружали
+      const lastPath = window.localStorage.getItem('lastPath');
+      if (lastPath) {
+        this.props.router.history.push(lastPath);
+      }
+    },
+  }),
+)(AuthorizationScreen);
+
+// export default AuthorizationScreen;

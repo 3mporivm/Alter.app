@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { ui, forms } from 'components';
-import { compose, getContext, withHandlers } from "recompose";
+import { compose, getContext, withHandlers, lifecycle } from "recompose";
 import CreateAccountIcon from 'assets/img/create-account.svg';
 import ImportAccountIcon from 'assets/img/import-account.svg';
 
@@ -57,5 +57,10 @@ export default compose(
       });
     },
     onBack: ({ router }) => () => router.history.goBack(),
+  }),
+  lifecycle({
+    componentWillMount() {
+      window.localStorage.setItem('lastPath', '/auth/account');
+    },
   }),
 )(AccountScreen);

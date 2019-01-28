@@ -1,6 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
+import { compose, getContext, lifecycle } from 'recompose';
 import * as screens from 'screens';
+import PropTypes from 'prop-types';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -18,4 +20,20 @@ const App = () => (
 	</div>
 );
 
-export default App;
+export default compose(
+  getContext({
+    router: PropTypes.shape({
+      history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }),
+  lifecycle({
+    componentWillMount() {
+      const lastPath = window.localStorage.getItem('lastPath');
+      if (lastPath) {
+        this.props.router.history.push(lastPath);
+      }
+    },
+  }),
+)(App);

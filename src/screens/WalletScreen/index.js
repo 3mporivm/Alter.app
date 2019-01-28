@@ -156,6 +156,7 @@ export default compose(
   lifecycle({
     componentDidMount() {
       const { coin, address } = this.props.wallet;
+      window.localStorage.setItem('lastPath', `/${coin}/wallet/${address}`);
       this.props.getTransactions(coin, address);
     },
   }),

@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import {compose, getContext, withHandlers, withProps} from "recompose";
+import PropTypes from 'prop-types';
+import { compose, getContext, withHandlers, withProps, lifecycle } from 'recompose';
+import get from 'lodash/get';
 import { ui, forms, modals } from 'components';
 
 import './style.scss';
@@ -47,7 +48,7 @@ export default compose(
     }).isRequired,
   }),
   withProps(({ location }) => ({
-    wallet: _.get(location, 'state.wallet', {}),
+    wallet: get(location, 'state.wallet') || JSON.parse(window.localStorage.getItem('wallet')),
   })),
   withHandlers({
     onBack: ({ router }) => () => router.history.goBack(),
@@ -61,5 +62,14 @@ export default compose(
         pathname: '/settings',
       });
     },
-  })
+  }),
+  lifecycle({
+    componentDidMount() {
+      // сохраняем пропы в local storage
+      window.localStorage.setItem('lastPath', '/receive');
+      if (this.props.wallet) {
+        window.localStorage.setItem('wallet', JSON.stringify(this.props.wallet));
+      }
+    },
+  }),
 )(ReceiveScreen);

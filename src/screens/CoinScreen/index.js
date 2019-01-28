@@ -221,6 +221,9 @@ export default compose(
     },
   }),
   lifecycle({
+    componentWillMount() {
+      window.localStorage.setItem('lastPath', `/coin/${this.props.currency.name}`);
+    },
     componentDidMount() {
       const { handleOuterDropdownClick } = this.props;
       document.addEventListener('mousedown', handleOuterDropdownClick, false);

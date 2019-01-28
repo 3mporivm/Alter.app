@@ -183,11 +183,11 @@ export default compose(
           this.props.setCurrencies(this.props.currencies);
         });
       }
-
       // загружаем курс валлют
       this.props.getCourse();
       // проверяем время авторизации
       this.props.checkTimeForLogOut();
+      window.localStorage.setItem('lastPath', '/');
     },
   }),
 )(OverviewScreen);

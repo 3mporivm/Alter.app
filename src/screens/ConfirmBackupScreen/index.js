@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { compose, getContext, withHandlers, withProps } from "recompose";
+import { compose, getContext, withHandlers, withProps, lifecycle } from 'recompose';
 import { ui, forms, apiHOCs } from 'components';
 import { blockchain } from 'helpers';
 
@@ -38,7 +38,7 @@ export default compose(
     }).isRequired,
   }),
   withProps(({ location }) => ({
-    phrase: _.get(location, 'state.phrase'),
+    phrase: _.get(location, 'state.phrase') || window.localStorage.getItem('phrase'),
   })),
   withHandlers({
     onSubmit: ({ router, updateProfile, phrase, createFirstWallets }) => () => {
@@ -50,5 +50,14 @@ export default compose(
       router.history.push('/');
     },
     onBack: ({ router }) => () => router.history.goBack(),
+  }),
+  lifecycle({
+    componentDidMount() {
+      const { phrase } = this.props;
+      if (phrase) {
+        window.localStorage.setItem('phrase', phrase);
+      }
+      window.localStorage.setItem('lastPath', '/auth/confirm-backup');
+    },
   }),
 )(ConfirmBackupScreen);

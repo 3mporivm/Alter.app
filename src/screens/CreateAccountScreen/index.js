@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { ui, forms, apiHOCs } from 'components';
-import { compose, getContext, withHandlers } from "recompose";
+import { compose, getContext, withHandlers, lifecycle } from "recompose";
 
 import './style.scss';
 
@@ -40,5 +40,10 @@ export default compose(
       });
     },
     onBack: ({ router }) => () => router.history.goBack(),
+  }),
+  lifecycle({
+    componentWillMount() {
+      window.localStorage.setItem('lastPath', '/auth/create');
+    },
   }),
 )(CreateAccountScreen);

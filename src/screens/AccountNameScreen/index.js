@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { compose, getContext, withHandlers } from "recompose";
+import { compose, getContext, withHandlers, lifecycle } from "recompose";
 import { ui, forms, apiHOCs } from 'components';
 
 const AccountNameScreen = ({ onSubmit, onBack, }) => (
@@ -32,5 +32,10 @@ export default compose(
       });
     },
     onBack: ({ router }) => () => router.history.goBack(),
+  }),
+  lifecycle({
+    componentWillMount() {
+      window.localStorage.setItem('lastPath', '/auth/account-name');
+    },
   }),
 )(AccountNameScreen);

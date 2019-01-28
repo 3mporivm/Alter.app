@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import { ui, forms } from 'components';
-import { compose, getContext, withHandlers } from "recompose";
-import { connect } from 'react-redux'
+import { compose, getContext, withHandlers, lifecycle } from 'recompose';
+import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 import { password } from 'helpers';
 
@@ -37,5 +37,10 @@ export default compose(
       // reset form
       dispatch(reset('changePasswordForm'));
     },
-  })
+  }),
+  lifecycle({
+    componentWillMount() {
+      window.localStorage.setItem('lastPath', '/change-password');
+    },
+  }),
 )(ChangePasswordScreen);
