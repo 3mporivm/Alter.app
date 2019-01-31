@@ -3,6 +3,11 @@ const bch = require('bitcore-lib-cash');
 const bchaddrs = require('bchaddrjs');
 const factor = 100000000; // множитель для BTC-LIKE валют
 import endpoints from 'api/endpoints';
+const Web3 = require('web3');
+const Tx = require('ethereumjs-tx');
+
+// connect to Infura node
+const web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/51a62e88a174471781232cf873256f57'));
 
 const createTxBody = async (options) => {
   const amount = options.amount * factor;
@@ -11,9 +16,11 @@ const createTxBody = async (options) => {
     options.sourceAddress = bchaddrs.toLegacyAddress(options.sourceAddress);
     options.targetAddress = bchaddrs.toLegacyAddress(options.targetAddress);
   }
-  const response = await fetch(endpoints.getUtxosUrl(options.chain, options.sourceAddress)); // получить по API: /utxos
+
+  // получить по API: /utxos
+  const response = await fetch(endpoints.getUtxosUrl(options.chain, options.sourceAddress));
   const { utxos } = await response.json();
-  let tx = new bitcore.Transaction();
+  const tx = new bitcore.Transaction();
 
   tx.from(utxos)
     .to(options.targetAddress, amount)
@@ -34,3 +41,32 @@ export const createTransaction = async (options, privateKey) => {
   tx.serialize();
   return tx.toString();
 };
+
+export const createTransactionEth = async (options, privateKey) => {
+  const nonce = await web3.eth.getTransactionCount(options.sourceAddress);
+  const gasPrice = await web3.eth.getGasPrice();
+  const txData = {
+    nonce,
+    gasLimit: web3.utils.toHex(21000),
+    gasPrice: web3.utils.toHex(gasPrice),
+    to: options.targetAddress,
+    from: options.sourceAddress,
+    value: web3.utils.toHex(web3.utils.toWei(`${options.amount}`, 'wei')),
+  };
+
+  const privateKeyBuffer = new Buffer(privateKey, 'hex');
+  const transaction = new Tx(txData);
+  transaction.sign(privateKeyBuffer);
+  const serializedTx = transaction.serialize().toString('hex');
+  console.log("serializedTx", serializedTx)
+  web3.eth.sendSignedTransaction(`0x${serializedTx}`, (err, result) => {
+    if (err) return console.log('error', err);
+    return result;
+  });
+};
+
+
+// export const createTransactionEth = (txData, function(err, result) {
+//   if (err) return console.log('error', err)
+//   console.log('sent', result)
+// })

@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { ui } from 'components';
-import {Field, reduxForm, formValueSelector, SubmissionError} from 'redux-form/immutable';
-import { connect } from "react-redux";
-import bitcore from "bitcore-lib";
+import {
+  Field,
+  reduxForm,
+  formValueSelector,
+  SubmissionError,
+} from 'redux-form/immutable';
+import { connect } from 'react-redux';
+import bitcore from 'bitcore-lib';
 import net from 'constants/networks';
-import WAValidator from 'wallet-address-validator';
 import iconEnterBlue from 'assets/img/enter-blue.svg';
 
 import { required } from 'validators';
@@ -39,32 +43,33 @@ const ImportWalletForm = ({
           marginTop: 30,
         },
         options: [
-          "Private key",
-          //"JSON file",
-        ]
+          'Private key',
+          // "JSON file",
+        ],
       }}
     />
     {
-      type === "JSON file" &&
-      <Field
-        component={ui.Fields.FileField}
-        name="file"
-        props={{
-          inputId: 'file',
-          label: 'JSON file:',
-          result: 'File not found',
-          styleWrapper: {
-            marginTop: 20,
-          }
-        }}
-      />
+      type === 'JSON file' && (
+        <Field
+          component={ui.Fields.FileField}
+          name="file"
+          props={{
+            inputId: 'file',
+            label: 'JSON file:',
+            result: 'File not found',
+            styleWrapper: {
+              marginTop: 20,
+            },
+          }}
+        />
+      )
     }
     <div className="import-wallet-form__field-wrapper">
       <Field
         validate={required}
         component={ui.Fields.BasicField}
-        name={type === "JSON file" ? "jsonFile" : "privateKey"}
-        placeholder={type === "JSON file" ? "Type password" : "Your private key"}
+        name={type === 'JSON file' ? 'jsonFile' : 'privateKey'}
+        placeholder={type === 'JSON file' ? 'Type password' : 'Your private key'}
         props={{
           inputId: 'wallet_name',
           styleWrapper: {
@@ -76,8 +81,7 @@ const ImportWalletForm = ({
         }}
       />
       {
-        error &&
-        <div className="import-wallet-form__field-wrapper__error">{error}</div>
+        error && <div className="import-wallet-form__field-wrapper__error">{error}</div>
       }
     </div>
     <div className="import-wallet-form__buttons">
@@ -112,29 +116,31 @@ ImportWalletForm.propTypes = {
 };
 
 ImportWalletForm.defaultProps = {
-  error: "",
+  error: '',
 };
 
 const selector = formValueSelector('importWalletForm');
 export default compose(
-  connect(state => ({ type: selector(state, "type") })),
+  connect(state => ({ type: selector(state, 'type') })),
   reduxForm({
     form: 'importWalletForm',
     initialValues: {
-      type: "Private key"
-    }
+      type: 'Private key',
+    },
   }),
   withHandlers({
-    submit: ({ onSubmit, currency }) => values => {
-      const network = bitcore.Networks.add(net[currency]);
-      bitcore.Networks.defaultNetwork = network;
-      // todo currency
+    submit: ({ onSubmit, currency }) => (values) => {
+      let network;
+      if (currency !== 'eth') {
+        network = bitcore.Networks.add(net[currency]);
+        bitcore.Networks.defaultNetwork = network;
+      }
       if (!bitcore.PrivateKey.isValid(values.get('privateKey').trim())) {
         throw new SubmissionError({
-          _error: 'Invalid private key!'
-        })
+          _error: 'Invalid private key!',
+        });
       }
       onSubmit(values);
     },
-  })
-)(ImportWalletForm)
+  }),
+)(ImportWalletForm);

@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ui, forms } from 'components';
-import { compose, getContext, withHandlers, lifecycle } from 'recompose';
+import {
+  compose,
+  getContext,
+  withHandlers,
+  lifecycle,
+} from 'recompose';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 import { password } from 'helpers';
