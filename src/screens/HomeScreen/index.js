@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router';
-import { ui, apiHOCs } from 'components';
+import { apiHOCs } from 'components';
 import {
   branch,
   compose,
@@ -24,11 +24,15 @@ const HomeScreen = () => (
 export default compose(
   apiHOCs.BootApiHOC(),
   branch(
+    () => localStorage.getItem('isNewWindow'),
+    renderComponent(withProps({ to: '/transaction-signature' })(Redirect)),
+  ),
+  branch(
     ({ profile }) => !profile.get('isRegistered'),
     renderComponent(withProps({ to: '/auth' })(Redirect)),
   ),
   branch(
-    () => !localStorage.getItem("isLogin"),
+    () => !localStorage.getItem('isLogin'),
     renderComponent(withProps({ to: '/log-in' })(Redirect)),
   ),
 )(HomeScreen);

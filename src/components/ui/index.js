@@ -6,6 +6,7 @@ import Badge from './Badge';
 import BalanceBlock from './BalanceBlock';
 import CurrencyCard from './СurrencyCard';
 import ConfirmationSending from './ConfirmationSending';
+import TransactionSignature from './TransactionSignature';
 import Transaction from './Transaction';
 
 export default {
@@ -17,5 +18,6 @@ export default {
   BalanceBlock,
   CurrencyCard,
   ConfirmationSending,
+  TransactionSignature,
   Transaction,
 };

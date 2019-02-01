@@ -70,9 +70,7 @@ const OverviewScreen = ({
               {`${walletIndex} of ${walletsCount}`}
             </span>
             </div>
-          : currenciesSearch.toJS().map(({
- name, fullName, color, wallets,
-}) => (
+          : currenciesSearch.toJS().map(({ name, fullName, color, wallets }) => (
             <ui.CurrencyCard
               key={name}
               onPress={() => onCoin(name)}
@@ -116,14 +114,8 @@ export default compose(
     }).isRequired,
   }),
   withHandlers({
-    onCoin: ({ router }) => (coin) => {
-      router.history.push(`/coin/${coin}`);
-    },
-    onSettings: ({ router }) => () => {
-      router.history.push({
-        pathname: '/settings',
-      });
-    },
+    onCoin: ({ router }) => coin => router.history.push(`/coin/${coin}`),
+    onSettings: ({ router }) => () => router.history.push('/settings'),
     checkTimeForLogOut: ({ router }) => () => {
       const authTime = new Date(window.localStorage.getItem('authTime'));
       const dateNow = new Date();

@@ -18,6 +18,8 @@ import SendScreen from './SendScreen';
 import ReceiveScreen from './ReceiveScreen';
 import WalletScreen from './WalletScreen';
 
+import TransactionSignatureScreen from './TransactionSignatureScreen';
+
 export {
   AuthorizationScreen,
   GetStartedScreen,
@@ -37,4 +39,5 @@ export {
   SendScreen,
   ReceiveScreen,
   WalletScreen,
+  TransactionSignatureScreen,
 };

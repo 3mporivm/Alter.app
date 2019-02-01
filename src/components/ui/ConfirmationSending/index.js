@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ui, forms, modals } from 'components';
+import { ui } from 'components';
 import iconSend from 'assets/img/send.svg';
 import { CURRENCY_ICONS } from 'constants/constants';
 

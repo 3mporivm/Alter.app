@@ -15,10 +15,11 @@
   },
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "permissions": [
+    "tabs",
     "activeTab",
     "background"
   ],
   "externally_connectable": {
-		"matches": ["http://127.0.0.1:5500/*"]
+		"matches": ["http://127.0.0.1:3000/*"]
 	}
 }

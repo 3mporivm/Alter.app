@@ -76,4 +76,12 @@ chrome.runtime.onMessageExternal.addListener(
       const currencyInfo = importCurrency(request.currency);
       sendResponse(currencyInfo);
     }
+    if (request.command === 'transactionSignature') {
+      const width = 500;
+      const height = 625;
+      localStorage.setItem('isNewWindow', 'true');
+      localStorage.setItem('deal', JSON.stringify(request.body));
+      window.open(chrome.extension.getURL('index.html'), '', `width=${width},height=${height},left=${((window.innerWidth - width) / 2)},top=${((window.innerHeight - 500) / 2)}`);
+      //sendResponse(currencyInfo);
+    }
 });

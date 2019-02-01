@@ -1,4 +1,4 @@
-import Immutable from "immutable";
+import Immutable from 'immutable';
 
 export const loadState = () => {
   try {
@@ -7,12 +7,16 @@ export const loadState = () => {
       return undefined;
     }
     const state = JSON.parse(serializedState);
-//Collection
+    // Collection
     return Immutable.Map({
       entities: Immutable.Map({
         profile: Immutable.Map(state.profile),
         currencies: Immutable.List(state.currencies),
-      })
+        deals: Immutable.Map(state.deals),
+      }),
+      results: Immutable.Map({
+        deals: Immutable.List(Object.keys(state.deals).map(key => +key)),
+      }),
     });
   } catch (err) {
     return undefined;
