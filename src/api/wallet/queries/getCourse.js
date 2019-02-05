@@ -1,6 +1,6 @@
 import endpoints from 'api/endpoints';
 import { course } from 'schemas';
-import { normalize } from "normalizr";
+import { normalize } from 'normalizr';
 
 export default () => ({
   url: endpoints.getCourseUrl(),
@@ -13,13 +13,13 @@ export default () => ({
   force: true,
   options: {
     headers: {
-      Accept: 'application/json'
+      Accept: 'application/json',
     },
   },
   update: {
     course: (_, result) => result,
   },
   updateResult: {
-    course: (prevResult, result) => result
+    course: (prevResult, result) => result,
   },
 });

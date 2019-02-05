@@ -40,7 +40,7 @@ const WalletScreen = ({
       icon={CURRENCY_ICONS[wallet.coin]}
       backgroundColor="#F7931A"
       currency={wallet.coin.toUpperCase()}
-      balanceTop={`${wallet.balance}`}
+      balanceTop={`${wallet.balance.toFixed(8)}`}
       balanceBottom={`$${wallet.currency ? wallet.currency.toFixed(2) : '0.00'}`}
     >
       <forms.EditWalletForm
@@ -144,6 +144,7 @@ export default compose(
       });
     },
     onSend: ({ router, wallet }) => () => {
+      console.log('wallet.balance', wallet.balance);
       router.history.push({
         pathname: '/send',
         state: {

@@ -86,7 +86,7 @@ const CoinScreen = ({
           name={wallet.name}
           icon={CURRENCY_ICONS[currency.name]}
           address={wallet.address}
-          balance={wallet.balance || 0}
+          balance={wallet.balance.toFixed(6) || 0}
           balanceUSD={`$${wallet.currency ? wallet.currency.toFixed(2) : '0.00'}`}
         />
       ))
@@ -224,7 +224,9 @@ export default compose(
         if (currency.name === 'bch' || currency.name === 'btc') {
           address = privateKey.toAddress();
         } else if (currency.name === 'eth') {
-          address = web3.eth.accounts.privateKeyToAccount(privateKey.toString()).address;
+          console.log(currency.name)
+          console.log(`0x${values.get('privateKey').trim()}`)
+          address = web3.eth.accounts.privateKeyToAccount(`0x${values.get('privateKey').trim()}`).address;
         } else {
           address = privateKey.toAddress(bitcore.Networks.add(net[currency.name]));
         }

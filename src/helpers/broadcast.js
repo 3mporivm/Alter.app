@@ -42,26 +42,32 @@ export const createTransaction = async (options, privateKey) => {
   return tx.toString();
 };
 
-export const createTransactionEth = async (options, privateKey) => {
-  const nonce = await web3.eth.getTransactionCount(options.sourceAddress);
-  const gasPrice = await web3.eth.getGasPrice();
-  const txData = {
-    nonce,
-    gasLimit: web3.utils.toHex(21000),
-    gasPrice: web3.utils.toHex(gasPrice),
-    to: options.targetAddress,
-    from: options.sourceAddress,
-    value: web3.utils.toHex(web3.utils.toWei(`${options.amount}`, 'wei')),
-  };
 
-  const privateKeyBuffer = new Buffer(privateKey, 'hex');
-  const transaction = new Tx(txData);
-  transaction.sign(privateKeyBuffer);
-  const serializedTx = transaction.serialize().toString('hex');
-  console.log("serializedTx", serializedTx)
-  web3.eth.sendSignedTransaction(`0x${serializedTx}`, (err, result) => {
-    if (err) return console.log('error', err);
-    return result;
+export const createTransactionEth = async (options, privateKey) => {
+  return new Promise(async function (resolve, reject) {
+    const nonce = await web3.eth.getTransactionCount(options.sourceAddress);
+    const gasPrice = await web3.eth.getGasPrice();
+    const txData = {
+      nonce,
+      gasLimit: web3.utils.toHex(21000),
+      gasPrice: web3.utils.toHex(gasPrice),
+      to: options.targetAddress,
+      from: options.sourceAddress,
+      value: web3.utils.toHex(web3.utils.toWei(`${options.amount}`, 'ether')),
+    };
+
+    const privateKeyBuffer = new Buffer(privateKey, 'hex');
+    const transaction = new Tx(txData);
+    transaction.sign(privateKeyBuffer);
+    const serializedTx = transaction.serialize().toString('hex');
+    web3.eth.sendSignedTransaction(`0x${serializedTx}`, (err, result) => {
+      if (err) {
+        console.log('error', err);
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
   });
 };
 

@@ -12,6 +12,8 @@ import { broadcast } from 'helpers';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 import iconSendWhite from 'assets/img/send-white.svg';
+const Web3 = require('web3');
+const web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/51a62e88a174471781232cf873256f57'));
 
 import './style.scss';
 
@@ -36,7 +38,7 @@ const SendScreen = ({
     />
     <forms.SendForm
       onSubmit={value => setConfirmationSending(value)}
-      balance={balance}
+      balance={balance.toFixed(8)}
       currency={currency.toUpperCase()}
       fee={fee}
     />
@@ -90,7 +92,7 @@ export default compose(
   }),
   withProps(({ location }) => ({
     currency: get(location, 'state.currency', '') || window.localStorage.getItem('currency'),
-    balance: get(location, 'state.balance', 0) || window.localStorage.getItem('balance'),
+    balance: get(location, 'state.balance', null) === null ? window.localStorage.getItem('balance') : get(location, 'state.balance', null),
     sourceAddress: get(location, 'state.address') || window.localStorage.getItem('address'),
     privateKey: get(location, 'state.privateKey') || window.localStorage.getItem('privateKey'),
   })),
@@ -107,7 +109,7 @@ export default compose(
       privateKey,
       postBroadcast,
       dispatch,
-      setFooterModalOpen,
+      setConfirmationSending,
     }) => async () => {
       setIsFetching(true);
       // create rawTx
@@ -126,15 +128,15 @@ export default compose(
           fee,
           sourceAddress,
         }, privateKey);
-        console.log("rawTx", rawTx)
       }
-
-      // postBroadcast(currency, rawTx).then(() => {
-      //   dispatch(reset('sendForm'));
-      //   setTimeout(() => getBalanceWallet(currency, sourceAddress), 500);
-      //   setFooterModalOpen(Immutable.Map());
-      //   setIsFetching(false);
-      // });
+      console.log('postBroadcast -- start')
+      postBroadcast(currency, rawTx).then(() => {
+        console.log('postBroadcast --- end')
+        dispatch(reset('sendForm'));
+        setTimeout(() => getBalanceWallet(currency, sourceAddress), 500);
+        setIsFetching(false);
+        setConfirmationSending(Immutable.Map());
+      });
     },
   }),
   lifecycle({
@@ -144,6 +146,7 @@ export default compose(
         balance,
         sourceAddress,
         privateKey,
+        location,
       } = this.props;
       window.localStorage.setItem('lastPath', '/send');
       // сохраняем пропы в local storage
@@ -152,7 +155,7 @@ export default compose(
       window.localStorage.setItem('sourceAddress', sourceAddress);
       window.localStorage.setItem('privateKey', privateKey);
       this.props.getCommission(this.props.currency)
-        .then(({ body }) => this.props.setFee(+body.data));
+        .then(({ body }) => this.props.setFee(currency !== 'eth' ? +body.data : web3.utils.fromWei(body.data)));
     },
   }),
 )(SendScreen);
