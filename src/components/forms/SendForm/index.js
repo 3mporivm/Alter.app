@@ -13,7 +13,6 @@ import './style.scss';
 
 const SendForm = ({
   handleSubmit,
-  facebookLoginRequest,
   isFetching,
   invalid,
   balance,
@@ -22,7 +21,7 @@ const SendForm = ({
 }) => (
   <form onSubmit={handleSubmit} className="send-form-wrapper">
     <div className="send-form">
-      <ui.Badge icon={iconSendWhite}/>
+      <ui.Badge icon={iconSendWhite} />
       <div className="send-form__title">
         {`Balance: ${balance}`}
       </div>
@@ -38,9 +37,9 @@ const SendForm = ({
           },
           styleInput: {
             fontSize: 34,
-            lineHeight: "22px",
+            lineHeight: '22px',
             color: '#ffffff',
-            fontFamily: 'ProximaNova-Bold'
+            fontFamily: 'ProximaNova-Bold',
           },
           label: 'Amount',
         }}
@@ -69,7 +68,7 @@ const SendForm = ({
       icon={iconSend}
       onPress={handleSubmit}
       isLoading={isFetching}
-      isDisabled={invalid || isFetching}
+      //isDisabled={invalid || isFetching}
       style={{ marginTop: 20 }}
     />
   </form>
@@ -78,9 +77,10 @@ const SendForm = ({
 SendForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  invalid: PropTypes.bool.isRequired,
   balance: PropTypes.number.isRequired,
-  coin: PropTypes.string.isRequired,
   fee: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired,
 };
 
 export default compose(

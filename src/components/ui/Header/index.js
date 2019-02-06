@@ -4,7 +4,11 @@ import iconSettings from 'assets/img/settings.svg';
 import iconDropdown from 'assets/img/dropdown.svg';
 import iconBack from 'assets/img/back.svg';
 import {
- compose, withState, lifecycle, withHandlers, withStateHandlers,
+  compose,
+  withState,
+  lifecycle,
+  withHandlers,
+  withStateHandlers,
 } from 'recompose';
 
 import logo from '../../../assets/img/logo.svg';
@@ -17,7 +21,6 @@ const Header = ({
   isDropDown,
   title,
   onBackPress,
-  onCenterPress,
   rightIcon,
   onRightPress,
   isDropdownOpen,
@@ -28,13 +31,14 @@ const Header = ({
   <div className="header">
     <div className="header__left">
       {
-        onBackPress
-        && <img
-          onClick={onBackPress}
-          className="header__left__icon-back"
-          src={iconBack}
-          alt=""
-        />
+        onBackPress && (
+          <img
+            onClick={onBackPress}
+            className="header__left__icon-back"
+            src={iconBack}
+            alt=""
+          />
+        )
       }
     </div>
     <div
@@ -81,13 +85,14 @@ const Header = ({
     </div>
     <div style={styleContent} className="header__right">
       {
-        onRightPress
-        && <img
-          onClick={onRightPress}
-          className="header__right__icon-settings"
-          src={rightIcon}
-          alt=""
-        />
+        onRightPress && (
+          <img
+            onClick={onRightPress}
+            className="header__right__icon-settings"
+            src={rightIcon}
+            alt=""
+          />
+        )
       }
     </div>
     {

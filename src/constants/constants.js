@@ -10,48 +10,53 @@ import iconLTC from 'assets/img/currency/ltc.svg';
 import iconBCH from 'assets/img/currency/bch.svg';
 import iconDASH from 'assets/img/currency/dash.svg';
 import iconDOGE from 'assets/img/currency/doge.svg';
+import iconETH from 'assets/img/currency/eth.png';
 
 export const NETWORK = 'livenet';
 export const BTC_LIKE = {
-    'btc': true,
-    'ltc': true,
-    'bch': true,
-    'dash': true,
-    'doge': true
+  btc: true,
+  ltc: true,
+  bch: true,
+  dash: true,
+  doge: true,
 };
 export const ETH_LIKE = {
-    'eth': true,
-    'ETH': true,
-    'etc': true,
-    'ETC': true
+  eth: true,
+  ETH: true,
+  etc: true,
+  ETC: true,
 };
 export const ERC20 = {
-  'bnb': true,
-  'BNB': true,
-  'ht': true,
-  'HT':true
+  bnb: true,
+  BNB: true,
+  ht: true,
+  HT: true,
 };
 
 export const COINS = [
   {
-    name: "btc",
+    name: 'btc',
     fullName: 'Bitcoin',
   },
   {
-    name: "ltc",
-    fullName: "Litecoin",
+    name: 'ltc',
+    fullName: 'Litecoin',
   },
   {
-    name: "bch",
-    fullName: "Bitcoin Cash",
+    name: 'bch',
+    fullName: 'Bitcoin Cash',
   },
   {
-    name: "dash",
-    fullName: "Dash",
+    name: 'dash',
+    fullName: 'Dash',
   },
   {
-    name: "doge",
-    fullName: "Doge",
+    name: 'doge',
+    fullName: 'Doge',
+  },
+  {
+    name: 'eth',
+    fullName: 'Ethereum',
   },
 ];
 export const CURRENCY_ICONS = {
@@ -60,8 +65,9 @@ export const CURRENCY_ICONS = {
   bch: iconBCH,
   dash: iconDASH,
   doge: iconDOGE,
+  eth: iconETH,
 };
-export const SALT = "$2a$10$J8GCNLf7N7W85iQGm5fhbu";
+export const SALT = '$2a$10$J8GCNLf7N7W85iQGm5fhbu';
 
 export const AVATARS = [
   iconAvatar1,

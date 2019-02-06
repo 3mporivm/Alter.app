@@ -12,16 +12,16 @@ import { broadcast } from 'helpers';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 import iconSendWhite from 'assets/img/send-white.svg';
+const Web3 = require('web3');
+const web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/51a62e88a174471781232cf873256f57'));
 
 import './style.scss';
 
 const SendScreen = ({
-  currencies,
-  onCoin,
   onSettings,
   onBack,
   onSend,
-  setFooterModalOpen,
+  setConfirmationSending,
   confirmationSending,
   currency,
   balance,
@@ -37,8 +37,8 @@ const SendScreen = ({
       title={`Send ${currency.toUpperCase()}`}
     />
     <forms.SendForm
-      onSubmit={value => setFooterModalOpen(value)}
-      balance={balance}
+      onSubmit={value => setConfirmationSending(value)}
+      balance={balance.toFixed(8)}
       currency={currency.toUpperCase()}
       fee={fee}
     />
@@ -52,7 +52,7 @@ const SendScreen = ({
       >
         <ui.ConfirmationSending
           currency={currency}
-          onCancel={() => setFooterModalOpen(Immutable.Map())}
+          onCancel={() => setConfirmationSending(Immutable.Map())}
           onSend={onSend}
           values={confirmationSending}
           fee={fee}
@@ -66,11 +66,10 @@ const SendScreen = ({
 
 SendScreen.propTypes = {
   onSend: PropTypes.func.isRequired,
-  onCoin: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
-  setFooterModalOpen: PropTypes.func.isRequired,
-  isFooterModalOpen: PropTypes.bool.isRequired,
+  setConfirmationSending: PropTypes.func.isRequired,
+  confirmationSending: PropTypes.object.isRequired,
   currency: PropTypes.string.isRequired,
   balance: PropTypes.number.isRequired,
   fee: PropTypes.number.isRequired,
@@ -81,7 +80,7 @@ export default compose(
   connect(),
   apiHOCs.WalletsApiHOC(),
   apiHOCs.TransactionsApiHOC(),
-  withState('confirmationSending', 'setFooterModalOpen', Immutable.Map()),
+  withState('confirmationSending', 'setConfirmationSending', Immutable.Map()),
   withState('isFetching', 'setIsFetching', false),
   withState('fee', 'setFee', 0),
   getContext({
@@ -93,22 +92,13 @@ export default compose(
   }),
   withProps(({ location }) => ({
     currency: get(location, 'state.currency', '') || window.localStorage.getItem('currency'),
-    balance: get(location, 'state.balance', 0) || window.localStorage.getItem('balance'),
+    balance: get(location, 'state.balance', null) === null ? window.localStorage.getItem('balance') : get(location, 'state.balance', null),
     sourceAddress: get(location, 'state.address') || window.localStorage.getItem('address'),
     privateKey: get(location, 'state.privateKey') || window.localStorage.getItem('privateKey'),
   })),
   withHandlers({
     onBack: ({ router }) => () => router.history.goBack(),
-    onCoin: ({ router }) => () => {
-      router.history.push({
-        pathname: '/coin',
-      });
-    },
-    onSettings: ({ router }) => () => {
-      router.history.push({
-        pathname: '/settings',
-      });
-    },
+    onSettings: ({ router }) => () => router.history.push('/settings'),
     onSend: ({
       getBalanceWallet,
       fee,
@@ -119,28 +109,45 @@ export default compose(
       privateKey,
       postBroadcast,
       dispatch,
-      setFooterModalOpen,
+      setConfirmationSending,
     }) => async () => {
       setIsFetching(true);
       // create rawTx
-      const rawTx = await broadcast.createTransaction({
-        chain: currency,
-        ...confirmationSending.toJS(),
-        fee,
-        sourceAddress,
-      }, privateKey);
-
-      postBroadcast(currency, rawTx).then(({ body }) => {
+      let rawTx;
+      if (currency !== 'eth') {
+        rawTx = await broadcast.createTransaction({
+          chain: currency,
+          ...confirmationSending.toJS(),
+          fee,
+          sourceAddress,
+        }, privateKey);
+      } else {
+        rawTx = await broadcast.createTransactionEth({
+          chain: currency,
+          ...confirmationSending.toJS(),
+          fee,
+          sourceAddress,
+        }, privateKey);
+      }
+      console.log('postBroadcast -- start')
+      postBroadcast(currency, rawTx).then(() => {
+        console.log('postBroadcast --- end')
         dispatch(reset('sendForm'));
         setTimeout(() => getBalanceWallet(currency, sourceAddress), 500);
-        setFooterModalOpen(Immutable.Map());
         setIsFetching(false);
+        setConfirmationSending(Immutable.Map());
       });
     },
   }),
   lifecycle({
     componentDidMount() {
-      const { currency, balance, sourceAddress, privateKey } = this.props;
+      const {
+        currency,
+        balance,
+        sourceAddress,
+        privateKey,
+        location,
+      } = this.props;
       window.localStorage.setItem('lastPath', '/send');
       // сохраняем пропы в local storage
       window.localStorage.setItem('currency', currency);
@@ -148,7 +155,7 @@ export default compose(
       window.localStorage.setItem('sourceAddress', sourceAddress);
       window.localStorage.setItem('privateKey', privateKey);
       this.props.getCommission(this.props.currency)
-        .then(({ body }) => this.props.setFee(+body.data));
+        .then(({ body }) => this.props.setFee(currency !== 'eth' ? +body.data : web3.utils.fromWei(body.data)));
     },
   }),
 )(SendScreen);

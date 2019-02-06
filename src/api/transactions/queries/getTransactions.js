@@ -8,7 +8,7 @@ export default ({ chain, address }) => ({
   transformResult: response => ({
     transactions: normalize(response.txs, transactions.arrayOfTransactionsSchemas).result,
   }),
-  queryKey: endpoints.getTransactionsUrl({}),
+  queryKey: 'getTransactions',
   meta: {},
   force: true,
   options: {

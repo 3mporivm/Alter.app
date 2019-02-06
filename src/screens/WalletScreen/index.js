@@ -1,7 +1,13 @@
 import React from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import { ui, forms, apiHOCs } from 'components';
-import { withState, compose, getContext, withHandlers, lifecycle } from "recompose";
+import {
+  withState,
+  compose,
+  getContext,
+  withHandlers,
+  lifecycle,
+} from 'recompose';
 import { ThreeBounce } from 'better-react-spinkit';
 import moment from 'moment';
 import { CURRENCY_ICONS } from 'constants/constants';
@@ -34,7 +40,7 @@ const WalletScreen = ({
       icon={CURRENCY_ICONS[wallet.coin]}
       backgroundColor="#F7931A"
       currency={wallet.coin.toUpperCase()}
-      balanceTop={`${wallet.balance}`}
+      balanceTop={`${wallet.balance.toFixed(8)}`}
       balanceBottom={`$${wallet.currency ? wallet.currency.toFixed(2) : '0.00'}`}
     >
       <forms.EditWalletForm
@@ -55,7 +61,7 @@ const WalletScreen = ({
         color="purple"
         style={{ marginRight: 21 }}
         onPress={onSend}
-        isDisabled={wallet.balance === 0}
+        //isDisabled={wallet.balance === 0}
       />
       <ui.Buttons.BasicButton
         title="Receive"
@@ -83,7 +89,10 @@ const WalletScreen = ({
               key={transaction.hash}
               type={transaction.value > 0 ? 'Received' : 'Sent'}
               hash={transaction.hash}
-              amount={(transaction.value > 0 ? transaction.value.toString() : transaction.value.toString().slice(1))}
+              amount={(transaction.value > 0
+                ? transaction.value.toString()
+                : transaction.value.toString().slice(1))
+              }
               date={moment(transaction.time * 1000).format('DD.MM.YYYY')}
             />
           ))
@@ -93,11 +102,12 @@ const WalletScreen = ({
         <div className="wallet-screen-layout__transactions__empty">Transaction history is empty</div>
       }
     </div>
-    <ui.InfoBlock style={{ marginTop: 50 }}/>
+    <ui.InfoBlock style={{ marginTop: 50 }} />
   </div>
 );
 
 WalletScreen.propTypes = {
+  wallet: PropTypes.object.isRequired,
   transactions: PropTypes.object.isRequired,
   onBack: PropTypes.func.isRequired,
   onSettings: PropTypes.func.isRequired,
@@ -134,6 +144,7 @@ export default compose(
       });
     },
     onSend: ({ router, wallet }) => () => {
+      console.log('wallet.balance', wallet.balance);
       router.history.push({
         pathname: '/send',
         state: {
@@ -157,7 +168,12 @@ export default compose(
     componentDidMount() {
       const { coin, address } = this.props.wallet;
       window.localStorage.setItem('lastPath', `/${coin}/wallet/${address}`);
-      this.props.getTransactions(coin, address);
+
+      if (coin !== 'eth') {
+        this.props.getTransactions(coin, address);
+      } else {
+        this.props.getTransactionsEtx(address);
+      }
     },
   }),
 )(WalletScreen);

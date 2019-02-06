@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, getContext, withHandlers } from 'recompose';
 import { ui, forms } from 'components';
-
+import { withRouter } from 'react-router-dom';
 import './style.scss';
 
 const LogInScreen = ({ onSubmit }) => (
@@ -17,17 +17,11 @@ LogInScreen.propTypes = {
 };
 
 export default compose(
-  getContext({
-    router: PropTypes.shape({
-      history: PropTypes.shape({
-        push: PropTypes.func.isRequired,
-      }).isRequired,
-    }).isRequired,
-  }),
+  withRouter,
   withHandlers({
-    onSubmit: ({ router }) => () => {
+    onSubmit: ({ history }) => () => {
       localStorage.setItem('isLogin', 'true');
-      router.history.push({ pathname: '/' });
+      history.push({ pathname: '/' });
     },
   }),
 )(LogInScreen);
