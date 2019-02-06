@@ -82,6 +82,6 @@ chrome.runtime.onMessageExternal.addListener(
       localStorage.setItem('isNewWindow', 'true');
       localStorage.setItem('deal', JSON.stringify(request.body));
       window.open(chrome.extension.getURL('index.html'), '', `width=${width},height=${height},left=${((window.innerWidth - width) / 2)},top=${((window.innerHeight - 500) / 2)}`);
-      //sendResponse(currencyInfo);
+      // sendResponse(currencyInfo);
     }
 });

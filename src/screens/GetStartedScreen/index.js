@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers, getContext } from 'recompose';
-import { ui, apiHOCs } from 'components';
+import { ui } from 'components';
 
 import logo from '../../assets/img/logo.svg';
 

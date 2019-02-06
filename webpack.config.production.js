@@ -5,10 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  entry: {
-    'static/bundle': './src/index.js',
-    background: './background.js',
-  },
+  entry: './src/index.js',
 
   optimization: {
     minimizer: [
@@ -36,7 +33,7 @@ module.exports = {
   },
 
   output: {
-    filename: '[name].js',
+    filename: 'static/bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
