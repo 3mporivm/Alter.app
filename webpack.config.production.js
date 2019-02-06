@@ -5,7 +5,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    'static/bundle': './src/index.js',
+    background: './background.js',
+  },
 
   optimization: {
     minimizer: [
@@ -25,15 +28,15 @@ module.exports = {
 
   resolve: {
     alias: {
-      react: "preact-compat",
-      "react-dom": "preact-compat"
+      react: 'preact-compat',
+      'react-dom': 'preact-compat',
     },
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.js', '.json'],
   },
 
   output: {
-    filename: 'static/bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
